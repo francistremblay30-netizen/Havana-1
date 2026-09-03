@@ -1,0 +1,82 @@
+{
+ "_aide": "Associe chaque emplacement du document à une photo du dossier photos/. Mettre null pour laisser l'espace réservé. Lancer ensuite modele/preparer_photos.py puis modele/generer_plan.js.",
+ "couverture": {
+  "file": "piscine-vue-aerienne.jpg",
+  "caption": ""
+ },
+ "aerienne": {
+  "file": "pavillon-accueil.jpg",
+  "caption": "Le pavillon d'accueil, au toit de chaume"
+ },
+ "piscine": {
+  "file": "piscine-fete-mousse.jpg",
+  "caption": "La piscine centrale un jour de fête de la mousse"
+ },
+ "projet_hotel": {
+  "file": "hotel-entree.jpg",
+  "caption": "Le bâtiment hôtelier actuel, à agrandir à 17 chambres"
+ },
+ "projet_spa": {
+  "file": "chalets.jpg",
+  "caption": "Les chalets existants, à mettre à niveau pour l'exploitation quatre saisons"
+ },
+ "plan_site": {
+  "file": "plan-du-site.jpg",
+  "caption": "Plan d'aménagement actuel du site (source : Havana Resort)"
+ },
+ "carte": null,
+ "promo": {
+  "file": "spectacle-scene.jpg",
+  "caption": "Soirée de spectacle sur la scène extérieure, devant le café Cubano"
+ },
+ "organigramme": {
+  "file": "equipe.jpg",
+  "caption": "L'équipe du Complexe Havana lors d'un événement Apzara [identifier les membres de la direction]"
+ },
+ "galerie": [
+  {
+   "file": "piscine-vue-aerienne.jpg",
+   "caption": "La piscine centrale vue du ciel, un jour d'été"
+  },
+  {
+   "file": "piscine-fete-mousse.jpg",
+   "caption": "La piscine centrale, fête de la mousse"
+  },
+  {
+   "file": "chalets.jpg",
+   "caption": "Les chalets aux couleurs cubaines"
+  },
+  {
+   "file": "famille-chaise-geante.jpg",
+   "caption": "Une famille d'invités sur la chaise géante « I ♥ Havana Resort »"
+  },
+  {
+   "file": "coolbox.jpg",
+   "caption": "Les Coolbox, mini-maisons en conteneur"
+  },
+  {
+   "file": "pavillon-accueil.jpg",
+   "caption": "Le pavillon d'accueil au toit de chaume"
+  },
+  {
+   "file": "spectacle-scene.jpg",
+   "caption": "Spectacle en soirée sur la scène extérieure"
+  },
+  {
+   "file": "kiosques-restauration.jpg",
+   "caption": "Les kiosques de restauration et les concessions"
+  },
+  {
+   "file": "train-coucher-de-soleil.jpg",
+   "caption": "Le train du resort et les guirlandes lumineuses, en soirée"
+  },
+  {
+   "file": "hotel-entree.jpg",
+   "caption": "L'entrée de l'hôtel"
+  },
+  {
+   "file": "hotel-arriere.jpg",
+   "caption": "L'hôtel vu de l'arrière, côté condos"
+  }
+ ]
+}

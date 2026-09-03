@@ -13,6 +13,8 @@ const {
 const HERE = __dirname;
 const M = JSON.parse(fs.readFileSync(path.join(HERE, "modele.json"), "utf8"));
 const OUTPUT = path.join(HERE, "..", "Plan_affaires_Complexe_Havana.docx");
+const PHOTOS_META = path.join(HERE, "..", "photos", "photos_meta.json");
+const PHOTOS = fs.existsSync(PHOTOS_META) ? JSON.parse(fs.readFileSync(PHOTOS_META, "utf8")) : {};
 
 // --- Palette et typographie --------------------------------------------------
 const NAVY = "0B2A4A", TEAL = "1B7F79", GOLD = "C9A227", GREY = "8A94A6", LIGHT = "F2F4F7", MID = "D9DEE7", WHITE = "FFFFFF", INK = "1F2933";
@@ -152,38 +154,62 @@ const callout = (title, lines, accent = TEAL) => new Table({
   width: { size: CONTENT_W, type: WidthType.DXA }, columnWidths: [CONTENT_W],
 });
 
-// Emplacement réservé pour une image.
-const placeholder = (caption, height = 2400, width = CONTENT_W) => new Table({
-  rows: [new TableRow({
-    height: { value: height, rule: "atLeast" },
-    children: [new TableCell({
-      width: { size: width, type: WidthType.DXA },
-      shading: { type: ShadingType.CLEAR, fill: "F7F8FA", color: "auto" },
-      borders: borders({ style: BorderStyle.DASHED, size: 8, color: GREY }),
-      verticalAlign: VerticalAlign.CENTER,
+// Image réelle (si une photo est associée à l'emplacement) ou espace réservé.
+const photoRun = (meta, maxWDxa, maxHDxa) => {
+  const data = fs.readFileSync(path.join(HERE, "..", meta.file));
+  const maxW = maxWDxa / 1440 * 96, maxH = maxHDxa / 1440 * 96;
+  const scale = Math.min(maxW / meta.width, maxH / meta.height);
+  return new ImageRun({ type: "jpg", data, transformation: { width: Math.round(meta.width * scale), height: Math.round(meta.height * scale) } });
+};
+const photoCell = (meta, width, height, fallbackCaption) => {
+  if (meta) {
+    return new TableCell({
+      width: { size: width, type: WidthType.DXA }, borders: borders(noBorder), verticalAlign: VerticalAlign.CENTER,
+      margins: { top: 0, bottom: 0, left: 0, right: 0 },
       children: [
-        new Paragraph({ alignment: AlignmentType.CENTER, children: [run("IMAGE À INSÉRER", { bold: true, color: GREY, size: 18 })], spacing: { after: 60 } }),
-        new Paragraph({ alignment: AlignmentType.CENTER, children: [run(caption, { italics: true, color: GREY, size: 19 })], spacing: { after: 0 } }),
+        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [photoRun(meta, width, height)] }),
+        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 0 }, children: [run(meta.caption || "", { italics: true, size: 17, color: GREY })] }),
       ],
-    })],
-  })],
-  width: { size: width, type: WidthType.DXA }, columnWidths: [width],
-});
-const twoPlaceholders = (c1, c2, height = 2200) => {
-  const w = Math.floor((CONTENT_W - 200) / 2);
-  const mk = (c) => new TableCell({
-    width: { size: w, type: WidthType.DXA }, shading: { type: ShadingType.CLEAR, fill: "F7F8FA", color: "auto" },
+    });
+  }
+  return new TableCell({
+    width: { size: width, type: WidthType.DXA }, shading: { type: ShadingType.CLEAR, fill: "F7F8FA", color: "auto" },
     borders: borders({ style: BorderStyle.DASHED, size: 8, color: GREY }), verticalAlign: VerticalAlign.CENTER,
     children: [
       new Paragraph({ alignment: AlignmentType.CENTER, children: [run("IMAGE À INSÉRER", { bold: true, color: GREY, size: 18 })], spacing: { after: 60 } }),
-      new Paragraph({ alignment: AlignmentType.CENTER, children: [run(c, { italics: true, color: GREY, size: 19 })] }),
+      new Paragraph({ alignment: AlignmentType.CENTER, children: [run(fallbackCaption, { italics: true, color: GREY, size: 19 })], spacing: { after: 0 } }),
     ],
   });
-  const gap = new TableCell({ width: { size: 200, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] });
+};
+const placeholder = (caption, height = 2400, width = CONTENT_W, slot = null) => {
+  const meta = slot ? PHOTOS[slot] : null;
   return new Table({
-    rows: [new TableRow({ height: { value: height, rule: "atLeast" }, children: [mk(c1), gap, mk(c2)] })],
+    rows: [new TableRow({ height: meta ? undefined : { value: height, rule: "atLeast" }, children: [photoCell(meta, width, height, caption)] })],
+    width: { size: width, type: WidthType.DXA }, columnWidths: [width], borders: borders(noBorder),
+  });
+};
+const twoPlaceholders = (c1, c2, height = 2200, slot1 = null, slot2 = null) => {
+  const w = Math.floor((CONTENT_W - 200) / 2);
+  const gap = new TableCell({ width: { size: 200, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] });
+  const m1 = slot1 ? PHOTOS[slot1] : null, m2 = slot2 ? PHOTOS[slot2] : null;
+  return new Table({
+    rows: [new TableRow({ height: (m1 && m2) ? undefined : { value: height, rule: "atLeast" }, children: [photoCell(m1, w, height, c1), gap, photoCell(m2, w, height, c2)] })],
     width: { size: w * 2 + 200, type: WidthType.DXA }, columnWidths: [w, 200, w], borders: borders(noBorder),
   });
+};
+// Galerie de photos sur deux colonnes.
+const gallery = (items, fallbackCaption, height = 3600) => {
+  if (!items || !items.length) return [placeholder(fallbackCaption, height)];
+  const w = Math.floor((CONTENT_W - 200) / 2), rowH = 3600;
+  const rows = [];
+  for (let i = 0; i < items.length; i += 2) {
+    const cells = [photoCell(items[i], w, rowH, "")];
+    cells.push(new TableCell({ width: { size: 200, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] }));
+    cells.push(items[i + 1] ? photoCell(items[i + 1], w, rowH, "") : new TableCell({ width: { size: w, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] }));
+    rows.push(new TableRow({ cantSplit: true, children: cells }));
+    rows.push(new TableRow({ height: { value: 160, rule: "exact" }, children: [new TableCell({ columnSpan: 3, width: { size: w * 2 + 200, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] })] }));
+  }
+  return [new Table({ rows, width: { size: w * 2 + 200, type: WidthType.DXA }, columnWidths: [w, 200, w], borders: borders(noBorder) })];
 };
 
 const figure = (file, widthIn, caption) => {
@@ -219,7 +245,7 @@ children.push(
   new Paragraph({ spacing: { before: 400, after: 100 }, children: [run("Plan d'affaires 2027 – 2031", { bold: true, size: 44, color: NAVY })] }),
   new Paragraph({ spacing: { before: 0, after: 100 }, children: [run("Du camping estival au centre de villégiature quatre saisons", { size: 28, color: TEAL, italics: true })] }),
   new Paragraph({ spacing: { before: 0, after: 500 }, children: [run("Demande de financement de " + moneyM(M.pret, 1), { size: 26, color: INK })] }),
-  placeholder("Photo de couverture : vue aérienne du site ou piscine centrale avec le café-bar (haute résolution)", 4200),
+  placeholder("Photo de couverture : vue aérienne du site ou piscine centrale avec le café-bar (haute résolution)", 6600, CONTENT_W, "couverture"),
   new Paragraph({ spacing: { before: 500, after: 60 }, children: [run("Présenté à : ", { bold: true, color: NAVY }), run("[Nom de l'institution financière]")] }),
   new Paragraph({ spacing: { after: 60 }, children: [run("Préparé par : ", { bold: true, color: NAVY }), run("La direction du Complexe Havana")] }),
   new Paragraph({ spacing: { after: 60 }, children: [run("Date : ", { bold: true, color: NAVY }), run("Septembre 2026")] }),
@@ -342,7 +368,7 @@ children.push(
     [3600, 1300, 2300, 2448], { numericFrom: 1 },
   ),
   spacer(),
-  twoPlaceholders("Vue aérienne du site (263 acres)", "Piscine centrale et café-bar en saison"),
+  twoPlaceholders("Vue aérienne du site (263 acres)", "Piscine centrale et café-bar en saison", 3300, "aerienne", "piscine"),
   spacer(),
   H2("2.6 Performance récente"),
   P("Les revenus enregistrés par le système de réservation (reservationcamping.ca) illustrent la vigueur de la demande. Les revenus ont progressé de 5,4 % en 2026 avec 8,7 % de transactions en moins : le panier moyen par réservation est passé de 137 $ à 158 $, porté par les chalets (+24 %)."),
@@ -399,9 +425,9 @@ children.push(
   H3("Amphithéâtre et sentier lumineux"),
   P("L'amphithéâtre extérieur accueille spectacles, soirées cubaines et festivals ; le sentier lumineux, un parcours nocturne illuminé exploité d'octobre à avril, crée une raison de visiter le site en basse saison."),
   spacer(),
-  twoPlaceholders("Rendu ou esquisse : hôtel 17 chambres et restaurant Madera", "Rendu ou esquisse : piscine et spa quatre saisons"),
+  twoPlaceholders("Rendu ou esquisse : hôtel 17 chambres et restaurant Madera", "Rendu ou esquisse : piscine et spa quatre saisons", 3300, "projet_hotel", "projet_spa"),
   spacer(),
-  placeholder("Plan d'aménagement du site : localisation des phases 1 et 2 (hôtel, villas, terrains saisonniers, spa, amphithéâtre, sentier)", 3600),
+  placeholder("Plan d'aménagement du site : localisation des phases 1 et 2 (hôtel, villas, terrains saisonniers, spa, amphithéâtre, sentier)", 5600, CONTENT_W, "plan_site"),
   H2("3.4 Échéancier de réalisation"),
   ...figure("echeancier.png", 6.5, "Figure 1 – Échéancier des phases 1 et 2"),
   P("La phase 1 est réalisée en basse saison pour ne pas perturber l'exploitation estivale 2027. La phase 2 démarre à la fermeture de la saison 2027 et ouvre pour l'été 2028. La structure de financement proposée prévoit un moratoire de capital de 18 mois aligné sur cette séquence."),
@@ -428,7 +454,7 @@ children.push(
   P("[Insérer les statistiques les plus récentes de Camping Québec, de l'Institut de la statistique du Québec et de Tourisme Cantons-de-l'Est : nombre d'établissements, taux d'occupation moyen, dépenses touristiques régionales.]", { italics: true, color: GREY, size: 19 }),
   H2("4.2 La région des Cantons-de-l'Est"),
   P("Les Cantons-de-l'Est comptent parmi les régions touristiques les plus fréquentées du Québec, à moins de deux heures de Montréal et à proximité de Sherbrooke, de Granby et de la frontière américaine. La région est reconnue pour ses spas, ses vignobles, ses stations de ski et ses lacs, ce qui en fait une destination quatre saisons établie. Maricourt se situe au cœur de ce bassin, à distance de route d'environ 4,5 millions de personnes."),
-  placeholder("Carte de localisation : Maricourt, distances routières depuis Montréal, Sherbrooke, Drummondville, Granby et la frontière", 3000),
+  placeholder("Carte de localisation : Maricourt, distances routières depuis Montréal, Sherbrooke, Drummondville, Granby et la frontière", 3000, CONTENT_W, "carte"),
   H2("4.3 Clientèle cible"),
   dataTable(
     ["Segment", "Profil", "Offre principale", "Saison"],
@@ -511,7 +537,7 @@ children.push(
     [3400, 1250, 1250, 1250, 1250, 1248],
   ),
   spacer(),
-  placeholder("Exemples de matériel promotionnel : visuels de campagne, affiche du festival cubain, capture du site web", 2400),
+  placeholder("Exemples de matériel promotionnel : visuels de campagne, affiche du festival cubain, capture du site web", 4200, CONTENT_W, "promo"),
 );
 
 // --- 6. Plan d'exploitation -------------------------------------------------------------------------
@@ -566,7 +592,7 @@ children.push(
     [1800, 2600, 5248], { numericFrom: 99 },
   ),
   spacer(),
-  placeholder("Organigramme de l'entreprise (direction générale, cinq services, responsables)", 2600),
+  placeholder("Organigramme de l'entreprise (direction générale, cinq services, responsables)", 2600, CONTENT_W, "organigramme"),
   spacer(),
   H2("Conseillers externes"),
   ...bullets([
@@ -756,7 +782,7 @@ children.push(
     [1000, 6600, 2048], { numericFrom: 99 },
   ),
   spacer(),
-  placeholder("Annexe F – Galerie photos : hébergements, piscine, animation, restauration, vues du site en quatre saisons", 3600),
+  ...gallery(PHOTOS.galerie, "Annexe F – Galerie photos : hébergements, piscine, animation, restauration, vues du site en quatre saisons"),
 );
 
 // =====================================================================================
