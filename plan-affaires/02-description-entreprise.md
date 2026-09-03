@@ -6,9 +6,10 @@
 
 ## Historique et origine du projet
 
-Complexe Havana est un camping en exploitation. Le système de réservation
-(reservationcamping.ca) a enregistré 10 587 transactions pour la saison
-2024-2025. Voir le plan financier pour les revenus détaillés.
+Complexe Havana est un camping en exploitation. Les revenus avant taxes
+ont atteint 1,45 M$ en 2025 et 1,53 M$ en 2026 selon le système de
+réservation (reservationcamping.ca). Voir le plan financier pour le détail
+par catégorie et l'évolution d'une saison à l'autre.
 
 [Compléter : année de fondation, propriétaires actuels, nature du projet
 Havana-1 (acquisition, agrandissement, refinancement, etc.).]

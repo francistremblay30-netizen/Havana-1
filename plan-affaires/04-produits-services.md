@@ -8,9 +8,10 @@ selon les catégories de revenus du système de réservation :
 - **Terrains de camping** : emplacements pour tentes, roulottes et
   véhicules récréatifs. Principale source de revenus (voir plan financier).
 - **Chalets** : location d'unités fermées.
-- **Prêt-à-camper (tente PAC)** : tentes aménagées, équipement fourni.
+- **Prêt-à-camper (tente PAC)** : 14 cabanas aménagées, équipement fourni.
 - **Emplacements saisonniers** : location d'un emplacement pour toute la
-  saison. Faible part des revenus actuellement, cible à préciser.
+  saison. Faible part des revenus actuellement. Objectif : 30 emplacements
+  à 3 650 $, soit environ 100 000 $ par saison (voir plan financier).
 
 [Compléter : nombre d'emplacements et d'unités par catégorie, services
 inclus, dates d'ouverture de la saison.]
