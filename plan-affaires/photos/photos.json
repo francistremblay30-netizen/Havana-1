@@ -43,6 +43,14 @@
    "caption": "La piscine, la plage de sable et les palapas"
   },
   {
+   "file": "aqua-bar.jpg",
+   "caption": "L'Aqua Bar, le bar dans la piscine"
+  },
+  {
+   "file": "lac-plage.jpg",
+   "caption": "Le lac, sa plage de sable et ses palapas"
+  },
+  {
    "file": "piscine-fete-mousse.jpg",
    "caption": "La piscine centrale, fête de la mousse"
   },
@@ -81,6 +89,10 @@
   {
    "file": "hotel-arriere.jpg",
    "caption": "L'hôtel vu de l'arrière, côté condos"
+  },
+  {
+   "file": "visuel-reseaux-piscine.jpg",
+   "caption": "Visuel des réseaux sociaux : animation aquatique"
   }
  ]
 }

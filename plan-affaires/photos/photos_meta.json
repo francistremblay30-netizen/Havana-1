@@ -61,6 +61,18 @@
    "caption": "La piscine, la plage de sable et les palapas"
   },
   {
+   "file": "photos/prepare/aqua-bar.jpg",
+   "width": 387,
+   "height": 516,
+   "caption": "L'Aqua Bar, le bar dans la piscine"
+  },
+  {
+   "file": "photos/prepare/lac-plage.jpg",
+   "width": 399,
+   "height": 501,
+   "caption": "Le lac, sa plage de sable et ses palapas"
+  },
+  {
    "file": "photos/prepare/piscine-fete-mousse.jpg",
    "width": 588,
    "height": 429,
@@ -119,6 +131,12 @@
    "width": 588,
    "height": 330,
    "caption": "L'hôtel vu de l'arrière, côté condos"
+  },
+  {
+   "file": "photos/prepare/visuel-reseaux-piscine.jpg",
+   "width": 334,
+   "height": 598,
+   "caption": "Visuel des réseaux sociaux : animation aquatique"
   }
  ]
 }
