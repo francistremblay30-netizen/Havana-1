@@ -1,0 +1,544 @@
+{
+ "annees": [
+  {
+   "label": "2026 (réel)",
+   "revenus": {
+    "terrains": 791894.29,
+    "saisonniers": 43208.71,
+    "chalets": 497722.97,
+    "cabanas": 199015.63,
+    "villas": 0.0,
+    "hotel": 0.0,
+    "spa": 0.0,
+    "spectacles": 0.0,
+    "sentier": 0.0,
+    "restauration": 100000.0,
+    "activites": 96700.0
+   },
+   "charges": {
+    "cout_ventes": 52340.0,
+    "salaires": 674131.224,
+    "energie": 242500,
+    "entretien": 69141.664,
+    "marketing": 51856.248,
+    "assurances": 60000,
+    "taxes": 54500,
+    "admin": 43213.54000000001,
+    "bancaires": 25928.124,
+    "fournitures": 43213.54000000001,
+    "loyers": 42000.0,
+    "divers": 34570.832
+   },
+   "total_revenus": 1728541.6,
+   "total_charges": 1393395.172,
+   "baiia": 335146.4280000001,
+   "marge_baiia": 0.19388970910506292,
+   "amortissement": 150000,
+   "interets": 375000.0,
+   "capital": 0.0,
+   "service_dette": 375000.0,
+   "bai": -189853.57199999993,
+   "impots": 0.0,
+   "benefice_net": -189853.57199999993,
+   "capex_maintien": 0.0,
+   "flux_libre": -39853.57199999993,
+   "tresorerie_cumulee": 0.0,
+   "dscr": 0.8937238080000002,
+   "couverture_interets": 0.8937238080000002,
+   "solde_dette": 5000000
+  },
+  {
+   "label": "An 1 – 2027",
+   "revenus": {
+    "terrains": 815651.1187000001,
+    "saisonniers": 109500.0,
+    "chalets": 446879.2,
+    "villas": 290791.28,
+    "hotel": 402230.0,
+    "cabanas": 204986.0989,
+    "restauration": 363206.031616,
+    "spa": 0.0,
+    "spectacles": 0.0,
+    "sentier": 0,
+    "activites": 105000
+   },
+   "charges": {
+    "cout_ventes": 140857.99043328,
+    "salaires": 985767.74251776,
+    "energie": 275000,
+    "entretien": 109529.74916864,
+    "marketing": 95838.53052256002,
+    "assurances": 95000,
+    "taxes": 75000,
+    "admin": 68456.0932304,
+    "bancaires": 41073.65593824,
+    "fournitures": 68456.0932304,
+    "loyers": 42840.0,
+    "divers": 54764.87458432
+   },
+   "total_revenus": 2738243.729216,
+   "total_charges": 2052584.7296256,
+   "baiia": 685658.9995904001,
+   "marge_baiia": 0.2504010115223434,
+   "amortissement": 250000.0,
+   "interets": 523250.00000000006,
+   "capital": 0.0,
+   "service_dette": 523250.00000000006,
+   "bai": -87591.00040959992,
+   "impots": 0.0,
+   "benefice_net": -87591.00040959992,
+   "capex_maintien": 54764.87458432,
+   "flux_libre": 107644.12500608008,
+   "tresorerie_cumulee": 107644.12500608008,
+   "dscr": 1.310385092384902,
+   "couverture_interets": 1.310385092384902,
+   "solde_dette": 10300000
+  },
+  {
+   "label": "An 2 – 2028",
+   "revenus": {
+    "terrains": 856923.06530622,
+    "saisonniers": 195494.0,
+    "chalets": 598410.224,
+    "villas": 503275.201,
+    "hotel": 546443.3250000001,
+    "cabanas": 217469.75232301,
+    "restauration": 612783.2692021383,
+    "spa": 226600.0,
+    "spectacles": 120000.0,
+    "sentier": 45000,
+    "activites": 130000
+   },
+   "charges": {
+    "cout_ventes": 228218.47883670565,
+    "salaires": 1377815.6045226655,
+    "energie": 400000,
+    "entretien": 162095.95347325475,
+    "marketing": 141833.95928909793,
+    "assurances": 130000,
+    "taxes": 130000,
+    "admin": 101309.97092078422,
+    "bancaires": 60785.98255247052,
+    "fournitures": 101309.97092078422,
+    "loyers": 43696.8,
+    "divers": 81047.97673662737
+   },
+   "total_revenus": 4052398.8368313685,
+   "total_charges": 2958114.697252391,
+   "baiia": 1094284.1395789776,
+   "marge_baiia": 0.2700336723111427,
+   "amortissement": 370000.0,
+   "interets": 719878.7529928439,
+   "capital": 77410.79092316223,
+   "service_dette": 797289.5439160061,
+   "bai": 4405.38658613374,
+   "impots": 881.077317226748,
+   "benefice_net": 3524.3092689069917,
+   "capex_maintien": 81047.97673662737,
+   "flux_libre": 215065.54160911744,
+   "tresorerie_cumulee": 322709.66661519755,
+   "dscr": 1.3725053187129965,
+   "couverture_interets": 1.5200950646613343,
+   "solde_dette": 10222589.209076835
+  },
+  {
+   "label": "An 3 – 2029",
+   "revenus": {
+    "terrains": 899937.2427019832,
+    "saisonniers": 247826.24,
+    "chalets": 670641.5696,
+    "villas": 589962.03422,
+    "hotel": 650388.9885999999,
+    "cabanas": 228343.23993916053,
+    "restauration": 788903.8356146745,
+    "spa": 437621.25,
+    "spectacles": 226600.0,
+    "sentier": 140000,
+    "activites": 145000
+   },
+   "charges": {
+    "cout_ventes": 289338.2657528426,
+    "salaires": 1658324.0522230202,
+    "energie": 420000,
+    "entretien": 201008.97602703274,
+    "marketing": 150756.73202027453,
+    "assurances": 134000,
+    "taxes": 133000,
+    "admin": 125630.61001689546,
+    "bancaires": 75378.36601013727,
+    "fournitures": 125630.61001689546,
+    "loyers": 44570.736000000004,
+    "divers": 100504.48801351637
+   },
+   "total_revenus": 5025224.400675818,
+   "total_charges": 3458142.836080615,
+   "baiia": 1567081.5645952034,
+   "marge_baiia": 0.31184310184923364,
+   "amortissement": 370000.0,
+   "interets": 710412.2755492195,
+   "capital": 163166.8122827927,
+   "service_dette": 873579.0878320122,
+   "bai": 486669.2890459839,
+   "impots": 97333.8578091968,
+   "benefice_net": 389335.4312367871,
+   "capex_maintien": 100504.48801351637,
+   "flux_libre": 495664.1309404781,
+   "tresorerie_cumulee": 818373.7975556757,
+   "dscr": 1.7938634136541403,
+   "couverture_interets": 2.205876247540477,
+   "solde_dette": 10059422.396794043
+  },
+  {
+   "label": "An 4 – 2030",
+   "revenus": {
+    "terrains": 935848.1999828799,
+    "saisonniers": 279191.7485,
+    "chalets": 725817.2472112,
+    "villas": 641823.5843565,
+    "hotel": 708548.7731575001,
+    "cabanas": 235193.53713733534,
+    "restauration": 881605.7725863538,
+    "spa": 540899.865,
+    "spectacles": 297052.0,
+    "sentier": 165000,
+    "activites": 152000
+   },
+   "charges": {
+    "cout_ventes": 321329.90495349676,
+    "salaires": 1807968.7365778252,
+    "energie": 435000,
+    "entretien": 222519.2291172708,
+    "marketing": 166889.4218379531,
+    "assurances": 138000,
+    "taxes": 136000,
+    "admin": 139074.51819829424,
+    "bancaires": 83444.71091897655,
+    "fournitures": 139074.51819829424,
+    "loyers": 45462.15072,
+    "divers": 111259.6145586354
+   },
+   "total_revenus": 5562980.72793177,
+   "total_charges": 3746022.8050807454,
+   "baiia": 1816957.9228510242,
+   "marge_baiia": 0.3266158938369253,
+   "amortissement": 370000.0,
+   "interets": 698616.9334962422,
+   "capital": 174962.15433576994,
+   "service_dette": 873579.0878320121,
+   "bai": 748340.989354782,
+   "impots": 149668.1978709564,
+   "benefice_net": 598672.7914838257,
+   "capex_maintien": 111259.6145586354,
+   "flux_libre": 682451.0225894202,
+   "tresorerie_cumulee": 1500824.820145096,
+   "dscr": 2.0799008906683243,
+   "couverture_interets": 2.6007928461711094,
+   "solde_dette": 9884460.242458273
+  },
+  {
+   "label": "An 5 – 2031",
+   "revenus": {
+    "terrains": 963923.6459823662,
+    "saisonniers": 287567.500955,
+    "chalets": 769068.2735364322,
+    "villas": 688862.2647182121,
+    "hotel": 756343.608583215,
+    "cabanas": 242249.34325145543,
+    "restauration": 964083.8056269371,
+    "spa": 588078.3532250001,
+    "spectacles": 327818.1,
+    "sentier": 175000,
+    "activites": 158000
+   },
+   "charges": {
+    "cout_ventes": 349747.65585688927,
+    "salaires": 1894718.3666811576,
+    "energie": 450000,
+    "entretien": 236839.7958351447,
+    "marketing": 177629.84687635853,
+    "assurances": 142000,
+    "taxes": 139000,
+    "admin": 148024.87239696545,
+    "bancaires": 88814.92343817926,
+    "fournitures": 148024.87239696545,
+    "loyers": 46371.3937344,
+    "divers": 118419.89791757235
+   },
+   "total_revenus": 5920994.895878618,
+   "total_charges": 3939591.625133633,
+   "baiia": 1981403.2707449845,
+   "marge_baiia": 0.3346402598867574,
+   "amortissement": 370000.0,
+   "interets": 685968.9052125278,
+   "capital": 187610.18261948414,
+   "service_dette": 873579.087832012,
+   "bai": 925434.3655324567,
+   "impots": 185086.87310649134,
+   "benefice_net": 740347.4924259654,
+   "capex_maintien": 118419.89791757235,
+   "flux_libre": 804317.4118889088,
+   "tresorerie_cumulee": 2305142.2320340048,
+   "dscr": 2.268144119225992,
+   "couverture_interets": 2.8884738880855005,
+   "solde_dette": 9696850.059838785
+  }
+ ],
+ "lignes": [
+  [
+   "terrains",
+   "Terrains de camping (265)"
+  ],
+  [
+   "saisonniers",
+   "Terrains saisonniers (35 → 70)"
+  ],
+  [
+   "chalets",
+   "Chalets 4 saisons (16)"
+  ],
+  [
+   "villas",
+   "Villas (13)"
+  ],
+  [
+   "hotel",
+   "Hôtel (17 chambres)"
+  ],
+  [
+   "cabanas",
+   "Cabanas prêt-à-camper (13)"
+  ],
+  [
+   "restauration",
+   "Restauration et bars"
+  ],
+  [
+   "spa",
+   "Spa et piscine 4 saisons"
+  ],
+  [
+   "spectacles",
+   "Spectacles et festivals"
+  ],
+  [
+   "sentier",
+   "Sentier lumineux"
+  ],
+  [
+   "activites",
+   "Activités et concessions"
+  ]
+ ],
+ "charges": [
+  [
+   "cout_ventes",
+   "Coût des ventes (restauration, concessions)"
+  ],
+  [
+   "salaires",
+   "Salaires et charges sociales"
+  ],
+  [
+   "energie",
+   "Électricité, chauffage et propane"
+  ],
+  [
+   "entretien",
+   "Entretien et réparations"
+  ],
+  [
+   "marketing",
+   "Marketing et commercialisation"
+  ],
+  [
+   "assurances",
+   "Assurances"
+  ],
+  [
+   "taxes",
+   "Taxes municipales et scolaires"
+  ],
+  [
+   "admin",
+   "Administration, honoraires, TI et télécoms"
+  ],
+  [
+   "bancaires",
+   "Frais bancaires et de cartes"
+  ],
+  [
+   "fournitures",
+   "Fournitures d'exploitation"
+  ],
+  [
+   "loyers",
+   "Loyers et locations"
+  ],
+  [
+   "divers",
+   "Divers et imprévus"
+  ]
+ ],
+ "projets": [
+  [
+   "Phase 1",
+   "Hôtel : de 6 à 17 chambres, exploitation 12 mois",
+   700000
+  ],
+  [
+   "Phase 1",
+   "Restaurant Madera et salle de conférence",
+   800000
+  ],
+  [
+   "Phase 1",
+   "Achèvement des 13 villas",
+   150000
+  ],
+  [
+   "Phase 1",
+   "Chalets existants : mise à niveau 4 saisons",
+   150000
+  ],
+  [
+   "Phase 1",
+   "35 terrains saisonniers additionnels",
+   700000
+  ],
+  [
+   "Phase 2",
+   "Piscine et spa 4 saisons",
+   2000000
+  ],
+  [
+   "Phase 2",
+   "Amphithéâtre",
+   500000
+  ],
+  [
+   "Phase 2",
+   "Sentier lumineux",
+   500000
+  ]
+ ],
+ "emplois": [
+  [
+   "Projets de développement (phases 1 et 2)",
+   5500000
+  ],
+  [
+   "Contingence de construction (5 %)",
+   275000
+  ],
+  [
+   "Honoraires professionnels (plans, ingénierie, permis)",
+   175000
+  ],
+  [
+   "Frais de financement et juridiques",
+   75000
+  ],
+  [
+   "Refinancement de la dette existante",
+   5000000
+  ],
+  [
+   "Fonds de roulement de démarrage",
+   100000
+  ]
+ ],
+ "sources": [
+  [
+   "Prêt à terme hypothécaire (demandé)",
+   10300000
+  ],
+  [
+   "Mise de fonds des propriétaires et investisseurs privés",
+   825000
+  ]
+ ],
+ "pret": 10300000,
+ "taux": 0.07,
+ "amort_ans": 25,
+ "paiement_mensuel": 72798.25731933434,
+ "service_dette_plein": 873579.0878320121,
+ "valeur_site": 28000000,
+ "ltv": 0.3678571428571429,
+ "reel_2025_total": 1453605.16,
+ "reel_2026_total": 1531841.68,
+ "dette": [
+  {
+   "an": 1,
+   "interets": 523250.00000000006,
+   "capital": 0.0,
+   "service": 523250.00000000006,
+   "solde_fin": 10300000
+  },
+  {
+   "an": 2,
+   "interets": 719878.7529928439,
+   "capital": 77410.79092316223,
+   "service": 797289.5439160061,
+   "solde_fin": 10222589.209076835
+  },
+  {
+   "an": 3,
+   "interets": 710412.2755492195,
+   "capital": 163166.8122827927,
+   "service": 873579.0878320122,
+   "solde_fin": 10059422.396794043
+  },
+  {
+   "an": 4,
+   "interets": 698616.9334962422,
+   "capital": 174962.15433576994,
+   "service": 873579.0878320121,
+   "solde_fin": 9884460.242458273
+  },
+  {
+   "an": 5,
+   "interets": 685968.9052125278,
+   "capital": 187610.18261948414,
+   "service": 873579.087832012,
+   "solde_fin": 9696850.059838785
+  }
+ ],
+ "sensibilite": [
+  {
+   "scenario": "Scénario de base",
+   "dscr_an2": 1.3725053187129965,
+   "baiia_an2": 1094284.1395789776,
+   "dscr_an3": 1.7938634136541403,
+   "baiia_an3": 1567081.5645952034,
+   "dscr_an5": 2.268144119225992,
+   "baiia_an5": 1981403.2707449843
+  },
+  {
+   "scenario": "Revenus -10 %",
+   "dscr_an2": 1.0868462333958222,
+   "baiia_an2": 866531.1377309843,
+   "dscr_an3": 1.4561334084236586,
+   "baiia_an3": 1272047.6946924585,
+   "dscr_an5": 1.8609411572564518,
+   "baiia_an5": 1625679.27866514
+  },
+  {
+   "scenario": "Revenus -15 %",
+   "dscr_an2": 0.9440166907372349,
+   "baiia_an2": 752654.6368069875,
+   "dscr_an3": 1.2872684058084176,
+   "baiia_an3": 1124530.759741086,
+   "dscr_an5": 1.657339676271682,
+   "baiia_an5": 1447817.2826252182
+  },
+  {
+   "scenario": "Revenus -20 %",
+   "dscr_an2": 0.8011871480786483,
+   "baiia_an2": 638778.1358829911,
+   "dscr_an3": 1.1184034031931762,
+   "baiia_an3": 977013.8247897131,
+   "dscr_an5": 1.453738195286913,
+   "baiia_an5": 1269955.2865852967
+  }
+ ]
+}

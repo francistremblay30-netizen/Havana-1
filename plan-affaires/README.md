@@ -33,3 +33,25 @@ Le dossier `sources/` contient les documents d'origine :
   sections plutôt que de les dupliquer.
 - Committer après chaque section terminée avec un message clair, par exemple
   `Rédiger le résumé exécutif`.
+
+## Plan d'affaires bancaire (version présentable)
+
+- `Plan_affaires_Complexe_Havana.docx` : document complet destiné à une
+  institution financière (27 pages), avec emplacements réservés pour les
+  images et champs `[à compléter]`.
+- `Plan_affaires_Complexe_Havana.pdf` : même document, rendu PDF.
+- `modele/modele_financier.py` : modèle financier sur cinq ans (hypothèses
+  explicites, échéancier de la dette, ratios, sensibilité). Produit
+  `modele.json` et les graphiques dans `modele/graphiques/`.
+- `modele/generer_plan.js` : générateur du document Word à partir du modèle.
+
+Pour régénérer après avoir modifié une hypothèse :
+
+```bash
+cd plan-affaires/modele
+python3 modele_financier.py
+node generer_plan.js      # nécessite le paquet npm « docx »
+```
+
+À l'ouverture du Word, accepter la mise à jour des champs pour remplir la
+table des matières.
