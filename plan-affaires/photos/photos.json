@@ -1,33 +1,69 @@
 {
- "_aide": "Associe chaque emplacement du document à une photo du dossier photos/. Mettre null pour laisser l'espace réservé. Lancer ensuite modele/preparer_photos.py puis modele/generer_plan.js.",
+ "_aide": "Chaque emplacement du document est associé à une photo et à une légende qui appuie l'argument de la section. Lancer modele/preparer_photos.py puis modele/generer_plan.js.",
  "couverture": {
   "file": "piscine-vue-aerienne.jpg",
   "caption": ""
  },
- "aerienne": {
+ "historique": {
   "file": "pavillon-accueil.jpg",
-  "caption": "Le pavillon d'accueil, au toit de chaume"
+  "caption": "Le pavillon d'accueil : dès l'entrée, le toit de chaume annonce le concept cubain"
  },
- "piscine": {
-  "file": "piscine-fete-mousse.jpg",
-  "caption": "La piscine centrale un jour de fête de la mousse"
+ "actifs_terrains": {
+  "file": "terrains-vue-aerienne.jpg",
+  "caption": "Les 265 terrains de camping : 52 % des revenus 2026, complets en haute saison"
  },
- "projet_hotel": {
+ "actifs_chalets": {
+  "file": "chalets.jpg",
+  "caption": "Les chalets et chambres : 33 % des revenus 2026, en hausse de 24 % en un an"
+ },
+ "projet_hotel_entree": {
   "file": "hotel-entree.jpg",
-  "caption": "Le bâtiment hôtelier actuel, à agrandir à 17 chambres"
+  "caption": "L'entrée de l'hôtel actuel : 6 chambres, à porter à 17"
+ },
+ "projet_hotel_arriere": {
+  "file": "hotel-arriere.jpg",
+  "caption": "L'aile arrière de l'hôtel : les chambres à rénover pour une exploitation 12 mois"
+ },
+ "projet_resto_aquabar": {
+  "file": "aqua-bar.jpg",
+  "caption": "L'Aqua Bar : la vente de boissons fonctionne déjà, le restaurant Madera y ajoute les repas"
+ },
+ "projet_resto_kiosques": {
+  "file": "kiosques-restauration.jpg",
+  "caption": "Les kiosques et concessions actuels : une offre saisonnière que le restaurant rend permanente"
  },
  "projet_spa": {
-  "file": "chalets.jpg",
-  "caption": "Les chalets existants, à mettre à niveau pour l'exploitation quatre saisons"
+  "file": "piscine-fete-mousse.jpg",
+  "caption": "La piscine actuelle, pleine chaque été : le spa 4 saisons prolonge cette attraction à l'année"
+ },
+ "projet_amphi_scene": {
+  "file": "spectacle-scene.jpg",
+  "caption": "La scène extérieure actuelle, un soir de spectacle : l'amphithéâtre lui donne une capacité permanente"
+ },
+ "projet_amphi_train": {
+  "file": "train-coucher-de-soleil.jpg",
+  "caption": "Le train et les guirlandes en soirée : l'animation nocturne existe, le sentier lumineux l'étend à l'hiver"
  },
  "plan_site": {
   "file": "plan-du-site.jpg",
   "caption": "Plan d'aménagement actuel du site (source : Havana Resort)"
  },
+ "clientele_famille": {
+  "file": "famille-chaise-geante.jpg",
+  "caption": "Le cœur de la clientèle : les familles, qui reviennent d'une année à l'autre"
+ },
+ "clientele_lac": {
+  "file": "lac-plage.jpg",
+  "caption": "Le lac et sa plage : l'offre détente qui attire couples et clientèle de jour"
+ },
  "carte": null,
- "promo": {
-  "file": "spectacle-scene.jpg",
-  "caption": "Soirée de spectacle sur la scène extérieure, devant le café Cubano"
+ "promo_1": {
+  "file": "visuel-reseaux-piscine.jpg",
+  "caption": "Contenu vidéo des réseaux sociaux : animation aquatique"
+ },
+ "promo_2": {
+  "file": "train-visuel-promo.jpg",
+  "caption": "Contenu vidéo des réseaux sociaux : le train du resort"
  },
  "organigramme": {
   "file": "equipe.jpg",
@@ -35,60 +71,12 @@
  },
  "galerie": [
   {
-   "file": "piscine-vue-aerienne.jpg",
-   "caption": "La piscine centrale vue du ciel, un jour d'été"
-  },
-  {
    "file": "piscine-plage-palapas.jpg",
    "caption": "La piscine, la plage de sable et les palapas"
   },
   {
-   "file": "aqua-bar.jpg",
-   "caption": "L'Aqua Bar, le bar dans la piscine"
-  },
-  {
-   "file": "lac-plage.jpg",
-   "caption": "Le lac, sa plage de sable et ses palapas"
-  },
-  {
-   "file": "piscine-fete-mousse.jpg",
-   "caption": "La piscine centrale, fête de la mousse"
-  },
-  {
-   "file": "chalets.jpg",
-   "caption": "Les chalets aux couleurs cubaines"
-  },
-  {
    "file": "coolbox.jpg",
    "caption": "Les Coolbox, mini-maisons en conteneur"
-  },
-  {
-   "file": "pavillon-accueil.jpg",
-   "caption": "Le pavillon d'accueil au toit de chaume"
-  },
-  {
-   "file": "spectacle-scene.jpg",
-   "caption": "Spectacle en soirée sur la scène extérieure"
-  },
-  {
-   "file": "kiosques-restauration.jpg",
-   "caption": "Les kiosques de restauration et les concessions"
-  },
-  {
-   "file": "hotel-entree.jpg",
-   "caption": "L'entrée de l'hôtel"
-  },
-  {
-   "file": "hotel-arriere.jpg",
-   "caption": "L'hôtel vu de l'arrière, côté condos"
-  },
-  {
-   "file": "famille-chaise-geante.jpg",
-   "caption": "Une famille d'invités sur la chaise géante « I ♥ Havana Resort »"
-  },
-  {
-   "file": "visuel-reseaux-piscine.jpg",
-   "caption": "Visuel des réseaux sociaux : animation aquatique"
   }
  ]
 }

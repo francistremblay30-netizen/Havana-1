@@ -5,29 +5,65 @@
   "height": 378,
   "caption": ""
  },
- "aerienne": {
+ "historique": {
   "file": "photos/prepare/pavillon-accueil.jpg",
   "width": 588,
   "height": 354,
-  "caption": "Le pavillon d'accueil, au toit de chaume"
+  "caption": "Le pavillon d'accueil : dès l'entrée, le toit de chaume annonce le concept cubain"
  },
- "piscine": {
-  "file": "photos/prepare/piscine-fete-mousse.jpg",
-  "width": 588,
-  "height": 429,
-  "caption": "La piscine centrale un jour de fête de la mousse"
- },
- "projet_hotel": {
-  "file": "photos/prepare/hotel-entree.jpg",
+ "actifs_terrains": {
+  "file": "photos/prepare/terrains-vue-aerienne.jpg",
   "width": 588,
   "height": 441,
-  "caption": "Le bâtiment hôtelier actuel, à agrandir à 17 chambres"
+  "caption": "Les 265 terrains de camping : 52 % des revenus 2026, complets en haute saison"
  },
- "projet_spa": {
+ "actifs_chalets": {
   "file": "photos/prepare/chalets.jpg",
   "width": 588,
   "height": 354,
-  "caption": "Les chalets existants, à mettre à niveau pour l'exploitation quatre saisons"
+  "caption": "Les chalets et chambres : 33 % des revenus 2026, en hausse de 24 % en un an"
+ },
+ "projet_hotel_entree": {
+  "file": "photos/prepare/hotel-entree.jpg",
+  "width": 588,
+  "height": 441,
+  "caption": "L'entrée de l'hôtel actuel : 6 chambres, à porter à 17"
+ },
+ "projet_hotel_arriere": {
+  "file": "photos/prepare/hotel-arriere.jpg",
+  "width": 588,
+  "height": 330,
+  "caption": "L'aile arrière de l'hôtel : les chambres à rénover pour une exploitation 12 mois"
+ },
+ "projet_resto_aquabar": {
+  "file": "photos/prepare/aqua-bar.jpg",
+  "width": 387,
+  "height": 516,
+  "caption": "L'Aqua Bar : la vente de boissons fonctionne déjà, le restaurant Madera y ajoute les repas"
+ },
+ "projet_resto_kiosques": {
+  "file": "photos/prepare/kiosques-restauration.jpg",
+  "width": 588,
+  "height": 441,
+  "caption": "Les kiosques et concessions actuels : une offre saisonnière que le restaurant rend permanente"
+ },
+ "projet_spa": {
+  "file": "photos/prepare/piscine-fete-mousse.jpg",
+  "width": 588,
+  "height": 429,
+  "caption": "La piscine actuelle, pleine chaque été : le spa 4 saisons prolonge cette attraction à l'année"
+ },
+ "projet_amphi_scene": {
+  "file": "photos/prepare/spectacle-scene.jpg",
+  "width": 588,
+  "height": 441,
+  "caption": "La scène extérieure actuelle, un soir de spectacle : l'amphithéâtre lui donne une capacité permanente"
+ },
+ "projet_amphi_train": {
+  "file": "photos/prepare/train-coucher-de-soleil.jpg",
+  "width": 1183,
+  "height": 1177,
+  "caption": "Le train et les guirlandes en soirée : l'animation nocturne existe, le sentier lumineux l'étend à l'hiver"
  },
  "plan_site": {
   "file": "photos/prepare/plan-du-site.jpg",
@@ -35,11 +71,29 @@
   "height": 381,
   "caption": "Plan d'aménagement actuel du site (source : Havana Resort)"
  },
- "promo": {
-  "file": "photos/prepare/spectacle-scene.jpg",
-  "width": 588,
-  "height": 441,
-  "caption": "Soirée de spectacle sur la scène extérieure, devant le café Cubano"
+ "clientele_famille": {
+  "file": "photos/prepare/famille-chaise-geante.jpg",
+  "width": 447,
+  "height": 447,
+  "caption": "Le cœur de la clientèle : les familles, qui reviennent d'une année à l'autre"
+ },
+ "clientele_lac": {
+  "file": "photos/prepare/lac-plage.jpg",
+  "width": 399,
+  "height": 501,
+  "caption": "Le lac et sa plage : l'offre détente qui attire couples et clientèle de jour"
+ },
+ "promo_1": {
+  "file": "photos/prepare/visuel-reseaux-piscine.jpg",
+  "width": 334,
+  "height": 598,
+  "caption": "Contenu vidéo des réseaux sociaux : animation aquatique"
+ },
+ "promo_2": {
+  "file": "photos/prepare/train-visuel-promo.jpg",
+  "width": 335,
+  "height": 597,
+  "caption": "Contenu vidéo des réseaux sociaux : le train du resort"
  },
  "organigramme": {
   "file": "photos/prepare/equipe.jpg",
@@ -49,88 +103,16 @@
  },
  "galerie": [
   {
-   "file": "photos/prepare/piscine-vue-aerienne.jpg",
-   "width": 529,
-   "height": 378,
-   "caption": "La piscine centrale vue du ciel, un jour d'été"
-  },
-  {
    "file": "photos/prepare/piscine-plage-palapas.jpg",
    "width": 554,
    "height": 554,
    "caption": "La piscine, la plage de sable et les palapas"
   },
   {
-   "file": "photos/prepare/aqua-bar.jpg",
-   "width": 387,
-   "height": 516,
-   "caption": "L'Aqua Bar, le bar dans la piscine"
-  },
-  {
-   "file": "photos/prepare/lac-plage.jpg",
-   "width": 399,
-   "height": 501,
-   "caption": "Le lac, sa plage de sable et ses palapas"
-  },
-  {
-   "file": "photos/prepare/piscine-fete-mousse.jpg",
-   "width": 588,
-   "height": 429,
-   "caption": "La piscine centrale, fête de la mousse"
-  },
-  {
-   "file": "photos/prepare/chalets.jpg",
-   "width": 588,
-   "height": 354,
-   "caption": "Les chalets aux couleurs cubaines"
-  },
-  {
    "file": "photos/prepare/coolbox.jpg",
    "width": 588,
    "height": 264,
    "caption": "Les Coolbox, mini-maisons en conteneur"
-  },
-  {
-   "file": "photos/prepare/pavillon-accueil.jpg",
-   "width": 588,
-   "height": 354,
-   "caption": "Le pavillon d'accueil au toit de chaume"
-  },
-  {
-   "file": "photos/prepare/spectacle-scene.jpg",
-   "width": 588,
-   "height": 441,
-   "caption": "Spectacle en soirée sur la scène extérieure"
-  },
-  {
-   "file": "photos/prepare/kiosques-restauration.jpg",
-   "width": 588,
-   "height": 441,
-   "caption": "Les kiosques de restauration et les concessions"
-  },
-  {
-   "file": "photos/prepare/hotel-entree.jpg",
-   "width": 588,
-   "height": 441,
-   "caption": "L'entrée de l'hôtel"
-  },
-  {
-   "file": "photos/prepare/hotel-arriere.jpg",
-   "width": 588,
-   "height": 330,
-   "caption": "L'hôtel vu de l'arrière, côté condos"
-  },
-  {
-   "file": "photos/prepare/famille-chaise-geante.jpg",
-   "width": 447,
-   "height": 447,
-   "caption": "Une famille d'invités sur la chaise géante « I ♥ Havana Resort »"
-  },
-  {
-   "file": "photos/prepare/visuel-reseaux-piscine.jpg",
-   "width": 334,
-   "height": 598,
-   "caption": "Visuel des réseaux sociaux : animation aquatique"
   }
  ]
 }
