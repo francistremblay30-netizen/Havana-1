@@ -14,6 +14,18 @@ le suivi des modifications avec Git.
 6. [Organisation et équipe](06-organisation-equipe.md)
 7. [Plan financier](07-plan-financier.md)
 
+## Documents sources
+
+Le dossier `sources/` contient les documents d'origine :
+
+- `Plan_affaire.docx` : texte du plan (mission, vision, histoire, projets et
+  coûts).
+- `Tableau_depenses_revenus_actuel.xls` : budget mensuel actuel.
+- `Tableau_depenses_revenus_projetes.xls` : budget mensuel une fois les
+  projets réalisés.
+- `rapport-revenus-2025.jpg` et `rapport-revenus-2026.jpg` : rapports de
+  revenus du système de réservation, annotés à la main.
+
 ## Comment travailler
 
 - Remplir une section à la fois, en remplaçant le texte entre crochets.
