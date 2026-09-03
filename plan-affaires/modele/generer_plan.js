@@ -18,7 +18,8 @@ const PHOTOS_META = path.join(HERE, "..", "photos", "photos_meta.json");
 const PHOTOS = fs.existsSync(PHOTOS_META) ? JSON.parse(fs.readFileSync(PHOTOS_META, "utf8")) : {};
 
 // --- Palette et typographie --------------------------------------------------
-const NAVY = "0B2A4A", TEAL = "1B7F79", GOLD = "C9A227", GREY = "8A94A6", LIGHT = "F2F4F7", MID = "D9DEE7", WHITE = "FFFFFF", INK = "1F2933";
+// Palette Havana Resort : lagon profond, turquoise du train et du logo, soleil, sable.
+const NAVY = "0C4A5E", TEAL = "2BB5BF", GOLD = "F4B942", GREY = "6F8A90", LIGHT = "F5F2EA", MID = "CFE3E6", WHITE = "FFFFFF", INK = "1E2A2E";
 const FONT = "Calibri";
 const PAGE_W = 12240, PAGE_H = 15840, MARGIN = 1296; // US Letter, marges 0,9 po
 const CONTENT_W = PAGE_W - 2 * MARGIN; // 9648 DXA
@@ -135,7 +136,7 @@ const dataTable = (headers, rows, widths, opts = {}) => {
   });
   const body = rows.map((r, ri) => {
     const isTotal = totalRows.includes(ri), isBold = boldRows.includes(ri), isSub = subheadRows.includes(ri);
-    const fill = isTotal ? MID : isSub ? "E4EEF5" : ri % 2 === 1 ? LIGHT : WHITE;
+    const fill = isTotal ? MID : isSub ? "E3F4F5" : ri % 2 === 1 ? LIGHT : WHITE;
     return new TableRow({
       cantSplit: true,
       children: r.map((v, i) => cell(v, widths[i], { fill, bold: isTotal || isBold || isSub, size: fontSize, color: isSub ? NAVY : INK, align: i >= numericFrom ? AlignmentType.RIGHT : AlignmentType.LEFT })),
@@ -275,8 +276,8 @@ children.push(
   new Paragraph({ spacing: { after: 0 }, children: [run("PLAN D'AFFAIRES 2027 – 2031", { bold: true, size: 22, color: GOLD })] }),
   new Paragraph({ spacing: { before: 80, after: 0 }, children: [run("COMPLEXE HAVANA", { bold: true, size: 72, color: WHITE })] }),
   new Paragraph({ spacing: { before: 60, after: 0 }, children: [new TextRun({ text: "Du camping estival au centre de villégiature quatre saisons", font: "Georgia", size: 28, italics: true, color: WHITE })] }),
-  new Paragraph({ spacing: { before: 260, after: 0 }, children: [run("Demande de financement de " + moneyM(M.pret, 1) + "   ·   Maricourt, Cantons-de-l'Est   ·   Septembre 2026", { size: 20, color: "D6DEE8" })] }),
-  new Paragraph({ spacing: { before: 60, after: 0 }, children: [run("Présenté à [nom de l'institution financière]   ·   Document confidentiel", { size: 18, color: "AAB6C6" })] }),
+  new Paragraph({ spacing: { before: 260, after: 0 }, children: [run("Demande de financement de " + moneyM(M.pret, 1) + "   ·   Maricourt, Cantons-de-l'Est   ·   Septembre 2026", { size: 20, color: "D9F1F3" })] }),
+  new Paragraph({ spacing: { before: 60, after: 0 }, children: [run("Présenté à [nom de l'institution financière]   ·   Document confidentiel", { size: 18, color: "A8D8DC" })] }),
   pageBreak(),
 );
 
@@ -617,6 +618,8 @@ children.push(
     [1800, 2600, 5248], { numericFrom: 99 },
   ),
   spacer(),
+  placeholder("Photo de la famille fondatrice", 4200, CONTENT_W, "famille"),
+  spacer(),
   placeholder("Organigramme de l'entreprise (direction générale, cinq services, responsables)", 2600, CONTENT_W, "organigramme"),
   spacer(),
   H2("Conseillers externes"),
@@ -816,9 +819,9 @@ backChildren.push(
   exactSpacer(5200),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 0 }, children: [run("COMPLEXE HAVANA", { bold: true, size: 40, color: WHITE })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 80, after: 0 }, children: [new TextRun({ text: "Un petit bout de Cuba, douze mois par année", font: "Georgia", size: 24, italics: true, color: GOLD })] }),
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 600, after: 0 }, children: [run("631, 7e Rang, Maricourt (Québec)  J0E 2L2", { size: 20, color: "D6DEE8" })] }),
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 60, after: 0 }, children: [run("514 774-7979   ·   havanaresort.ca", { size: 20, color: "D6DEE8" })] }),
-  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 600, after: 0 }, children: [run("Plan d'affaires 2027 – 2031   ·   Document confidentiel", { size: 17, color: "AAB6C6" })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 600, after: 0 }, children: [run("631, 7e Rang, Maricourt (Québec)  J0E 2L2", { size: 20, color: "D9F1F3" })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 60, after: 0 }, children: [run("514 774-7979   ·   havanaresort.ca", { size: 20, color: "D9F1F3" })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 600, after: 0 }, children: [run("Plan d'affaires 2027 – 2031   ·   Document confidentiel", { size: 17, color: "A8D8DC" })] }),
 );
 
 // =====================================================================================

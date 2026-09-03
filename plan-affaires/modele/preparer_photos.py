@@ -21,7 +21,7 @@ PHOTOS = ROOT / "photos"
 PREP = PHOTOS / "prepare"
 PREP.mkdir(exist_ok=True)
 
-NAVY = (11, 42, 74)
+NAVY = (8, 52, 66)  # lagon profond
 DPI = 200
 SIZES = {
     "cover": (int(8.5 * DPI), int(11 * DPI)),

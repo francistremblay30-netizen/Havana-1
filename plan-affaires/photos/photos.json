@@ -1,31 +1,127 @@
 {
  "_aide": "Chaque emplacement du document est associé à une photo, un type de recadrage (cover, banner, wide, pair, natural, portrait) et une légende. Lancer modele/preparer_photos.py puis modele/generer_plan.js.",
- "couverture": {"file": "piscine-vue-aerienne.jpg", "kind": "cover", "caption": ""},
- "dos": {"file": "__navy__", "kind": "cover", "caption": ""},
-
- "ban_1": {"file": "piscine-plage-palapas.jpg", "kind": "banner", "caption": ""},
- "ban_2": {"file": "pavillon-accueil.jpg", "kind": "banner", "caption": ""},
- "ban_3": {"file": "piscine-fete-mousse.jpg", "kind": "banner", "caption": ""},
- "ban_4": {"file": "lac-plage.jpg", "kind": "banner", "caption": ""},
- "ban_5": {"file": "spectacle-scene.jpg", "kind": "banner", "caption": ""},
- "ban_6": {"file": "kiosques-restauration.jpg", "kind": "banner", "caption": ""},
- "ban_7": {"file": "equipe.jpg", "kind": "banner", "anchor": "top", "caption": ""},
- "ban_8": {"file": "famille-chaise-geante.jpg", "kind": "banner", "caption": ""},
- "ban_9": {"file": "train-coucher-de-soleil.jpg", "kind": "banner", "caption": ""},
- "ban_10": {"file": "piscine-vue-aerienne.jpg", "kind": "banner", "caption": ""},
- "ban_annexes": {"file": "hotel-arriere.jpg", "kind": "banner", "caption": ""},
-
- "actifs_terrains": {"file": "terrains-vue-aerienne.jpg", "kind": "pair", "caption": "265 terrains de camping : 52 % des revenus 2026, complets en haute saison"},
- "actifs_chalets": {"file": "chalets.jpg", "kind": "pair", "caption": "Chalets et chambres : 33 % des revenus 2026, en hausse de 24 % en un an"},
- "projet_hotel_entree": {"file": "hotel-entree.jpg", "kind": "pair", "caption": "L'hôtel actuel : 6 chambres, à porter à 17"},
- "projet_hotel_arriere": {"file": "hotel-arriere.jpg", "kind": "pair", "caption": "L'aile arrière : les chambres à rénover pour une exploitation 12 mois"},
- "projet_resto": {"file": "aqua-bar.jpg", "kind": "wide", "caption": "L'Aqua Bar : la vente de boissons fonctionne déjà ; le restaurant Madera y ajoute les repas et l'hiver"},
- "plan_site": {"file": "plan-du-site.jpg", "kind": "natural", "caption": "Plan d'aménagement actuel du site (source : Havana Resort)"},
+ "couverture": {
+  "file": "piscine-vue-aerienne.jpg",
+  "kind": "cover",
+  "caption": ""
+ },
+ "dos": {
+  "file": "__navy__",
+  "kind": "cover",
+  "caption": ""
+ },
+ "ban_1": {
+  "file": "piscine-plage-palapas.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_2": {
+  "file": "pavillon-accueil.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_3": {
+  "file": "piscine-fete-mousse.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_4": {
+  "file": "lac-plage.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_5": {
+  "file": "spectacle-scene.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_6": {
+  "file": "kiosques-restauration.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_7": {
+  "file": "equipe.jpg",
+  "kind": "banner",
+  "anchor": "top",
+  "caption": ""
+ },
+ "ban_8": {
+  "file": "terrains-vue-aerienne.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_9": {
+  "file": "train-coucher-de-soleil.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_10": {
+  "file": "piscine-vue-aerienne.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "ban_annexes": {
+  "file": "hotel-arriere.jpg",
+  "kind": "banner",
+  "caption": ""
+ },
+ "actifs_terrains": {
+  "file": "terrains-vue-aerienne.jpg",
+  "kind": "pair",
+  "caption": "265 terrains de camping : 52 % des revenus 2026, complets en haute saison"
+ },
+ "actifs_chalets": {
+  "file": "chalets.jpg",
+  "kind": "pair",
+  "caption": "Chalets et chambres : 33 % des revenus 2026, en hausse de 24 % en un an"
+ },
+ "projet_hotel_entree": {
+  "file": "hotel-entree.jpg",
+  "kind": "pair",
+  "caption": "L'hôtel actuel : 6 chambres, à porter à 17"
+ },
+ "projet_hotel_arriere": {
+  "file": "hotel-arriere.jpg",
+  "kind": "pair",
+  "caption": "L'aile arrière : les chambres à rénover pour une exploitation 12 mois"
+ },
+ "projet_resto": {
+  "file": "aqua-bar.jpg",
+  "kind": "wide",
+  "caption": "L'Aqua Bar : la vente de boissons fonctionne déjà ; le restaurant Madera y ajoute les repas et l'hiver"
+ },
+ "plan_site": {
+  "file": "plan-du-site.jpg",
+  "kind": "natural",
+  "caption": "Plan d'aménagement actuel du site (source : Havana Resort)"
+ },
  "carte": null,
- "promo_1": {"file": "visuel-reseaux-piscine.jpg", "kind": "portrait", "caption": "Contenu vidéo des réseaux sociaux : animation aquatique"},
- "promo_2": {"file": "train-visuel-promo.jpg", "kind": "portrait", "caption": "Contenu vidéo des réseaux sociaux : le train du resort"},
+ "promo_1": {
+  "file": "visuel-reseaux-piscine.jpg",
+  "kind": "portrait",
+  "caption": "Contenu vidéo des réseaux sociaux : animation aquatique"
+ },
+ "promo_2": {
+  "file": "train-visuel-promo.jpg",
+  "kind": "portrait",
+  "caption": "Contenu vidéo des réseaux sociaux : le train du resort"
+ },
  "galerie": [
-  {"file": "coolbox.jpg", "kind": "pair", "caption": "Les Coolbox, mini-maisons en conteneur"},
-  {"file": "aqua-bar.jpg", "kind": "pair", "caption": "L'Aqua Bar, dans la piscine centrale"}
- ]
+  {
+   "file": "coolbox.jpg",
+   "kind": "pair",
+   "caption": "Les Coolbox, mini-maisons en conteneur"
+  },
+  {
+   "file": "aqua-bar.jpg",
+   "kind": "pair",
+   "caption": "L'Aqua Bar, dans la piscine centrale"
+  }
+ ],
+ "famille": {
+  "file": "famille-chaise-geante.jpg",
+  "kind": "natural",
+  "caption": "La famille fondatrice : Dominique, sa conjointe et leurs deux filles, sur la chaise géante « I ♥ Havana Resort »"
+ }
 }

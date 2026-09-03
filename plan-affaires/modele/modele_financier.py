@@ -304,8 +304,8 @@ def charts(years):
     import matplotlib.pyplot as plt
     from matplotlib.ticker import FuncFormatter
 
-    navy, teal, gold, grey = "#0B2A4A", "#1B7F79", "#C9A227", "#8A94A6"
-    palette = [navy, "#1F4E79", "#2E75B6", "#5B9BD5", "#9DC3E6", teal, "#3FA796", "#7FCDBB", gold, "#E0C36A", grey]
+    navy, teal, gold, grey = "#0C4A5E", "#2BB5BF", "#F4B942", "#8FA6AB"
+    palette = [navy, "#136B80", "#1A8FA3", "#2BB5BF", "#78E1E6", "#1E7F5C", "#3FA796", "#8FD3C0", gold, "#F7D98A", grey]
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9, "axes.spines.top": False, "axes.spines.right": False})
     fmt_m = FuncFormatter(lambda v, _: f"{v/1e6:.1f} M$")
     labels = [y["label"].replace(" – ", "\n") for y in years]
@@ -387,7 +387,7 @@ def charts(years):
         ("Ouverture phase 1 (saison 2027)", 6, 1, gold),
         ("Phase 2 : piscine-spa, amphithéâtre, sentier", 8, 9, teal),
         ("Ouverture phase 2 (saison 2028)", 17, 1, gold),
-        ("Exploitation 12 mois, montée en régime", 18, 6, "#5B9BD5"),
+        ("Exploitation 12 mois, montée en régime", 18, 6, "#78E1E6"),
     ]
     for i, (name, start, dur, col) in enumerate(taches):
         ax.barh(i, dur, left=start, color=col, height=0.55)
