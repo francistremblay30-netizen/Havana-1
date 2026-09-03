@@ -59,10 +59,6 @@
    "caption": "Les chalets aux couleurs cubaines"
   },
   {
-   "file": "famille-chaise-geante.jpg",
-   "caption": "Une famille d'invités sur la chaise géante « I ♥ Havana Resort »"
-  },
-  {
    "file": "coolbox.jpg",
    "caption": "Les Coolbox, mini-maisons en conteneur"
   },
@@ -79,16 +75,16 @@
    "caption": "Les kiosques de restauration et les concessions"
   },
   {
-   "file": "train-coucher-de-soleil.jpg",
-   "caption": "Le train du resort et les guirlandes lumineuses, en soirée"
-  },
-  {
    "file": "hotel-entree.jpg",
    "caption": "L'entrée de l'hôtel"
   },
   {
    "file": "hotel-arriere.jpg",
    "caption": "L'hôtel vu de l'arrière, côté condos"
+  },
+  {
+   "file": "famille-chaise-geante.jpg",
+   "caption": "Une famille d'invités sur la chaise géante « I ♥ Havana Resort »"
   },
   {
    "file": "visuel-reseaux-piscine.jpg",
