@@ -1,82 +1,31 @@
 {
- "_aide": "Chaque emplacement du document est associé à une photo et à une légende qui appuie l'argument de la section. Lancer modele/preparer_photos.py puis modele/generer_plan.js.",
- "couverture": {
-  "file": "piscine-vue-aerienne.jpg",
-  "caption": ""
- },
- "historique": {
-  "file": "pavillon-accueil.jpg",
-  "caption": "Le pavillon d'accueil : dès l'entrée, le toit de chaume annonce le concept cubain"
- },
- "actifs_terrains": {
-  "file": "terrains-vue-aerienne.jpg",
-  "caption": "Les 265 terrains de camping : 52 % des revenus 2026, complets en haute saison"
- },
- "actifs_chalets": {
-  "file": "chalets.jpg",
-  "caption": "Les chalets et chambres : 33 % des revenus 2026, en hausse de 24 % en un an"
- },
- "projet_hotel_entree": {
-  "file": "hotel-entree.jpg",
-  "caption": "L'entrée de l'hôtel actuel : 6 chambres, à porter à 17"
- },
- "projet_hotel_arriere": {
-  "file": "hotel-arriere.jpg",
-  "caption": "L'aile arrière de l'hôtel : les chambres à rénover pour une exploitation 12 mois"
- },
- "projet_resto_aquabar": {
-  "file": "aqua-bar.jpg",
-  "caption": "L'Aqua Bar : la vente de boissons fonctionne déjà, le restaurant Madera y ajoute les repas"
- },
- "projet_resto_kiosques": {
-  "file": "kiosques-restauration.jpg",
-  "caption": "Les kiosques et concessions actuels : une offre saisonnière que le restaurant rend permanente"
- },
- "projet_spa": {
-  "file": "piscine-fete-mousse.jpg",
-  "caption": "La piscine actuelle, pleine chaque été : le spa 4 saisons prolonge cette attraction à l'année"
- },
- "projet_amphi_scene": {
-  "file": "spectacle-scene.jpg",
-  "caption": "La scène extérieure actuelle, un soir de spectacle : l'amphithéâtre lui donne une capacité permanente"
- },
- "projet_amphi_train": {
-  "file": "train-coucher-de-soleil.jpg",
-  "caption": "Le train et les guirlandes en soirée : l'animation nocturne existe, le sentier lumineux l'étend à l'hiver"
- },
- "plan_site": {
-  "file": "plan-du-site.jpg",
-  "caption": "Plan d'aménagement actuel du site (source : Havana Resort)"
- },
- "clientele_famille": {
-  "file": "famille-chaise-geante.jpg",
-  "caption": "Le cœur de la clientèle : les familles, qui reviennent d'une année à l'autre"
- },
- "clientele_lac": {
-  "file": "lac-plage.jpg",
-  "caption": "Le lac et sa plage : l'offre détente qui attire couples et clientèle de jour"
- },
+ "_aide": "Chaque emplacement du document est associé à une photo, un type de recadrage (cover, banner, wide, pair, natural, portrait) et une légende. Lancer modele/preparer_photos.py puis modele/generer_plan.js.",
+ "couverture": {"file": "piscine-vue-aerienne.jpg", "kind": "cover", "caption": ""},
+ "dos": {"file": "__navy__", "kind": "cover", "caption": ""},
+
+ "ban_1": {"file": "piscine-plage-palapas.jpg", "kind": "banner", "caption": ""},
+ "ban_2": {"file": "pavillon-accueil.jpg", "kind": "banner", "caption": ""},
+ "ban_3": {"file": "piscine-fete-mousse.jpg", "kind": "banner", "caption": ""},
+ "ban_4": {"file": "lac-plage.jpg", "kind": "banner", "caption": ""},
+ "ban_5": {"file": "spectacle-scene.jpg", "kind": "banner", "caption": ""},
+ "ban_6": {"file": "kiosques-restauration.jpg", "kind": "banner", "caption": ""},
+ "ban_7": {"file": "equipe.jpg", "kind": "banner", "anchor": "top", "caption": ""},
+ "ban_8": {"file": "famille-chaise-geante.jpg", "kind": "banner", "caption": ""},
+ "ban_9": {"file": "train-coucher-de-soleil.jpg", "kind": "banner", "caption": ""},
+ "ban_10": {"file": "piscine-vue-aerienne.jpg", "kind": "banner", "caption": ""},
+ "ban_annexes": {"file": "hotel-arriere.jpg", "kind": "banner", "caption": ""},
+
+ "actifs_terrains": {"file": "terrains-vue-aerienne.jpg", "kind": "pair", "caption": "265 terrains de camping : 52 % des revenus 2026, complets en haute saison"},
+ "actifs_chalets": {"file": "chalets.jpg", "kind": "pair", "caption": "Chalets et chambres : 33 % des revenus 2026, en hausse de 24 % en un an"},
+ "projet_hotel_entree": {"file": "hotel-entree.jpg", "kind": "pair", "caption": "L'hôtel actuel : 6 chambres, à porter à 17"},
+ "projet_hotel_arriere": {"file": "hotel-arriere.jpg", "kind": "pair", "caption": "L'aile arrière : les chambres à rénover pour une exploitation 12 mois"},
+ "projet_resto": {"file": "aqua-bar.jpg", "kind": "wide", "caption": "L'Aqua Bar : la vente de boissons fonctionne déjà ; le restaurant Madera y ajoute les repas et l'hiver"},
+ "plan_site": {"file": "plan-du-site.jpg", "kind": "natural", "caption": "Plan d'aménagement actuel du site (source : Havana Resort)"},
  "carte": null,
- "promo_1": {
-  "file": "visuel-reseaux-piscine.jpg",
-  "caption": "Contenu vidéo des réseaux sociaux : animation aquatique"
- },
- "promo_2": {
-  "file": "train-visuel-promo.jpg",
-  "caption": "Contenu vidéo des réseaux sociaux : le train du resort"
- },
- "organigramme": {
-  "file": "equipe.jpg",
-  "caption": "L'équipe du Complexe Havana lors d'un événement Apzara [identifier les membres de la direction]"
- },
+ "promo_1": {"file": "visuel-reseaux-piscine.jpg", "kind": "portrait", "caption": "Contenu vidéo des réseaux sociaux : animation aquatique"},
+ "promo_2": {"file": "train-visuel-promo.jpg", "kind": "portrait", "caption": "Contenu vidéo des réseaux sociaux : le train du resort"},
  "galerie": [
-  {
-   "file": "piscine-plage-palapas.jpg",
-   "caption": "La piscine, la plage de sable et les palapas"
-  },
-  {
-   "file": "coolbox.jpg",
-   "caption": "Les Coolbox, mini-maisons en conteneur"
-  }
+  {"file": "coolbox.jpg", "kind": "pair", "caption": "Les Coolbox, mini-maisons en conteneur"},
+  {"file": "aqua-bar.jpg", "kind": "pair", "caption": "L'Aqua Bar, dans la piscine centrale"}
  ]
 }

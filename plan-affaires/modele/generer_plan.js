@@ -7,7 +7,8 @@ const path = require("path");
 const {
   Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Table, TableRow, TableCell,
   WidthType, ShadingType, BorderStyle, ImageRun, PageBreak, Header, Footer, PageNumber,
-  TableOfContents, LevelFormat, VerticalAlign, TabStopType,
+  TableOfContents, LevelFormat, VerticalAlign, TabStopType, LineRuleType,
+  HorizontalPositionRelativeFrom, VerticalPositionRelativeFrom, TextWrappingType,
 } = require("docx");
 
 const HERE = __dirname;
@@ -45,12 +46,39 @@ const P = (text, opts = {}) => {
   return new Paragraph({ children: runs, alignment: align || AlignmentType.LEFT, spacing: { before, after, line: 276 }, keepNext, indent });
 };
 
+const EMU = 914400;
+// Image flottante derrière le texte, positionnée par rapport à la page (pleine largeur).
+const bleedImage = (meta, topIn, widthIn, heightIn) => new ImageRun({
+  type: "jpg", data: fs.readFileSync(path.join(HERE, "..", meta.file)),
+  transformation: { width: Math.round(widthIn * 96), height: Math.round(heightIn * 96) },
+  floating: {
+    horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: 0 },
+    verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: Math.round(topIn * EMU) },
+    behindDocument: true, allowOverlap: true, lockAnchor: true, layoutInCell: false,
+    wrap: { type: TextWrappingType.NONE },
+  },
+});
+const exactSpacer = (twips, extra = {}) => new Paragraph({ spacing: { before: 0, after: 0, line: twips, lineRule: LineRuleType.EXACT }, children: [], ...extra });
+// Ouverture de chapitre : bandeau photo pleine largeur, numéro et titre en surimpression.
+const chapter = (num, title, slot, lead) => {
+  const meta = PHOTOS[slot];
+  const out = [];
+  out.push(new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: meta ? [bleedImage(meta, 0.62, 8.5, 4.2)] : [] }));
+  out.push(exactSpacer(meta ? 3800 : 200));
+  out.push(new Paragraph({ children: [run(num, { bold: true, size: 26, color: meta ? GOLD : TEAL })], spacing: { before: 0, after: 60 } }));
+  out.push(new Paragraph({
+    heading: HeadingLevel.HEADING_1,
+    children: [new TextRun({ text: title, font: FONT, size: 46, bold: true, color: meta ? WHITE : NAVY })],
+    spacing: { before: 0, after: 0 },
+  }));
+  out.push(exactSpacer(meta ? 1250 : 200));
+  if (lead) out.push(LEAD(lead));
+  return out;
+};
 const H1 = (text) => new Paragraph({
   heading: HeadingLevel.HEADING_1,
   children: [new TextRun({ text, font: FONT, size: 40, bold: true, color: NAVY })],
-  spacing: { before: 0, after: 200 },
-  border: { bottom: { color: TEAL, size: 12, style: BorderStyle.SINGLE, space: 6 } },
-  pageBreakBefore: true,
+  spacing: { before: 0, after: 200 }, pageBreakBefore: true,
 });
 const H2 = (text) => new Paragraph({
   heading: HeadingLevel.HEADING_2,
@@ -64,8 +92,8 @@ const H3 = (text) => new Paragraph({
 });
 // Titre-message (style conseil) : une phrase qui énonce le point clé de la section.
 const LEAD = (text) => new Paragraph({
-  children: [new TextRun({ text, font: FONT, size: 24, italics: true, color: TEAL })],
-  spacing: { before: 0, after: 200, line: 276 },
+  children: [new TextRun({ text, font: "Georgia", size: 25, italics: true, color: TEAL })],
+  spacing: { before: 0, after: 240, line: 300 },
 });
 
 const bullets = (items, ref = "puces") => items.map((t) => new Paragraph({
@@ -113,7 +141,8 @@ const dataTable = (headers, rows, widths, opts = {}) => {
       children: r.map((v, i) => cell(v, widths[i], { fill, bold: isTotal || isBold || isSub, size: fontSize, color: isSub ? NAVY : INK, align: i >= numericFrom ? AlignmentType.RIGHT : AlignmentType.LEFT })),
     });
   });
-  return new Table({ rows: [head, ...body], width: { size: total, type: WidthType.DXA }, columnWidths: widths, borders: borders(border(MID, 4)) });
+  return new Table({ rows: [head, ...body], width: { size: total, type: WidthType.DXA }, columnWidths: widths,
+    borders: { top: noBorder, bottom: border(NAVY, 8), left: noBorder, right: noBorder, insideHorizontal: border(MID, 4), insideVertical: noBorder } });
 };
 
 // Rangée d'indicateurs clés.
@@ -128,7 +157,7 @@ const kpiRow = (items) => {
         borders: { top: border(TEAL, 18), bottom: noBorder, left: noBorder, right: { style: BorderStyle.SINGLE, size: 6, color: WHITE } },
         margins: { top: 120, bottom: 120, left: 120, right: 120 },
         children: [
-          new Paragraph({ children: [run(value, { bold: true, size: 30, color: NAVY })], spacing: { after: 40 } }),
+          new Paragraph({ children: [run(value, { bold: true, size: 36, color: NAVY })], spacing: { after: 40 } }),
           new Paragraph({ children: [run(label, { size: 17, color: GREY })], spacing: { after: 0 } }),
         ],
       })),
@@ -167,8 +196,8 @@ const photoCell = (meta, width, height, fallbackCaption) => {
       width: { size: width, type: WidthType.DXA }, borders: borders(noBorder), verticalAlign: VerticalAlign.CENTER,
       margins: { top: 0, bottom: 0, left: 0, right: 0 },
       children: [
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 40 }, children: [photoRun(meta, width, height)] }),
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 0 }, children: [run(meta.caption || "", { italics: true, size: 17, color: GREY })] }),
+        new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 60 }, children: [photoRun(meta, width, height)] }),
+        new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 0, line: 240 }, border: { top: { color: TEAL, size: 6, style: BorderStyle.SINGLE, space: 3 } }, children: [run(meta.caption || "", { size: 16, color: GREY })] }),
       ],
     });
   }
@@ -238,18 +267,16 @@ const chLine = (k) => P5.map((y) => money(y.charges[k]));
 // =====================================================================================
 const children = [];
 
-// --- Page couverture -----------------------------------------------------------------
+// --- Page couverture (photo pleine page, texte en surimpression) ------------------------
+const coverMeta = PHOTOS.couverture;
 children.push(
-  new Paragraph({ spacing: { before: 1800, after: 0 }, children: [run("COMPLEXE HAVANA", { bold: true, size: 64, color: NAVY })] }),
-  new Paragraph({ spacing: { before: 60, after: 0 }, children: [run("Maricourt, Cantons-de-l'Est", { size: 24, color: GREY })], border: { bottom: { color: TEAL, size: 18, style: BorderStyle.SINGLE, space: 10 } } }),
-  new Paragraph({ spacing: { before: 400, after: 100 }, children: [run("Plan d'affaires 2027 – 2031", { bold: true, size: 44, color: NAVY })] }),
-  new Paragraph({ spacing: { before: 0, after: 100 }, children: [run("Du camping estival au centre de villégiature quatre saisons", { size: 28, color: TEAL, italics: true })] }),
-  new Paragraph({ spacing: { before: 0, after: 500 }, children: [run("Demande de financement de " + moneyM(M.pret, 1), { size: 26, color: INK })] }),
-  placeholder("Photo de couverture : vue aérienne du site ou piscine centrale avec le café-bar (haute résolution)", 5300, CONTENT_W, "couverture"),
-  new Paragraph({ spacing: { before: 500, after: 60 }, children: [run("Présenté à : ", { bold: true, color: NAVY }), run("[Nom de l'institution financière]")] }),
-  new Paragraph({ spacing: { after: 60 }, children: [run("Préparé par : ", { bold: true, color: NAVY }), run("La direction du Complexe Havana")] }),
-  new Paragraph({ spacing: { after: 60 }, children: [run("Date : ", { bold: true, color: NAVY }), run("Septembre 2026")] }),
-  new Paragraph({ spacing: { before: 300, after: 0 }, children: [run("DOCUMENT CONFIDENTIEL", { bold: true, size: 18, color: GREY })] }),
+  new Paragraph({ spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: coverMeta ? [bleedImage(coverMeta, 0, 8.5, 11)] : [] }),
+  exactSpacer(7400),
+  new Paragraph({ spacing: { after: 0 }, children: [run("PLAN D'AFFAIRES 2027 – 2031", { bold: true, size: 22, color: GOLD })] }),
+  new Paragraph({ spacing: { before: 80, after: 0 }, children: [run("COMPLEXE HAVANA", { bold: true, size: 72, color: WHITE })] }),
+  new Paragraph({ spacing: { before: 60, after: 0 }, children: [new TextRun({ text: "Du camping estival au centre de villégiature quatre saisons", font: "Georgia", size: 28, italics: true, color: WHITE })] }),
+  new Paragraph({ spacing: { before: 260, after: 0 }, children: [run("Demande de financement de " + moneyM(M.pret, 1) + "   ·   Maricourt, Cantons-de-l'Est   ·   Septembre 2026", { size: 20, color: "D6DEE8" })] }),
+  new Paragraph({ spacing: { before: 60, after: 0 }, children: [run("Présenté à [nom de l'institution financière]   ·   Document confidentiel", { size: 18, color: "AAB6C6" })] }),
   pageBreak(),
 );
 
@@ -266,8 +293,7 @@ children.push(
 // --- 1. Sommaire exécutif --------------------------------------------------------------
 const y3 = Y[3], y5 = Y[5], y1 = Y[1];
 children.push(
-  H1("1. Sommaire exécutif"),
-  LEAD("Un concept unique au Québec, un site qui affiche complet chaque été et une expansion structurée vers une exploitation douze mois par année."),
+  ...chapter("01", "Sommaire exécutif", "ban_1", "Un concept unique au Québec, un site qui affiche complet chaque été et une expansion structurée vers une exploitation douze mois par année."),
   kpiRow([
     { label: "Revenus 2026 (réels, avant taxes)", value: moneyM(M.reel_2026_total) },
     { label: "Valeur estimée du site (2025)", value: moneyM(M.valeur_site, 0) },
@@ -319,12 +345,10 @@ children.push(
 // --- 2. L'entreprise ----------------------------------------------------------------------
 const reel = Y[0].revenus;
 children.push(
-  H1("2. L'entreprise"),
-  LEAD("Dix ans d'exploitation, un concept qui n'existe nulle part ailleurs au Québec et un site de 263 acres qui vaut 28 M$."),
+  ...chapter("02", "L'entreprise", "ban_2", "Dix ans d'exploitation, un concept qui n'existe nulle part ailleurs au Québec et un site de 263 acres qui vaut 28 M$."),
   H2("2.1 Historique"),
   P("En 2015, la famille Perrier fait l'acquisition d'un vaste terrain de 263 acres sur le 7e rang à Maricourt, dans les Cantons-de-l'Est, et fonde le Camping Havana Resort. L'ambition est claire dès le départ : créer un complexe touristique unique qui permet de « voyager à Cuba en restant au Québec »."),
   P("Le concept s'articule autour d'une piscine centrale avec café-bar intégré, où se déploient l'animation, la musique et l'ambiance festive et familiale des grandes destinations vacances. Au fil des saisons, l'offre s'est enrichie de chalets, de cabanas prêt-à-camper, d'un premier bâtiment hôtelier de six chambres et d'activités récréatives. Le camping est aujourd'hui devenu trop petit pour la demande."),
-  placeholder("Pavillon d'accueil", 2800, CONTENT_W, "historique"),
   H2("2.2 Mission, vision et valeurs"),
   H3("Mission"),
   P("Offrir à tous nos invités un petit bout de Cuba afin qu'ils puissent se divertir, décrocher de leur quotidien et retrouver l'ambiance des plus grandes destinations vacances. L'accueil chaleureux n'est qu'un prélude au service impeccable que reçoivent les invités tout au long d'un séjour qui se veut mémorable. Notre mission ultime : que chaque invité planifie son retour au moment de son départ."),
@@ -405,8 +429,7 @@ const phaseRows = [];
 });
 phaseRows.push(["Total des projets de développement", "", money(M.emplois[0][1])]);
 children.push(
-  H1("3. Le projet : un centre de villégiature quatre saisons"),
-  LEAD("Huit composantes, deux phases, dix-huit mois : doubler la capacité en hébergement quatre saisons et ajouter des revenus de restauration, de spa et d'événements."),
+  ...chapter("03", "Le projet", "ban_3", "Huit composantes, deux phases, dix-huit mois : doubler la capacité en hébergement quatre saisons et ajouter des revenus de restauration, de spa et d'événements."),
   H2("3.1 Objectif"),
   P("Rendre le site accessible à l'année et passer d'un camping estival à un centre récréotouristique complet. Le projet répond à deux constats : la capacité d'hébergement est saturée en été, et les actifs (piscine, bâtiments, terrain) sont sous-utilisés de novembre à avril. Chaque composante a été choisie pour l'un de ces deux leviers : ajouter de la capacité vendable ou allonger la saison."),
   H2("3.2 Composantes et coûts"),
@@ -420,7 +443,7 @@ children.push(
   spacer(80),
   H3("Restaurant Madera et salle de conférence"),
   P("Aménagement d'un restaurant de cuisine cubaine et latino-américaine dans l'hôtel, ouvert à la clientèle du site et au public régional. Le restaurant, le café Cubano et le Mojito bar forment un pôle de restauration qui capte une part des dépenses des invités aujourd'hui réalisées hors site."),
-  twoPlaceholders("Aqua Bar", "Kiosques de restauration", 3000, "projet_resto_aquabar", "projet_resto_kiosques"),
+  placeholder("Aqua Bar", 3400, CONTENT_W, "projet_resto"),
   spacer(80),
   H3("Villas et chalets quatre saisons"),
   P("Achèvement des 13 villas en construction et mise à niveau des 16 chalets existants (isolation, chauffage, plomberie hivernale) pour une location à l'année. Ces 29 unités constituent l'offre d'hébergement privé haut de gamme du site."),
@@ -428,11 +451,9 @@ children.push(
   P("Aménagement de 35 terrains saisonniers additionnels (services, électricité, voirie), pour un total de 70. Les saisonniers procurent des revenus récurrents encaissés avant la saison, ce qui stabilise la trésorerie printanière."),
   H3("Piscine et spa quatre saisons"),
   P("Construction d'une piscine intérieure-extérieure chauffée et d'un spa de type nordique (bains chauds, sauna, aires de détente). Le spa attire une clientèle de jour en toute saison et prolonge la durée des séjours en hiver. Il s'agit de l'investissement le plus important du projet et du principal moteur de fréquentation hivernale."),
-  placeholder("Rendu ou esquisse : piscine et spa quatre saisons", 3400, CONTENT_W, "projet_spa"),
-  spacer(80),
+
   H3("Amphithéâtre et sentier lumineux"),
   P("L'amphithéâtre extérieur accueille spectacles, soirées cubaines et festivals ; le sentier lumineux, un parcours nocturne illuminé exploité d'octobre à avril, crée une raison de visiter le site en basse saison."),
-  twoPlaceholders("Scène extérieure", "Animation en soirée", 3000, "projet_amphi_scene", "projet_amphi_train"),
   spacer(),
   placeholder("Plan d'aménagement du site : localisation des phases 1 et 2 (hôtel, villas, terrains saisonniers, spa, amphithéâtre, sentier)", 5600, CONTENT_W, "plan_site"),
   H2("3.4 Échéancier de réalisation"),
@@ -449,8 +470,7 @@ children.push(
 
 // --- 4. Analyse du marché ---------------------------------------------------------------------
 children.push(
-  H1("4. Analyse du marché"),
-  LEAD("Le camping et le plein air demeurent parmi les segments les plus dynamiques du tourisme québécois ; la demande se déplace vers le confort, les expériences et les quatre saisons."),
+  ...chapter("04", "Analyse du marché", "ban_4", "Le camping et le plein air demeurent parmi les segments les plus dynamiques du tourisme québécois ; la demande se déplace vers le confort, les expériences et les quatre saisons."),
   H2("4.1 L'industrie du camping et de la villégiature au Québec"),
   P("Le camping est une activité de masse au Québec : plusieurs centaines d'établissements et plus de 200 000 emplacements accueillent chaque été des centaines de milliers de ménages. Depuis 2020, la fréquentation s'est maintenue à des niveaux élevés et la clientèle s'est rajeunie et diversifiée. Trois tendances structurent l'industrie :"),
   ...bullets([
@@ -475,8 +495,7 @@ children.push(
     ],
     [2000, 2600, 3300, 1748], { numericFrom: 99 },
   ),
-  spacer(80),
-  twoPlaceholders("Clientèle familiale", "Le lac", 3000, "clientele_famille", "clientele_lac"),
+
   H2("4.4 Concurrence"),
   P("Aucun établissement québécois n'offre une thématique cubaine intégrée. La concurrence est donc indirecte et se répartit en trois groupes."),
   dataTable(
@@ -499,8 +518,7 @@ children.push(
 
 // --- 5. Stratégie de commercialisation --------------------------------------------------------------
 children.push(
-  H1("5. Stratégie de commercialisation"),
-  LEAD("Vendre d'abord la nouvelle capacité à la clientèle existante, puis conquérir les marchés de l'hiver et des groupes."),
+  ...chapter("05", "Stratégie de commercialisation", "ban_5", "Vendre d'abord la nouvelle capacité à la clientèle existante, puis conquérir les marchés de l'hiver et des groupes."),
   H2("5.1 Positionnement"),
   P("« Cuba à 90 minutes de Montréal, douze mois par année. » Le Complexe Havana se positionne comme une destination d'évasion accessible, festive et familiale, à un prix inférieur à celui des centres de villégiature haut de gamme de la région, avec une expérience qu'aucun concurrent n'offre."),
   H2("5.2 Offre et tarification"),
@@ -551,8 +569,7 @@ children.push(
 
 // --- 6. Plan d'exploitation -------------------------------------------------------------------------
 children.push(
-  H1("6. Plan d'exploitation"),
-  LEAD("Une organisation qui passe de 6 à 12 mois d'activité : effectifs, systèmes et fournisseurs sont dimensionnés en conséquence."),
+  ...chapter("06", "Plan d'exploitation", "ban_6", "Une organisation qui passe de 6 à 12 mois d'activité : effectifs, systèmes et fournisseurs sont dimensionnés en conséquence."),
   H2("6.1 Organisation des opérations"),
   P("Les opérations se répartissent en cinq services : hébergement et réservations, restauration et bars, spa et activités, entretien et infrastructures, administration. Chaque service est dirigé par un responsable qui relève de la direction générale. La saison estivale (mai à octobre) demeure la période de pointe ; l'hiver est exploité avec une équipe réduite centrée sur l'hôtel, les chalets, le spa, le restaurant et le sentier lumineux."),
   H2("6.2 Ressources humaines"),
@@ -586,8 +603,7 @@ children.push(
 
 // --- 7. Équipe de direction ------------------------------------------------------------------------------
 children.push(
-  H1("7. Équipe de direction"),
-  LEAD("Une direction renouvelée en 2025, appuyée sur la famille fondatrice et sur des conseillers externes."),
+  ...chapter("07", "Équipe de direction", "ban_7", "Une direction renouvelée en 2025, appuyée sur la famille fondatrice et sur des conseillers externes."),
   dataTable(
     ["Nom", "Poste", "Expérience et responsabilités dans le projet"],
     [
@@ -655,8 +671,7 @@ const sensRows = M.sensibilite.map((s) => [s.scenario, ratio(s.dscr_an2), ratio(
 const W6 = [2900, 1350, 1350, 1350, 1350, 1348];
 
 children.push(
-  H1("8. Plan financier"),
-  LEAD("Des projections bâties sur les revenus réels de 2026, des hypothèses d'occupation prudentes et une structure de financement qui respecte les ratios bancaires dès la première année."),
+  ...chapter("08", "Plan financier", "ban_8", "Des projections bâties sur les revenus réels de 2026, des hypothèses d'occupation prudentes et une structure de financement qui respecte les ratios bancaires dès la première année."),
   H2("8.1 Hypothèses clés"),
   dataTable(
     ["Hypothèse", "Valeur", "Justification"],
@@ -732,8 +747,7 @@ children.push(
 
 // --- 9. Risques ---------------------------------------------------------------------------------------------------
 children.push(
-  H1("9. Risques et mesures d'atténuation"),
-  LEAD("Les principaux risques sont identifiés, mesurés et couverts par des mesures concrètes ou par la structure de financement."),
+  ...chapter("09", "Risques et mesures d'atténuation", "ban_9", "Les principaux risques sont identifiés, mesurés et couverts par des mesures concrètes ou par la structure de financement."),
   dataTable(
     ["Risque", "Probabilité / impact", "Mesures d'atténuation"],
     [
@@ -752,7 +766,7 @@ children.push(
 
 // --- 10. Conclusion -------------------------------------------------------------------------------------------------
 children.push(
-  H1("10. Conclusion et demande"),
+  ...chapter("10", "Conclusion et demande", "ban_10"),
   LEAD("Un actif de 28 M$, une demande démontrée et un plan phasé : le Complexe Havana demande un prêt de " + moneyM(M.pret, 1) + " pour devenir une destination quatre saisons."),
   P("Depuis 2015, le Complexe Havana a bâti un concept que personne d'autre n'offre au Québec et une clientèle qui remplit le site chaque été. Le projet présenté ici ne repose pas sur la conquête d'un marché incertain : il répond à une demande existante en ajoutant de la capacité et en ouvrant le site toute l'année."),
   P("Les projections, construites à partir des revenus réels de 2026 et d'hypothèses d'occupation prudentes, font passer les revenus de " + moneyM(Y[0].total_revenus, 1) + " à " + moneyM(y5.total_revenus, 1) + " en cinq ans, avec une marge BAIIA de " + pct(y5.marge_baiia, 0) + " et un ratio de couverture du service de la dette de " + ratio(y5.dscr) + " en An 5. Le ratio prêt-valeur de " + pct(M.ltv, 0) + " procure au prêteur une sécurité exceptionnelle."),
@@ -762,9 +776,8 @@ children.push(
     "Mise de fonds des propriétaires et investisseurs privés : " + money(totalEmplois - M.pret) + ".",
     "Clôture souhaitée : [mois et année], pour un début des travaux de la phase 1 à l'automne 2026 ou à l'hiver 2027.",
   ]),
-  spacer(200),
   P("Nous remercions l'institution de l'attention portée à ce dossier et demeurons disponibles pour une visite du site et toute information complémentaire."),
-  spacer(400),
+  spacer(200),
   P("_______________________________", { after: 0 }),
   P("[Nom], direction générale", { after: 0 }),
   P("Complexe Havana", { after: 0 }),
@@ -773,7 +786,7 @@ children.push(
 
 // --- Annexes ---------------------------------------------------------------------------------------------------
 children.push(
-  H1("Annexes"),
+  ...chapter("A", "Annexes", "ban_annexes"),
   P("Les documents suivants accompagnent le plan d'affaires et sont fournis dans un cahier distinct ou en pièces jointes."),
   dataTable(
     ["Annexe", "Contenu", "Statut"],
@@ -793,6 +806,19 @@ children.push(
   spacer(),
   P("Annexe F – Autres photos du site", { bold: true, color: NAVY }),
   ...gallery(PHOTOS.galerie, "Annexe F – Galerie photos : hébergements, piscine, animation, restauration, vues du site en quatre saisons"),
+);
+
+// --- Quatrième de couverture -----------------------------------------------------------------
+const backMeta = PHOTOS.dos;
+const backChildren = [];
+backChildren.push(
+  new Paragraph({ spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: backMeta ? [bleedImage(backMeta, 0, 8.5, 11)] : [] }),
+  exactSpacer(5200),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 0 }, children: [run("COMPLEXE HAVANA", { bold: true, size: 40, color: WHITE })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 80, after: 0 }, children: [new TextRun({ text: "Un petit bout de Cuba, douze mois par année", font: "Georgia", size: 24, italics: true, color: GOLD })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 600, after: 0 }, children: [run("631, 7e Rang, Maricourt (Québec)  J0E 2L2", { size: 20, color: "D6DEE8" })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 60, after: 0 }, children: [run("514 774-7979   ·   havanaresort.ca", { size: 20, color: "D6DEE8" })] }),
+  new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 600, after: 0 }, children: [run("Plan d'affaires 2027 – 2031   ·   Document confidentiel", { size: 17, color: "AAB6C6" })] }),
 );
 
 // =====================================================================================
@@ -832,10 +858,15 @@ const doc = new Document({
   },
   features: { updateFields: true },
   sections: [{
-    properties: { page: { size: { width: PAGE_W, height: PAGE_H }, margin: { top: 1200, bottom: 1100, left: MARGIN, right: MARGIN, header: 560, footer: 560 } } },
-    headers: { default: header },
-    footers: { default: footer },
+    properties: { titlePage: true, page: { size: { width: PAGE_W, height: PAGE_H }, margin: { top: 1200, bottom: 1100, left: MARGIN, right: MARGIN, header: 560, footer: 560 } } },
+    headers: { default: header, first: new Header({ children: [] }) },
+    footers: { default: footer, first: new Footer({ children: [] }) },
     children,
+  }, {
+    properties: { page: { size: { width: PAGE_W, height: PAGE_H }, margin: { top: 1200, bottom: 1100, left: MARGIN, right: MARGIN, header: 560, footer: 560 } } },
+    headers: { default: new Header({ children: [] }) },
+    footers: { default: new Footer({ children: [] }) },
+    children: backChildren,
   }],
 });
 
