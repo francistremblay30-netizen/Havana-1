@@ -6,7 +6,12 @@
 
 ## Historique et origine du projet
 
-[D'où vient l'idée ? Où en est le projet aujourd'hui ?]
+Complexe Havana est un camping en exploitation. Le système de réservation
+(reservationcamping.ca) a enregistré 10 587 transactions pour la saison
+2024-2025. Voir le plan financier pour les revenus détaillés.
+
+[Compléter : année de fondation, propriétaires actuels, nature du projet
+Havana-1 (acquisition, agrandissement, refinancement, etc.).]
 
 ## Valeurs et vision
 
