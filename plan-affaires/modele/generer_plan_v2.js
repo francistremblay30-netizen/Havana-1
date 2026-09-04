@@ -85,7 +85,7 @@ children.push(
 
 children.push(
   H2("Avis de confidentialité"),
-  P("Ce plan d'affaires contient des renseignements confidentiels appartenant au Complexe Havana et à ses partenaires. Il est remis uniquement aux fins d'évaluation d'une demande de financement. Les projections reposent sur des hypothèses documentées dans le classeur financier joint (annexe H) ; chaque hypothèse y porte sa source ou la mention « hypothèse à valider ». Les résultats réels pourraient différer."),
+  P("Ce plan d'affaires contient des renseignements confidentiels appartenant au Complexe Havana et à ses partenaires. Il est remis uniquement aux fins d'évaluation d'une demande de financement. Les projections reposent sur des hypothèses documentées dans le classeur financier joint (annexe H), chacune avec sa source. Les résultats réels pourraient différer."),
   spacer(200),
   H2("Table des matières"),
   new TableOfContents("Table des matières", { hyperlink: true, headingStyleRange: "1-2" }),
