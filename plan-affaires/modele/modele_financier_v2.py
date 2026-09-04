@@ -60,12 +60,12 @@ H = {
     "hotel_rooms": {1: 11.5, 2: 17, 3: 17, 4: 17, 5: 17},               # 6 chambres jan.-juin 2027, 17 dès juillet
     "hotel_occ": {1: 0.35, 2: 0.42, 3: 0.48, 4: 0.52, 5: 0.55},
     "cabanas_uplift": {1: 1.0, 2: 1.02, 3: 1.04, 4: 1.05, 5: 1.05},
-    "coolbox_n": 9, "coolbox_ete": 225.0, "coolbox_hiver": 199.0,      # tarif 2023 affiché 225 $ ; hiver hyp.
-    "coolbox_occ_ete": {1: 0.55, 2: 0.60, 3: 0.63, 4: 0.65, 5: 0.65},
-    "coolbox_occ_hiver": {1: 0.20, 2: 0.27, 3: 0.32, 4: 0.34, 5: 0.35},
-    "coolbox_ete_frac": {1: 0.80, 2: 1, 3: 1, 4: 1, 5: 1},              # livrées fin mai 2027 (hyp.)
+    "coolbox_n": 20, "coolbox_ete": 225.0, "coolbox_hiver": 199.0,     # 20 unités propriété Havana (apport Coolbox HPA) ; tarif affiché 225 $
+    "coolbox_occ_ete": {1: 0.60, 2: 0.65, 3: 0.68, 4: 0.70, 5: 0.70},   # base annuelle du réseau Coolbox : ≈ 40 000 $ par unité par année
+    "coolbox_occ_hiver": {1: 0.30, 2: 0.35, 3: 0.38, 4: 0.40, 5: 0.40},
+    "coolbox_ete_frac": {1: 0.85, 2: 1, 3: 1, 4: 1, 5: 1},              # 9 déjà en place, 11 livrées pour juin 2027
     "redevance_base": 90167.15,                                          # 50 % du CA 2026 des 9 unités Coolbox HPA
-    "fb_ratio": {1: 0.08, 2: 0.14, 3: 0.18, 4: 0.19, 5: 0.20},          # restauration sans alcool
+    "fb_ratio": {1: 0.12, 2: 0.17, 3: 0.20, 4: 0.22, 5: 0.23},          # restaurant, café, cantine et bars (budget de la direction à maturité ≈ 890 k$)
     "spa_visites": {1: 0, 2: 0, 3: 0, 4: 5000, 5: 7500}, "spa_tarif": 55.0,   # phase 2 financée en 2029, ouverture juin 2030 (scénario « avec phase 2 » seulement)
     "spectacles": {1: 0, 2: 60000, 3: 120000, 4: 150000, 5: 160000},  # billetterie brute, scène et chapiteau existants (hyp.)
     "activites": {1: 105000, 2: 125000, 3: 140000, 4: 148000, 5: 155000},
@@ -89,7 +89,7 @@ def revenus(year):
     r["cabanas"] = REEL_2026["cabanas"] * (1 + INFL) ** year * H["cabanas_uplift"][year]
     r["coolbox"] = H["coolbox_n"] * (184 * H["coolbox_ete_frac"][year] * H["coolbox_occ_ete"][year] * idx(H["coolbox_ete"], year)
                                      + 181 * H["coolbox_occ_hiver"][year] * idx(H["coolbox_hiver"], year))
-    r["redevance"] = H["redevance_base"] * (1 + INFL) ** year
+    r["redevance"] = 0.0   # unités propriété de Havana dès 2027 : 100 % des ventes dans la ligne Coolbox
     heberg = r["terrains"] + r["saisonniers"] + r["chalets"] + r["villas"] + r["hotel"] + r["cabanas"] + r["coolbox"]
     r["restauration"] = heberg * H["fb_ratio"][year]
     r["spa"] = H["spa_visites"][year] * idx(H["spa_tarif"], year) if PHASE2 else 0.0
@@ -104,9 +104,9 @@ LIGNES = [
     ("villas", "Villas (13)"),
     ("hotel", "Hôtel (6 → 17 chambres)"),
     ("cabanas", "Cabanas prêt-à-camper (13)"),
-    ("coolbox", "Unités Coolbox 4 saisons (9 nouvelles)"),
-    ("redevance", "Partenariat Coolbox HPA (9 unités existantes)"),
-    ("restauration", "Restauration"),
+    ("coolbox", "Unités Coolbox 4 saisons (20, propriété Havana)"),
+    ("redevance", "Partenariat Coolbox HPA (2026, avant le transfert des unités)"),
+    ("restauration", "Restauration et bars"),
     ("spectacles", "Spectacles et festivals"),
     ("activites", "Activités et concessions"),
 ]
@@ -163,7 +163,8 @@ PART_VARIABLE = {"cout_ventes": 1.0, "cachets": 1.0, "commissions": 1.0, "salair
 # ---------------------------------------------------------------------------
 # Investissement (emplois) et financement (sources)
 # ---------------------------------------------------------------------------
-COOLBOX_UNITE = 96500 + 3000 + 5000 + 4000 + 3700   # 12×24 Régulier + thermopompe + transport-installation + ameublement + raccordement (prix catalogue 2026-07-16 ; ameublement et raccordement hyp.)
+COOLBOX_UNITE = 106000   # 20 unités 12×24 quatre saisons = 2 120 000 $ (apport en nature de Coolbox HPA, plan Havana Spa Resort août 2026)
+APPORT_COOLBOX = 20 * COOLBOX_UNITE
 import sys
 PHASE2 = "--phase2" in sys.argv   # scénario de base = phase 1a seulement ; --phase2 ajoute le spa financé en 2029
 PROJETS_TOUS = [
@@ -171,7 +172,7 @@ PROJETS_TOUS = [
     ("Phase 1a", "Restaurant Madera et salle de conférence", 800000, "chantier"),
     ("Phase 1a", "Achèvement des 13 villas", 150000, "chantier"),
     ("Phase 1a", "Chalets existants : hivernisation (isolation, chauffage, plomberie)", 150000, "chantier"),
-    ("Phase 1a", "9 unités Coolbox 12×24 quatre saisons sur les emplacements aménagés en 2022", 9 * COOLBOX_UNITE, "usine"),
+    ("Phase 1a", "20 unités Coolbox 12×24 quatre saisons (apport en nature de Coolbox HPA)", APPORT_COOLBOX, "usine"),
     ("Phase 1a", "Conversion de 40 terrains existants en terrains saisonniers", 50000, "chantier"),
     ("Phase 2", "Achèvement de la piscine intérieure et spa quatre saisons", 2000000, "chantier"),
 ]
@@ -254,9 +255,10 @@ EMPLOIS = [
 ]
 TOTAL_EMPLOIS = sum(e[1] for e in EMPLOIS)
 DETTE_COUCHES = sum(c[1] for c in COUCHES)
-FONDS_PROPRES = TOTAL_EMPLOIS - DETTE_COUCHES
+FONDS_PROPRES_ESPECES = TOTAL_EMPLOIS - DETTE_COUCHES - APPORT_COOLBOX
+FONDS_PROPRES = FONDS_PROPRES_ESPECES + APPORT_COOLBOX
 ARGENT_NEUF = TOTAL_EMPLOIS - REFINANCEMENT
-SOURCES = [(c[0], c[1], c[5]) for c in COUCHES] + [("Fonds propres : actionnaires, Coolbox HPA (apport en nature) et investisseur privé", FONDS_PROPRES, "Engagé")]
+SOURCES = [(c[0], c[1], c[5]) for c in COUCHES] + [("Apport en nature de Coolbox HPA : 20 unités quatre saisons", APPORT_COOLBOX, "Engagé"), ("Fonds propres en espèces : actionnaires et investisseur privé", FONDS_PROPRES_ESPECES, "Engagé")]
 
 def dettes():
     """Échéanciers par couche, An 1..5 et complet ; tirage An 1 du senior sur le solde moyen décaissé."""
@@ -277,7 +279,7 @@ FACTEUR_CAP = (CAPEX + CONTINGENCE + HONORAIRES) / CAPEX
 DPA_CATS = [  # (nom, taux, ajout An 1, ajout An 2) sur le capex avant capitalisation
     ("Cat. 1 — bâtiments : hôtel, restaurant, villas, chalets" + (", bâtiment piscine-spa" if PHASE2 else ""), 0.04, 700000 + 800000 + 150000 + 150000, 1200000 if PHASE2 else 0),
     ("Cat. 8 — équipements : mobilier" + (", piscine-spa (équipements)" if PHASE2 else ""), 0.20, 0, 800000 if PHASE2 else 0),
-    ("Cat. 6 — unités d'hébergement préfabriquées sur structure d'acier (Coolbox)", 0.10, 9 * COOLBOX_UNITE, 0),
+    ("Cat. 6 — unités d'hébergement préfabriquées sur structure d'acier (Coolbox)", 0.10, APPORT_COOLBOX, 0),
     ("Cat. 17 — aménagements de surface : conversion de terrains saisonniers", 0.08, 50000, 0),
 ]
 TAUX_AMORT_COMPTABLE = {0.04: 0.04, 0.20: 0.10, 0.10: 0.05, 0.08: 0.05}   # linéaire comptable par catégorie (hyp.)
@@ -557,7 +559,7 @@ def main():
         "annees": years, "lignes": LIGNES, "charges": CHARGES, "projets": PROJETS,
         "emplois": EMPLOIS, "sources": SOURCES, "couches": [{k: v for k, v in d.items() if k != "rows"} | {"rows": d["rows"][:5], "complet": d["rows"]} for d in D],
         "total_emplois": TOTAL_EMPLOIS, "argent_neuf": ARGENT_NEUF, "fonds_propres": FONDS_PROPRES,
-        "pct_fonds_propres_argent_neuf": FONDS_PROPRES / ARGENT_NEUF, "senior": SENIOR, "tranche_a": REFINANCEMENT, "tranche_b": TRANCHE_B,
+        "pct_fonds_propres_argent_neuf": FONDS_PROPRES / ARGENT_NEUF, "fonds_propres_especes": FONDS_PROPRES_ESPECES, "apport_coolbox": APPORT_COOLBOX, "senior": SENIOR, "tranche_a": REFINANCEMENT, "tranche_b": TRANCHE_B,
         "paiement_senior": PAIEMENT_SENIOR, "reserve_service": RESERVE_SERVICE, "interets_capitalises": INTERETS_CAPITALISES,
         "coolbox_unite": COOLBOX_UNITE, "coolbox_2026": COOLBOX_2026, "contingence": CONTINGENCE,
         "reel_2025_total": REEL_2025_TOTAL, "reel_2026_total": REEL_2026_TOTAL, "autres_2026": AUTRES_2026,
