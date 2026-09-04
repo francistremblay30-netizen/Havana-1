@@ -319,7 +319,7 @@ children.push(
     [run("Phase 2 (automne 2027-printemps 2028, 3,0 M$) : ", { bold: true }), run("piscine et spa quatre saisons, amphithéâtre et sentier lumineux.")],
   ]),
   H2("La demande de financement"),
-  P("Le Complexe Havana sollicite un prêt à terme hypothécaire de " + money(M.pret) + ", qui servira à financer les projets de développement (" + moneyM(M.emplois[0][1], 1) + " plus contingence et honoraires) et à refinancer la dette existante de 5,0 M$ dans une structure unique. Les propriétaires et des investisseurs privés injectent " + money(M.emplois.reduce((a, e) => a + e[1], 0) - M.pret) + ". Le prêt est garanti par une hypothèque de premier rang sur un site évalué à " + moneyM(M.valeur_site, 0) + " en 2025, pour un ratio prêt-valeur de " + pct(M.ltv, 0) + "."),
+  P("Le Complexe Havana sollicite un prêt à terme hypothécaire de " + money(M.pret) + " sur des emplois totaux de " + money(M.emplois.reduce((a, e) => a + e[1], 0)) + " : projets de développement (" + moneyM(M.emplois[0][1], 1) + "), contingence de construction, honoraires professionnels, frais de financement, fonds de roulement de démarrage et refinancement de la dette existante de 5,0 M$ dans une structure unique. Les propriétaires et des investisseurs privés injectent " + money(M.emplois.reduce((a, e) => a + e[1], 0) - M.pret) + ". Le prêt est garanti par une hypothèque de premier rang sur un site évalué à " + moneyM(M.valeur_site, 0) + " en 2025, pour un ratio prêt-valeur de " + pct(M.ltv, 0) + "."),
   H2("Pourquoi le projet est solide"),
   ...numbered([
     [run("Une demande démontrée : ", { bold: true }), run("le site affiche complet en été ; la croissance passe par la capacité et la durée d'exploitation, non par la recherche de nouveaux clients.")],
@@ -653,11 +653,11 @@ const resRows = [
   ["Bénéfice net", ...P5.map((y) => money(y.benefice_net))],
 ];
 const cfRows = [
-  ["BAIIA", ...P5.map((y) => money(y.baiia))],
-  ["Moins : impôts", ...P5.map((y) => money(-y.impots))],
-  ["Moins : intérêts", ...P5.map((y) => money(-y.interets))],
+  ["Bénéfice net", ...P5.map((y) => money(y.benefice_net))],
+  ["Plus : amortissement (sans effet de trésorerie)", ...P5.map((y) => money(y.amortissement))],
+  ["Flux de trésorerie d'exploitation", ...P5.map((y) => money(y.benefice_net + y.amortissement))],
   ["Moins : remboursement de capital", ...P5.map((y) => money(-y.capital))],
-  ["Moins : immobilisations de maintien (2 %)", ...P5.map((y) => money(-y.capex_maintien))],
+  ["Moins : immobilisations de maintien (2 % des revenus)", ...P5.map((y) => money(-y.capex_maintien))],
   ["Flux de trésorerie disponible", ...P5.map((y) => money(y.flux_libre))],
   ["Trésorerie cumulée (depuis l'An 1)", ...P5.map((y) => money(y.tresorerie_cumulee))],
 ];
@@ -669,9 +669,40 @@ const ratioRows = [
   ["Marge BAIIA", ...P5.map((y) => pct(y.marge_baiia))],
   ["Marge nette", ...P5.map((y) => pct(y.benefice_net / y.total_revenus))],
   ["Ratio prêt-valeur (solde / 28 M$)", ...P5.map((y) => pct(y.solde_dette / M.valeur_site, 0))],
+  ["Dette / avoir des actionnaires (bilan pro forma)", ...M.bilan.map((b) => ratio(b.dette_sur_avoir))],
+  ["Encaisse / portion courante de la dette", ...M.bilan.map((b) => (b.encaisse_sur_portion_courante ? ratio(b.encaisse_sur_portion_courante, 1) : "—"))],
 ];
 const sensRows = M.sensibilite.map((s) => [s.scenario, ratio(s.dscr_an2), ratio(s.dscr_an3), ratio(s.dscr_an5)]);
 const W6 = [2900, 1350, 1350, 1350, 1350, 1348];
+
+// --- Bilan prévisionnel, DPA et échéancier complet (états calibre prêteur) ---
+const B5 = M.bilan; // an 1..5
+const bilanMap = (f) => B5.map((b) => money(f(b)));
+const bilanRows = [
+  ["ACTIF", "", "", "", "", ""],
+  ["Encaisse et équivalents", ...bilanMap((b) => b.encaisse)],
+  ["Site et immobilisations existantes (valeur d'évaluation 2025, nette)", ...bilanMap((b) => b.immo_existantes_nettes)],
+  ["Nouvelles immobilisations (projet et maintien), nettes", ...bilanMap((b) => b.immo_nouvelles_nettes)],
+  ["Frais de financement reportés", ...bilanMap((b) => b.frais_reportes)],
+  ["Total de l'actif", ...bilanMap((b) => b.actif_total)],
+  ["PASSIF", "", "", "", "", ""],
+  ["Portion courante de la dette à long terme", ...bilanMap((b) => b.portion_courante)],
+  ["Dette à long terme", ...bilanMap((b) => b.dette_lt)],
+  ["Total du passif", ...bilanMap((b) => b.passif_total)],
+  ["AVOIR DES ACTIONNAIRES", "", "", "", "", ""],
+  ["Avoir pro forma à l'ouverture", ...bilanMap((b) => b.avoir_ouverture)],
+  ["Bénéfices non répartis cumulés", ...bilanMap((b) => b.bnr_cumules)],
+  ["Total de l'avoir", ...bilanMap((b) => b.avoir_total)],
+  ["Total du passif et de l'avoir", ...bilanMap((b) => b.passif_total + b.avoir_total)],
+];
+const dpaCats = M.dpa.categories;
+const dpaRows = dpaCats.map((c) => [c.nom, pct(c.taux, 0), money(c.base), ...c.dpa.map((v) => money(v))]);
+dpaRows.push(["Total de la DPA", "", money(dpaCats.reduce((a, c) => a + c.base, 0)), ...M.dpa.total.map((v) => money(v))]);
+const fnaccRows = dpaCats.map((c) => [c.nom, ...c.fnacc.map((v) => money(v))]);
+const debtFullRows = M.dette_complete.map((d) => [`An ${d.an}`, money(d.interets), money(d.capital), money(d.service), money(d.solde_fin)]);
+debtFullRows.push(["Total", money(M.dette_complete.reduce((a, d) => a + d.interets, 0)), money(M.dette_complete.reduce((a, d) => a + d.capital, 0)), money(M.dette_complete.reduce((a, d) => a + d.service, 0)), "—"]);
+const ventilRows = dpaCats.map((c) => [c.nom, pct(c.taux, 0), money(c.base)]);
+ventilRows.push(["Total capitalisé (projets, contingence et honoraires au prorata, frais de financement)", "", money(dpaCats.reduce((a, c) => a + c.base, 0))]);
 
 children.push(
   ...chapter("08", "Plan financier", "ban_8", "Des projections bâties sur les revenus réels de 2026, des hypothèses d'occupation prudentes et une structure de financement qui respecte les ratios bancaires dès la première année."),
@@ -690,8 +721,9 @@ children.push(
       ["Énergie", "275 k$ An 1 → 450 k$ An 5", "Chauffage des bâtiments, piscine et spa"],
       ["Entretien et immobilisations de maintien", "4 % + 2 % des revenus", "Pratique bancaire"],
       ["Amortissement comptable", "150 k$ existant + 4 % des nouveaux actifs", "Hypothèse ; à aligner sur les états financiers"],
-      ["Impôts", "20 % combiné", "Taux moyen petite entreprise et taux général"],
-      ["Prêt à terme", money(M.pret) + " à " + pct(M.taux, 1) + ", 25 ans", "Moratoire de capital de 18 mois pendant la construction"],
+      ["Impôts", "20 % combiné", "Taux moyen petite entreprise et taux général ; la DPA fiscale (annexe K) réduirait l'impôt décaissé les premières années"],
+      ["DPA fiscale", "Cat. 1 (4 %), cat. 8 (20 %), cat. 17 (8 %), demi-année", "Cédule complète à l'annexe K ; classement à valider avec le comptable"],
+      ["Prêt à terme", money(M.pret) + " à " + pct(M.taux, 1) + ", 25 ans", "Moratoire de capital de 18 mois pendant la construction ; tableau complet à l'annexe J"],
     ],
     [2900, 3100, 3648], { numericFrom: 99, fontSize: 18 },
   ),
@@ -701,6 +733,10 @@ children.push(
   spacer(120),
   dataTable(["Sources", "Montant", "Part"], sourcesRows, [5600, 2200, 1848], { totalRows: [sourcesRows.length - 1] }),
   ...figure("sources_emplois.png", 6.2, "Figure 2 – Emplois et sources de financement"),
+  H3("Ventilation de l'investissement par catégorie d'actifs"),
+  P("L'investissement capitalisé se répartit comme suit entre les catégories fiscales d'amortissement (classement préliminaire, à valider avec le comptable ; cédule de DPA complète à l'annexe K) :"),
+  dataTable(["Catégorie d'actifs", "Taux DPA", "Montant capitalisé"], ventilRows, [5600, 2200, 1848], { totalRows: [ventilRows.length - 1], fontSize: 18 }),
+  spacer(120),
   H3("Structure de financement proposée"),
   dataTable(
     ["Modalité", "Proposition"],
@@ -727,24 +763,31 @@ children.push(
   spacer(),
   ...figure("repartition.png", 6.2, "Figure 4 – Répartition des revenus : 2026 (réel) et An 5"),
   H2("8.4 Flux de trésorerie et service de la dette"),
-  dataTable(["Flux de trésorerie", ...yearHeads], cfRows, W6, { boldRows: [5, 6], fontSize: 18 }),
+  dataTable(["Flux de trésorerie (méthode indirecte)", ...yearHeads], cfRows, W6, { boldRows: [2, 5, 6], fontSize: 18 }),
   spacer(120),
+  P("L'échéancier ci-dessous couvre les cinq années de projection ; le tableau d'amortissement complet du prêt sur 25 ans est présenté à l'annexe J.", { size: 19 }),
   dataTable(["Échéancier du prêt", "Intérêts", "Capital", "Service total", "Solde en fin d'année"], debtRows, [2000, 1900, 1900, 1900, 1948]),
   ...figure("dscr.png", 6.5, "Figure 5 – BAIIA, service de la dette et ratio de couverture"),
-  H2("8.5 Ratios financiers"),
+  pageBreak(),
+  H2("8.5 Bilan prévisionnel (pro forma)"),
+  P("Le bilan prévisionnel présente la situation financière projetée au 31 décembre de chaque exercice. En attendant l'intégration des états financiers historiques (annexe A), il est établi sur une base pro forma : le site est porté à sa valeur d'évaluation de 28 M$ (2025) plutôt qu'à sa valeur aux livres, et l'avoir d'ouverture en découle — valeur du site, moins la dette existante refinancée de 5,0 M$, plus la mise de fonds de 825 000 $, soit 23 825 000 $. Les nouvelles immobilisations sont au coût, nettes de l'amortissement comptable cumulé."),
+  dataTable(["Bilan au 31 décembre", ...yearHeads], bilanRows, W6, { subheadRows: [0, 6, 10], totalRows: [5, 9, 13, 14], fontSize: 17 }),
+  spacer(80),
+  P("L'encaisse comprend la réserve de service de la dette proposée (trois mois de paiements, soit environ 218 000 $), constituée à même les flux de l'An 1 et complétée dès l'An 2. Ce bilan pro forma sera remplacé par un bilan aux valeurs comptables lorsque les états financiers (annexe A) seront joints au dossier.", { italics: true, color: GREY, size: 18 }),
+  H2("8.6 Ratios financiers"),
   dataTable(["Ratio", ...yearHeads], ratioRows, W6, { boldRows: [0] }),
   spacer(),
   callout("Lecture des ratios", [
     "Le ratio de couverture du service de la dette atteint " + ratio(y1.dscr) + " en An 1 (intérêts seulement) et " + ratio(Y[2].dscr) + " en An 2, première année de remboursement de capital, puis dépasse 1,75 x à compter de l'An 3. Le ratio prêt-valeur de " + pct(M.ltv, 0) + " à la clôture et la dette à terme ramenée à " + ratio(y5.solde_dette / y5.baiia, 1) + " le BAIIA en An 5 situent le dossier dans les normes de prudence des institutions financières pour l'hébergement touristique.",
   ]),
-  H2("8.6 Analyse de sensibilité"),
+  H2("8.7 Analyse de sensibilité"),
   P("Le tableau suivant mesure le ratio de couverture si les revenus étaient inférieurs aux projections, en supposant que 60 % des charges sont variables et que les charges fixes demeurent inchangées."),
   dataTable(["Scénario", "DSCR An 2", "DSCR An 3", "DSCR An 5"], sensRows, [3600, 2000, 2000, 2048], { boldRows: [0] }),
   spacer(),
   P("Même avec des revenus inférieurs de 15 % aux projections, le ratio de couverture demeure au-dessus de 1,25 x dès l'An 3 et au-dessus de 1,65 x en An 5. L'An 2 est l'année charnière : la trésorerie dégagée en An 1, la mise de fonds et la valeur du site couvrent ce risque de transition. La direction propose en outre de constituer une réserve de service de la dette équivalant à trois mois de paiements à même les flux de l'An 1."),
-  H2("8.7 Seuil de rentabilité"),
+  H2("8.8 Seuil de rentabilité"),
   P("À maturité (An 3), les charges fixes (salaires de base, énergie, assurances, taxes, loyers, administration, soit environ 40 % des charges) et le service de la dette totalisent environ " + moneyM(Y[3].total_charges * 0.4 + Y[3].service_dette, 2) + ". Avec une marge sur charges variables d'environ 59 %, le seuil de rentabilité en trésorerie se situe autour de " + moneyM((Y[3].total_charges * 0.4 + Y[3].service_dette) / (1 - (Y[3].total_charges * 0.6 / Y[3].total_revenus)), 1) + " de revenus, soit " + pct(((Y[3].total_charges * 0.4 + Y[3].service_dette) / (1 - (Y[3].total_charges * 0.6 / Y[3].total_revenus))) / Y[3].total_revenus, 0) + " des revenus projetés de l'An 3."),
-  H2("8.8 États financiers historiques"),
+  H2("8.9 États financiers historiques"),
   P("Les états financiers des exercices 2024, 2025 et 2026, l'état de la dette existante et le rapport d'évaluation du site (28 M$, 2025) sont présentés aux annexes A et B. [Insérer un tableau sommaire : revenus, BAIIA, bénéfice net, actif total, dette et avoir des actionnaires pour les trois derniers exercices.]", { italics: true, color: GREY, size: 19 }),
 );
 
@@ -803,12 +846,24 @@ children.push(
       ["G", "Rapports de revenus du système de réservation, saisons 2025 et 2026", "Disponibles"],
       ["H", "Modèle financier détaillé (hypothèses et calculs mensuels)", "Disponible sur demande"],
       ["I", "Lettres d'appui (municipalité, Tourisme Cantons-de-l'Est, partenaires)", "[À obtenir]"],
+      ["J", "Tableau d'amortissement complet de l'emprunt (25 ans)", "Fourni ci-après"],
+      ["K", "Cédule de DPA par catégorie fiscale", "Fournie ci-après"],
     ],
     [1000, 6600, 2048], { numericFrom: 99 },
   ),
   spacer(),
   P("Annexe F – Autres photos du site", { bold: true, color: NAVY }),
   ...gallery(PHOTOS.galerie, "Annexe F – Galerie photos : hébergements, piscine, animation, restauration, vues du site en quatre saisons"),
+  pageBreak(),
+  H2("Annexe J – Tableau d'amortissement complet de l'emprunt"),
+  P("Prêt de " + money(M.pret) + " à " + pct(M.taux, 1) + ", amortissement de 25 ans, paiement mensuel de " + money(M.paiement_mensuel) + " après le moratoire. An 1 : intérêts seulement, calculés sur le solde moyen décaissé de 7 475 000 $ (refinancement de 5,0 M$ à la clôture, puis décaissements des projets par avancement des travaux). An 2 : six premiers mois d'intérêts seulement (fin du moratoire de capital de 18 mois), puis paiements complets de capital et intérêts jusqu'au remboursement intégral.", { size: 19 }),
+  dataTable(["Année", "Intérêts", "Capital", "Service total", "Solde en fin d'année"], debtFullRows, [1600, 2000, 2000, 2000, 2048], { totalRows: [debtFullRows.length - 1], fontSize: 16 }),
+  pageBreak(),
+  H2("Annexe K – Cédule de DPA par catégorie fiscale"),
+  P("Ventilation de l'investissement capitalisé — projets de 5,5 M$, contingence de 5 % et honoraires professionnels répartis au prorata (5 950 000 $), plus frais de financement de 75 000 $ — par catégorie de déduction pour amortissement, selon la méthode du solde dégressif avec règle de demi-année l'année de la mise en service (phase 1 en 2027, phase 2 en 2028). Le classement par catégorie est une hypothèse de travail à valider avec le comptable. L'état des résultats (section 8.3) utilise l'amortissement comptable et un impôt de 20 % du bénéfice comptable : la DPA fiscale, supérieure les premières années, réduirait l'impôt réellement décaissé — une réserve de prudence en faveur de la capacité de remboursement présentée.", { size: 19 }),
+  dataTable(["Catégorie", "Taux", "Base", "DPA 2027", "DPA 2028", "DPA 2029", "DPA 2030", "DPA 2031"], dpaRows, [2448, 650, 1250, 1060, 1060, 1060, 1060, 1060], { totalRows: [dpaRows.length - 1], fontSize: 15 }),
+  spacer(120),
+  dataTable(["Fraction non amortie (FNACC) en fin d'année", ...yearHeads], fnaccRows, W6, { fontSize: 15 }),
 );
 
 // --- Quatrième de couverture -----------------------------------------------------------------

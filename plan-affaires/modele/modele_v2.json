@@ -1,0 +1,1674 @@
+{
+ "annees": [
+  {
+   "label": "2026 (réel)",
+   "revenus": {
+    "terrains": 791894.29,
+    "saisonniers": 43208.71,
+    "chalets": 497722.97,
+    "cabanas": 199015.63,
+    "villas": 0.0,
+    "hotel": 0.0,
+    "coolbox": 0.0,
+    "spa": 0.0,
+    "spectacles": 0.0,
+    "redevance": 76667.15,
+    "restauration": 100000.0,
+    "activites": 96700.0
+   },
+   "charges": {
+    "cout_ventes": 52340.0,
+    "cachets": 0.0,
+    "commissions": 0.0,
+    "salaires": 704031.4125,
+    "energie": 242500,
+    "entretien": 144416.7,
+    "vehicules": 88500.0,
+    "marketing": 54156.2625,
+    "assurances": 60000,
+    "taxes": 54500,
+    "honoraires": 25000.0,
+    "admin": 36104.175,
+    "bancaires": 27078.13125,
+    "fournitures": 45130.21875,
+    "loyers": 42000.0,
+    "divers": 36104.175
+   },
+   "total_revenus": 1805208.75,
+   "total_charges": 1611861.075,
+   "hebergement": 1531841.6,
+   "baiia": 193347.67500000005,
+   "marge_baiia": 0.10710543863694437,
+   "amortissement": 150000,
+   "interets": 300000.0,
+   "capital": 0.0,
+   "service_dette": 300000.0,
+   "service_senior": 300000.0,
+   "bai": -256652.32499999995,
+   "impots": 0.0,
+   "benefice_net": -256652.32499999995,
+   "capex_maintien": 0.0,
+   "flux_libre": -106652.32499999995,
+   "tresorerie_cumulee": 0.0,
+   "dscr_senior": 0.6444922500000001,
+   "dscr_total": 0.6444922500000001,
+   "dscr_bancaire": 0.6444922500000001,
+   "couverture_interets": 0.6444922500000001,
+   "solde_senior": 4000000,
+   "solde_total": 4000000
+  },
+  {
+   "label": "An 1 – 2027",
+   "revenus": {
+    "terrains": 815651.1187000001,
+    "saisonniers": 109500.0,
+    "chalets": 423160.96,
+    "villas": 222098.5,
+    "hotel": 279133.75,
+    "cabanas": 204986.0989,
+    "coolbox": 228778.2,
+    "redevance": 92872.1645,
+    "restauration": 182664.690208,
+    "spa": 0.0,
+    "spectacles": 0,
+    "activites": 105000
+   },
+   "charges": {
+    "cout_ventes": 81279.34776864,
+    "cachets": 0.0,
+    "commissions": 43800.627,
+    "salaires": 958984.37363088,
+    "energie": 275000,
+    "entretien": 213107.63858464002,
+    "vehicules": 91155.0,
+    "marketing": 93234.59188078002,
+    "assurances": 95000,
+    "taxes": 75000,
+    "honoraires": 25750.0,
+    "admin": 53276.909646160006,
+    "bancaires": 39957.682234620006,
+    "fournitures": 66596.1370577,
+    "loyers": 42840.0,
+    "divers": 53276.909646160006
+   },
+   "total_revenus": 2663845.4823080003,
+   "total_charges": 2208259.2174495803,
+   "hebergement": 2283308.6276000002,
+   "baiia": 455586.26485842,
+   "marge_baiia": 0.17102578504804733,
+   "amortissement": 221465.4079131408,
+   "interets": 423500.0,
+   "capital": 0.0,
+   "service_dette": 423500.0,
+   "service_senior": 337750.0,
+   "bai": -189379.1430547208,
+   "impots": 0.0,
+   "benefice_net": -189379.1430547208,
+   "capex_maintien": 53276.909646160006,
+   "flux_libre": -21190.64478774,
+   "tresorerie_cumulee": -21190.64478774,
+   "dscr_senior": 1.3488860543550556,
+   "dscr_total": 1.0757644978947343,
+   "dscr_bancaire": 0.9499630583524439,
+   "couverture_interets": 1.0757644978947343,
+   "solde_senior": 5500000,
+   "solde_total": 7085000
+  },
+  {
+   "label": "An 2 – 2028",
+   "revenus": {
+    "terrains": 856923.06530622,
+    "saisonniers": 169177.5,
+    "chalets": 547435.936,
+    "villas": 467648.4280000001,
+    "hotel": 510013.77,
+    "cabanas": 215358.39550434,
+    "coolbox": 320418.75509999995,
+    "redevance": 95658.32943499999,
+    "restauration": 432176.61898747843,
+    "spa": 0.0,
+    "spectacles": 60000.0,
+    "activites": 125000
+   },
+   "charges": {
+    "cout_ventes": 167618.2842658679,
+    "cachets": 33000.0,
+    "commissions": 77884.857186,
+    "salaires": 1291935.6714332332,
+    "energie": 400000,
+    "entretien": 303984.8638666431,
+    "vehicules": 93889.65,
+    "marketing": 132993.37794165636,
+    "assurances": 130000,
+    "taxes": 130000,
+    "honoraires": 26522.5,
+    "admin": 75996.21596666078,
+    "bancaires": 56997.16197499558,
+    "fournitures": 94995.26995832597,
+    "loyers": 43696.8,
+    "divers": 75996.21596666078
+   },
+   "total_revenus": 3799810.7983330386,
+   "total_charges": 3135510.8685600436,
+   "hebergement": 3086975.84991056,
+   "baiia": 664299.929772995,
+   "marge_baiia": 0.17482447548820604,
+   "amortissement": 292930.8158262816,
+   "interets": 467600.89293481596,
+   "capital": 101918.77533754971,
+   "service_dette": 569519.6682723657,
+   "service_senior": 466474.2702015598,
+   "bai": -96231.77898810263,
+   "impots": 0.0,
+   "benefice_net": -96231.77898810263,
+   "capex_maintien": 75996.21596666078,
+   "flux_libre": 18784.04553396847,
+   "tresorerie_cumulee": -2406.5992537715283,
+   "dscr_senior": 1.4240869694398284,
+   "dscr_total": 1.166421401719355,
+   "dscr_bancaire": 1.0329822595784088,
+   "couverture_interets": 1.4206558195465189,
+   "solde_senior": 5415860.263134664,
+   "solde_total": 6983081.224662451
+  },
+  {
+   "label": "An 3 – 2029",
+   "revenus": {
+    "terrains": 891283.999983695,
+    "saisonniers": 224592.53,
+    "chalets": 604346.35296,
+    "villas": 541034.5993,
+    "hotel": 600359.0664,
+    "cabanas": 226168.54241593042,
+    "coolbox": 359085.70864799997,
+    "redevance": 98528.07931804999,
+    "restauration": 620436.7439473725,
+    "spa": 0.0,
+    "spectacles": 123600.0,
+    "activites": 140000
+   },
+   "charges": {
+    "cout_ventes": 232744.12550263296,
+    "cachets": 67980.0,
+    "commissions": 90028.76246088,
+    "salaires": 1417419.3993513754,
+    "energie": 420000,
+    "entretien": 354354.84983784385,
+    "vehicules": 96706.3395,
+    "marketing": 132883.06868919145,
+    "assurances": 134000,
+    "taxes": 133000,
+    "honoraires": 27318.175,
+    "admin": 88588.71245946096,
+    "bancaires": 66441.53434459573,
+    "fournitures": 110735.89057432621,
+    "loyers": 44570.736000000004,
+    "divers": 88588.71245946096
+   },
+   "total_revenus": 4429435.622973048,
+   "total_charges": 3505360.3061797675,
+   "hebergement": 3446870.7997076255,
+   "baiia": 924075.3167932807,
+   "marge_baiia": 0.20862145777683502,
+   "amortissement": 292930.8158262816,
+   "interets": 459663.2692516863,
+   "capital": 213929.10913895542,
+   "service_dette": 673592.3783906417,
+   "service_senior": 466474.27020156,
+   "bai": 171481.2317153127,
+   "impots": 20920.710269268147,
+   "benefice_net": 150560.52144604456,
+   "capex_maintien": 88588.71245946096,
+   "flux_libre": 140973.51567390992,
+   "tresorerie_cumulee": 138566.91642013838,
+   "dscr_senior": 1.980978107096871,
+   "dscr_total": 1.3718613013423595,
+   "dscr_bancaire": 1.209286090811666,
+   "couverture_interets": 2.0103309935937212,
+   "solde_senior": 5325638.05788811,
+   "solde_total": 6769152.115523496
+  },
+  {
+   "label": "An 4 – 2030",
+   "revenus": {
+    "terrains": 926935.3599830429,
+    "saisonniers": 263237.9343,
+    "chalets": 650887.6455488,
+    "villas": 585128.9191429501,
+    "hotel": 669900.658258,
+    "cabanas": 235193.53713733534,
+    "coolbox": 385085.88959778,
+    "redevance": 101483.9216975915,
+    "restauration": 706110.2893539026,
+    "spa": 0.0,
+    "spectacles": 159135.0,
+    "activites": 148000
+   },
+   "charges": {
+    "cout_ventes": 262616.3954867879,
+    "cachets": 87524.25,
+    "commissions": 98406.92801992383,
+    "salaires": 1497640.7380560148,
+    "energie": 435000,
+    "entretien": 386487.9324015522,
+    "vehicules": 99607.52968500002,
+    "marketing": 144932.97465058207,
+    "assurances": 138000,
+    "taxes": 136000,
+    "honoraires": 28137.720250000002,
+    "admin": 96621.98310038805,
+    "bancaires": 72466.48732529103,
+    "fournitures": 120777.47887548507,
+    "loyers": 45462.15072,
+    "divers": 96621.98310038805
+   },
+   "total_revenus": 4831099.1550194025,
+   "total_charges": 3746304.551671413,
+   "hebergement": 3716369.9439679086,
+   "baiia": 1084794.6033479897,
+   "marge_baiia": 0.2245440568573122,
+   "amortissement": 292930.8158262816,
+   "interets": 446998.1715319438,
+   "capital": 303895.91119904397,
+   "service_dette": 750894.0827309878,
+   "service_senior": 466474.27020155994,
+   "bai": 344865.6159897643,
+   "impots": 42073.60515075124,
+   "benefice_net": 302792.01083901303,
+   "capex_maintien": 96621.98310038805,
+   "flux_libre": 195204.93236586268,
+   "tresorerie_cumulee": 333771.8487860011,
+   "dscr_senior": 2.3255186248091633,
+   "dscr_total": 1.4446705977527643,
+   "dscr_bancaire": 1.259963338179342,
+   "couverture_interets": 2.4268434916192207,
+   "solde_senior": 5228893.682129255,
+   "solde_total": 6465256.204324451
+  },
+  {
+   "label": "An 5 – 2031",
+   "revenus": {
+    "terrains": 954743.420782534,
+    "saisonniers": 287567.500955,
+    "chalets": 685045.8894452641,
+    "villas": 623978.3700849272,
+    "hotel": 729805.2363522252,
+    "cabanas": 242249.34325145543,
+    "coolbox": 400287.0394501786,
+    "redevance": 104528.43934851924,
+    "restauration": 784735.360064317,
+    "spa": 0.0,
+    "spectacles": 174836.32,
+    "activites": 155000
+   },
+   "charges": {
+    "cout_ventes": 289962.6688212246,
+    "cachets": 96159.97600000001,
+    "commissions": 105244.23875323986,
+    "salaires": 1542833.0759203264,
+    "energie": 450000,
+    "entretien": 411422.1535787537,
+    "vehicules": 102595.75557555,
+    "marketing": 154283.30759203262,
+    "assurances": 142000,
+    "taxes": 139000,
+    "honoraires": 28981.8518575,
+    "admin": 102855.53839468842,
+    "bancaires": 77141.65379601631,
+    "fournitures": 128569.42299336054,
+    "loyers": 46371.3937344,
+    "divers": 102855.53839468842
+   },
+   "total_revenus": 5142776.919734421,
+   "total_charges": 3920276.5754117807,
+   "hebergement": 3923676.8003215846,
+   "baiia": 1222500.3443226404,
+   "marge_baiia": 0.23771210834199896,
+   "amortissement": 292930.8158262816,
+   "interets": 429413.9606834361,
+   "capital": 321480.1220475516,
+   "service_dette": 750894.0827309877,
+   "service_senior": 466474.2702015599,
+   "bai": 500155.5678129227,
+   "impots": 61041.22547042451,
+   "benefice_net": 439114.3423424982,
+   "capex_maintien": 102855.53839468842,
+   "flux_libre": 307709.49772653973,
+   "tresorerie_cumulee": 641481.3465125408,
+   "dscr_senior": 2.6207240622176387,
+   "dscr_total": 1.6280596324270258,
+   "dscr_bancaire": 1.4097908144480324,
+   "couverture_interets": 2.8469040512259163,
+   "solde_senior": 5125155.647624406,
+   "solde_total": 6143776.0822769
+  }
+ ],
+ "lignes": [
+  [
+   "terrains",
+   "Terrains de camping"
+  ],
+  [
+   "saisonniers",
+   "Terrains saisonniers (12 → 70, conversion de terrains existants)"
+  ],
+  [
+   "chalets",
+   "Chalets 4 saisons (16)"
+  ],
+  [
+   "villas",
+   "Villas (13)"
+  ],
+  [
+   "hotel",
+   "Hôtel (6 → 17 chambres)"
+  ],
+  [
+   "cabanas",
+   "Cabanas prêt-à-camper (13)"
+  ],
+  [
+   "coolbox",
+   "Unités Coolbox 4 saisons, propriété Havana (9, grappe A)"
+  ],
+  [
+   "redevance",
+   "Partenariat Coolbox HPA, part Havana (9 unités existantes)"
+  ],
+  [
+   "restauration",
+   "Restauration (sans alcool jusqu'au permis RACJ)"
+  ],
+  [
+   "spa",
+   "Spa et piscine 4 saisons (phase 2)"
+  ],
+  [
+   "spectacles",
+   "Spectacles et festivals (billetterie brute)"
+  ],
+  [
+   "activites",
+   "Activités et concessions"
+  ]
+ ],
+ "charges": [
+  [
+   "cout_ventes",
+   "Coût des ventes (restauration, concessions)"
+  ],
+  [
+   "cachets",
+   "Cachets, technique et sécurité des spectacles (55 % de la billetterie)"
+  ],
+  [
+   "commissions",
+   "Commissions des plateformes de distribution"
+  ],
+  [
+   "salaires",
+   "Salaires et charges sociales"
+  ],
+  [
+   "energie",
+   "Électricité, chauffage et propane"
+  ],
+  [
+   "entretien",
+   "Entretien et réparations (8 %)"
+  ],
+  [
+   "vehicules",
+   "Véhicules, essence et entretien des véhicules"
+  ],
+  [
+   "marketing",
+   "Marketing et commercialisation"
+  ],
+  [
+   "assurances",
+   "Assurances"
+  ],
+  [
+   "taxes",
+   "Taxes municipales et scolaires"
+  ],
+  [
+   "honoraires",
+   "Honoraires comptables et audit"
+  ],
+  [
+   "admin",
+   "Administration, TI et télécoms"
+  ],
+  [
+   "bancaires",
+   "Frais bancaires et de cartes"
+  ],
+  [
+   "fournitures",
+   "Fournitures d'exploitation"
+  ],
+  [
+   "loyers",
+   "Loyers et locations"
+  ],
+  [
+   "divers",
+   "Divers et imprévus"
+  ]
+ ],
+ "projets": [
+  [
+   "Phase 1a",
+   "Hôtel : de 6 à 17 chambres, exploitation 12 mois",
+   700000,
+   "chantier"
+  ],
+  [
+   "Phase 1a",
+   "Restaurant Madera et salle de conférence",
+   800000,
+   "chantier"
+  ],
+  [
+   "Phase 1a",
+   "Achèvement des 13 villas",
+   150000,
+   "chantier"
+  ],
+  [
+   "Phase 1a",
+   "Chalets existants : hivernisation (isolation, chauffage, plomberie)",
+   150000,
+   "chantier"
+  ],
+  [
+   "Phase 1a",
+   "Grappe A : 9 unités Coolbox 12×24 quatre saisons sur emplacements aménagés en 2022",
+   1009800,
+   "usine"
+  ],
+  [
+   "Phase 1a",
+   "Conversion de 40 terrains existants en terrains saisonniers (bornes, signalisation)",
+   50000,
+   "chantier"
+  ]
+ ],
+ "emplois": [
+  [
+   "Projets de développement, phase 1a (hôtel, restaurant, villas, chalets, grappe Coolbox, saisonniers)",
+   2859800
+  ],
+  [
+   "Contingence (5 % forfaits d'usine, 10 % travaux de chantier)",
+   235490
+  ],
+  [
+   "Honoraires professionnels (plans, ingénierie, permis)",
+   175000
+  ],
+  [
+   "Mise en conformité environnementale et réglementaire (hyp.)",
+   250000
+  ],
+  [
+   "Intérêts capitalisés pendant la construction (hyp.)",
+   52500
+  ],
+  [
+   "Réserve de service de la dette (6 mois, déposée à la clôture)",
+   233237
+  ],
+  [
+   "Frais de financement et juridiques (montage multi-bailleurs)",
+   125000
+  ],
+  [
+   "Fonds de roulement de démarrage",
+   250000
+  ],
+  [
+   "Refinancement de la dette existante (selon relevés des créanciers, hyp.)",
+   4000000
+  ]
+ ],
+ "sources": [
+  [
+   "Prêt hypothécaire de premier rang (tranche A refinancement, tranche B construction)",
+   5500000,
+   "Demandé"
+  ],
+  [
+   "DEC – contribution remboursable sans intérêt (hyp.)",
+   500000,
+   "À solliciter"
+  ],
+  [
+   "Quasi-équité patiente : Fonds régional de solidarité FTQ Estrie ou Fondaction (hyp.)",
+   750000,
+   "À solliciter"
+  ],
+  [
+   "MRC du Val-Saint-François – FLI / FLS (hyp.)",
+   150000,
+   "À solliciter"
+  ],
+  [
+   "Construction Prospère – retenue contractuelle subordonnée (10 % des travaux de chantier)",
+   185000,
+   "Engagé (à signer)"
+  ],
+  [
+   "Fonds propres : actionnaires, Coolbox HPA (apport en nature validé) et investisseur privé (relais converti en quasi-équité postposée)",
+   1096027,
+   "À documenter (preuve de fonds en fiducie)"
+  ]
+ ],
+ "couches": [
+  {
+   "nom": "Prêt hypothécaire de premier rang (tranche A refinancement, tranche B construction)",
+   "montant": 5500000,
+   "taux": 0.07,
+   "amort_ans": 25,
+   "moratoire_mois": 12,
+   "paiement_mensuel": 38872.85585012999,
+   "statut": "Demandé",
+   "rows": [
+    {
+     "an": 1,
+     "interets": 337750.0,
+     "capital": 0.0,
+     "service": 337750.0,
+     "solde_fin": 5500000
+    },
+    {
+     "an": 2,
+     "interets": 382334.53333622334,
+     "capital": 84139.73686533648,
+     "service": 466474.2702015598,
+     "solde_fin": 5415860.263134664
+    },
+    {
+     "an": 3,
+     "interets": 376252.06495500595,
+     "capital": 90222.20524655403,
+     "service": 466474.27020156,
+     "solde_fin": 5325638.05788811
+    },
+    {
+     "an": 4,
+     "interets": 369729.8944427046,
+     "capital": 96744.37575885531,
+     "service": 466474.27020155994,
+     "solde_fin": 5228893.682129255
+    },
+    {
+     "an": 5,
+     "interets": 362736.23569671094,
+     "capital": 103738.03450484897,
+     "service": 466474.2702015599,
+     "solde_fin": 5125155.647624406
+    }
+   ],
+   "complet": [
+    {
+     "an": 1,
+     "interets": 337750.0,
+     "capital": 0.0,
+     "service": 337750.0,
+     "solde_fin": 5500000
+    },
+    {
+     "an": 2,
+     "interets": 382334.53333622334,
+     "capital": 84139.73686533648,
+     "service": 466474.2702015598,
+     "solde_fin": 5415860.263134664
+    },
+    {
+     "an": 3,
+     "interets": 376252.06495500595,
+     "capital": 90222.20524655403,
+     "service": 466474.27020156,
+     "solde_fin": 5325638.05788811
+    },
+    {
+     "an": 4,
+     "interets": 369729.8944427046,
+     "capital": 96744.37575885531,
+     "service": 466474.27020155994,
+     "solde_fin": 5228893.682129255
+    },
+    {
+     "an": 5,
+     "interets": 362736.23569671094,
+     "capital": 103738.03450484897,
+     "service": 466474.2702015599,
+     "solde_fin": 5125155.647624406
+    },
+    {
+     "an": 6,
+     "interets": 355237.0047944883,
+     "capital": 111237.26540707158,
+     "service": 466474.2702015599,
+     "solde_fin": 5013918.382217333
+    },
+    {
+     "an": 7,
+     "interets": 347195.65388398455,
+     "capital": 119278.6163175754,
+     "service": 466474.27020155994,
+     "solde_fin": 4894639.765899757
+    },
+    {
+     "an": 8,
+     "interets": 338572.99306596705,
+     "capital": 127901.2771355929,
+     "service": 466474.27020155994,
+     "solde_fin": 4766738.488764163
+    },
+    {
+     "an": 9,
+     "interets": 329326.99940021924,
+     "capital": 137147.27080134075,
+     "service": 466474.27020156,
+     "solde_fin": 4629591.217962823
+    },
+    {
+     "an": 10,
+     "interets": 319412.61210477824,
+     "capital": 147061.6580967817,
+     "service": 466474.27020155994,
+     "solde_fin": 4482529.559866042
+    },
+    {
+     "an": 11,
+     "interets": 308781.51295010984,
+     "capital": 157692.7572514501,
+     "service": 466474.27020155994,
+     "solde_fin": 4324836.802614591
+    },
+    {
+     "an": 12,
+     "interets": 297381.8907779597,
+     "capital": 169092.37942360018,
+     "service": 466474.2702015599,
+     "solde_fin": 4155744.423190991
+    },
+    {
+     "an": 13,
+     "interets": 285158.18899725436,
+     "capital": 181316.08120430555,
+     "service": 466474.2702015599,
+     "solde_fin": 3974428.341986685
+    },
+    {
+     "an": 14,
+     "interets": 272050.8348264593,
+     "capital": 194423.43537510058,
+     "service": 466474.2702015599,
+     "solde_fin": 3780004.9066115846
+    },
+    {
+     "an": 15,
+     "interets": 257995.9489628462,
+     "capital": 208478.3212387137,
+     "service": 466474.2702015599,
+     "solde_fin": 3571526.585372871
+    },
+    {
+     "an": 16,
+     "interets": 242925.03426372728,
+     "capital": 223549.2359378326,
+     "service": 466474.2702015599,
+     "solde_fin": 3347977.349435038
+    },
+    {
+     "an": 17,
+     "interets": 226764.64192243168,
+     "capital": 239709.62827912823,
+     "service": 466474.2702015599,
+     "solde_fin": 3108267.7211559103
+    },
+    {
+     "an": 18,
+     "interets": 209436.01351211537,
+     "capital": 257038.25668944456,
+     "service": 466474.27020155994,
+     "solde_fin": 2851229.464466466
+    },
+    {
+     "an": 19,
+     "interets": 190854.69715288957,
+     "capital": 275619.57304867037,
+     "service": 466474.27020155994,
+     "solde_fin": 2575609.891417796
+    },
+    {
+     "an": 20,
+     "interets": 170930.13593164002,
+     "capital": 295544.13426991994,
+     "service": 466474.27020156,
+     "solde_fin": 2280065.757147875
+    },
+    {
+     "an": 21,
+     "interets": 149565.2265686813,
+     "capital": 316909.04363287863,
+     "service": 466474.27020155994,
+     "solde_fin": 1963156.7135149967
+    },
+    {
+     "an": 22,
+     "interets": 126655.8461803882,
+     "capital": 339818.4240211717,
+     "service": 466474.2702015599,
+     "solde_fin": 1623338.2894938248
+    },
+    {
+     "an": 23,
+     "interets": 102090.34483145914,
+     "capital": 364383.9253701008,
+     "service": 466474.27020156,
+     "solde_fin": 1258954.3641237242
+    },
+    {
+     "an": 24,
+     "interets": 75749.00140374198,
+     "capital": 390725.26879781793,
+     "service": 466474.2702015599,
+     "solde_fin": 868229.0953259064
+    },
+    {
+     "an": 25,
+     "interets": 47503.44012977331,
+     "capital": 418970.83007178653,
+     "service": 466474.2702015599,
+     "solde_fin": 449258.26525411976
+    },
+    {
+     "an": 26,
+     "interets": 17216.004947479687,
+     "capital": 449258.2652540802,
+     "service": 466474.2702015599,
+     "solde_fin": 3.954482963308692e-08
+    }
+   ]
+  },
+  {
+   "nom": "DEC – contribution remboursable sans intérêt (hyp.)",
+   "montant": 500000,
+   "taux": 0.0,
+   "amort_ans": 7,
+   "moratoire_mois": 24,
+   "paiement_mensuel": 5952.380952380952,
+   "statut": "À solliciter",
+   "rows": [
+    {
+     "an": 1,
+     "interets": 0.0,
+     "capital": 0.0,
+     "service": 0.0,
+     "solde_fin": 500000
+    },
+    {
+     "an": 2,
+     "interets": 0.0,
+     "capital": 0.0,
+     "service": 0.0,
+     "solde_fin": 500000
+    },
+    {
+     "an": 3,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 428571.42857142864
+    },
+    {
+     "an": 4,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 357142.8571428573
+    },
+    {
+     "an": 5,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 285714.2857142859
+    }
+   ],
+   "complet": [
+    {
+     "an": 1,
+     "interets": 0.0,
+     "capital": 0.0,
+     "service": 0.0,
+     "solde_fin": 500000
+    },
+    {
+     "an": 2,
+     "interets": 0.0,
+     "capital": 0.0,
+     "service": 0.0,
+     "solde_fin": 500000
+    },
+    {
+     "an": 3,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 428571.42857142864
+    },
+    {
+     "an": 4,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 357142.8571428573
+    },
+    {
+     "an": 5,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 285714.2857142859
+    },
+    {
+     "an": 6,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 214285.71428571455
+    },
+    {
+     "an": 7,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 142857.1428571432
+    },
+    {
+     "an": 8,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 71428.57142857183
+    },
+    {
+     "an": 9,
+     "interets": 0.0,
+     "capital": 71428.57142857143,
+     "service": 71428.57142857143,
+     "solde_fin": 3.838067641481757e-10
+    }
+   ]
+  },
+  {
+   "nom": "Quasi-équité patiente : Fonds régional de solidarité FTQ Estrie ou Fondaction (hyp.)",
+   "montant": 750000,
+   "taux": 0.09,
+   "amort_ans": 7,
+   "moratoire_mois": 36,
+   "paiement_mensuel": 12066.808695028842,
+   "statut": "À solliciter",
+   "rows": [
+    {
+     "an": 1,
+     "interets": 67500.0,
+     "capital": 0.0,
+     "service": 67500.0,
+     "solde_fin": 750000
+    },
+    {
+     "an": 2,
+     "interets": 67500.0,
+     "capital": 0.0,
+     "service": 67500.0,
+     "solde_fin": 750000
+    },
+    {
+     "an": 3,
+     "interets": 67500.0,
+     "capital": 0.0,
+     "service": 67500.0,
+     "solde_fin": 750000
+    },
+    {
+     "an": 4,
+     "interets": 64230.225797596824,
+     "capital": 80571.47854274928,
+     "service": 144801.7043403461,
+     "solde_fin": 669428.5214572506
+    },
+    {
+     "an": 5,
+     "interets": 56672.06535473732,
+     "capital": 88129.63898560876,
+     "service": 144801.7043403461,
+     "solde_fin": 581298.8824716416
+    }
+   ],
+   "complet": [
+    {
+     "an": 1,
+     "interets": 67500.0,
+     "capital": 0.0,
+     "service": 67500.0,
+     "solde_fin": 750000
+    },
+    {
+     "an": 2,
+     "interets": 67500.0,
+     "capital": 0.0,
+     "service": 67500.0,
+     "solde_fin": 750000
+    },
+    {
+     "an": 3,
+     "interets": 67500.0,
+     "capital": 0.0,
+     "service": 67500.0,
+     "solde_fin": 750000
+    },
+    {
+     "an": 4,
+     "interets": 64230.225797596824,
+     "capital": 80571.47854274928,
+     "service": 144801.7043403461,
+     "solde_fin": 669428.5214572506
+    },
+    {
+     "an": 5,
+     "interets": 56672.06535473732,
+     "capital": 88129.63898560876,
+     "service": 144801.7043403461,
+     "solde_fin": 581298.8824716416
+    },
+    {
+     "an": 6,
+     "interets": 48404.89732863363,
+     "capital": 96396.80701171244,
+     "service": 144801.70434034607,
+     "solde_fin": 484902.0754599291
+    },
+    {
+     "an": 7,
+     "interets": 39362.21191747641,
+     "capital": 105439.49242286968,
+     "service": 144801.7043403461,
+     "solde_fin": 379462.5830370593
+    },
+    {
+     "an": 8,
+     "interets": 29471.260241283868,
+     "capital": 115330.44409906221,
+     "service": 144801.70434034607,
+     "solde_fin": 264132.1389379971
+    },
+    {
+     "an": 9,
+     "interets": 18652.469073334116,
+     "capital": 126149.235267012,
+     "service": 144801.70434034613,
+     "solde_fin": 137982.90367098514
+    },
+    {
+     "an": 10,
+     "interets": 6818.800669368752,
+     "capital": 137982.90367097736,
+     "service": 144801.70434034613,
+     "solde_fin": 7.790731615386903e-09
+    }
+   ]
+  },
+  {
+   "nom": "MRC du Val-Saint-François – FLI / FLS (hyp.)",
+   "montant": 150000,
+   "taux": 0.06,
+   "amort_ans": 7,
+   "moratoire_mois": 12,
+   "paiement_mensuel": 2191.2831725671563,
+   "statut": "À solliciter",
+   "rows": [
+    {
+     "an": 1,
+     "interets": 9000.0,
+     "capital": 0.0,
+     "service": 9000.0,
+     "solde_fin": 150000
+    },
+    {
+     "an": 2,
+     "interets": 8516.35959859265,
+     "capital": 17779.038472213226,
+     "service": 26295.398070805873,
+     "solde_fin": 132220.96152778674
+    },
+    {
+     "an": 3,
+     "interets": 7419.787408571779,
+     "capital": 18875.610662234096,
+     "service": 26295.398070805873,
+     "solde_fin": 113345.35086555265
+    },
+    {
+     "an": 4,
+     "interets": 6255.581045318965,
+     "capital": 20039.81702548691,
+     "service": 26295.398070805877,
+     "solde_fin": 93305.53384006576
+    },
+    {
+     "an": 5,
+     "interets": 5019.568981021988,
+     "capital": 21275.829089783885,
+     "service": 26295.398070805873,
+     "solde_fin": 72029.70475028186
+    }
+   ],
+   "complet": [
+    {
+     "an": 1,
+     "interets": 9000.0,
+     "capital": 0.0,
+     "service": 9000.0,
+     "solde_fin": 150000
+    },
+    {
+     "an": 2,
+     "interets": 8516.35959859265,
+     "capital": 17779.038472213226,
+     "service": 26295.398070805873,
+     "solde_fin": 132220.96152778674
+    },
+    {
+     "an": 3,
+     "interets": 7419.787408571779,
+     "capital": 18875.610662234096,
+     "service": 26295.398070805873,
+     "solde_fin": 113345.35086555265
+    },
+    {
+     "an": 4,
+     "interets": 6255.581045318965,
+     "capital": 20039.81702548691,
+     "service": 26295.398070805877,
+     "solde_fin": 93305.53384006576
+    },
+    {
+     "an": 5,
+     "interets": 5019.568981021988,
+     "capital": 21275.829089783885,
+     "service": 26295.398070805873,
+     "solde_fin": 72029.70475028186
+    },
+    {
+     "an": 6,
+     "interets": 3707.3223971610496,
+     "capital": 22588.075673644827,
+     "service": 26295.398070805877,
+     "solde_fin": 49441.62907663704
+    },
+    {
+     "an": 7,
+     "interets": 2314.139315380905,
+     "capital": 23981.258755424973,
+     "service": 26295.398070805877,
+     "solde_fin": 25460.370321212064
+    },
+    {
+     "an": 8,
+     "interets": 835.0277495899201,
+     "capital": 25460.370321212067,
+     "service": 26295.398070801988,
+     "solde_fin": 0.0
+    }
+   ]
+  },
+  {
+   "nom": "Construction Prospère – retenue contractuelle subordonnée (10 % des travaux de chantier)",
+   "montant": 185000,
+   "taux": 0.05,
+   "amort_ans": 5,
+   "moratoire_mois": 24,
+   "paiement_mensuel": 3491.1782241420337,
+   "statut": "Engagé (à signer)",
+   "rows": [
+    {
+     "an": 1,
+     "interets": 9250.0,
+     "capital": 0.0,
+     "service": 9250.0,
+     "solde_fin": 185000
+    },
+    {
+     "an": 2,
+     "interets": 9250.0,
+     "capital": 0.0,
+     "service": 9250.0,
+     "solde_fin": 185000
+    },
+    {
+     "an": 3,
+     "interets": 8491.416888108559,
+     "capital": 33402.72180159584,
+     "service": 41894.1386897044,
+     "solde_fin": 151597.27819840415
+    },
+    {
+     "an": 4,
+     "interets": 6782.470246323371,
+     "capital": 35111.66844338103,
+     "service": 41894.1386897044,
+     "solde_fin": 116485.60975502318
+    },
+    {
+     "an": 5,
+     "interets": 4986.090650965839,
+     "capital": 36908.04803873856,
+     "service": 41894.1386897044,
+     "solde_fin": 79577.56171628457
+    }
+   ],
+   "complet": [
+    {
+     "an": 1,
+     "interets": 9250.0,
+     "capital": 0.0,
+     "service": 9250.0,
+     "solde_fin": 185000
+    },
+    {
+     "an": 2,
+     "interets": 9250.0,
+     "capital": 0.0,
+     "service": 9250.0,
+     "solde_fin": 185000
+    },
+    {
+     "an": 3,
+     "interets": 8491.416888108559,
+     "capital": 33402.72180159584,
+     "service": 41894.1386897044,
+     "solde_fin": 151597.27819840415
+    },
+    {
+     "an": 4,
+     "interets": 6782.470246323371,
+     "capital": 35111.66844338103,
+     "service": 41894.1386897044,
+     "solde_fin": 116485.60975502318
+    },
+    {
+     "an": 5,
+     "interets": 4986.090650965839,
+     "capital": 36908.04803873856,
+     "service": 41894.1386897044,
+     "solde_fin": 79577.56171628457
+    },
+    {
+     "an": 6,
+     "interets": 3097.8048661937914,
+     "capital": 38796.33382351061,
+     "service": 41894.13868970441,
+     "solde_fin": 40781.22789277396
+    },
+    {
+     "an": 7,
+     "interets": 1112.9107969297102,
+     "capital": 40781.22789277395,
+     "service": 41894.138689703665,
+     "solde_fin": 0.0
+    }
+   ]
+  }
+ ],
+ "total_emplois": 8181027,
+ "argent_neuf": 4181027,
+ "fonds_propres": 1096027,
+ "pct_fonds_propres_argent_neuf": 0.2621430093610972,
+ "senior": 5500000,
+ "tranche_a": 4000000,
+ "tranche_b": 1500000,
+ "paiement_senior": 38872.85585012999,
+ "reserve_service": 233237,
+ "interets_capitalises": 52500,
+ "coolbox_unite": 112200,
+ "coolbox_2026": {
+  "ca_ht": 180334.31,
+  "part_havana": 90167.15,
+  "transport": 13500.0,
+  "redevance": 76667.15,
+  "unites": 9
+ },
+ "contingence": 235490,
+ "reel_2025_total": 1453605.16,
+ "reel_2026_total": 1531841.68,
+ "autres_2026": {
+  "restauration": 100000.0,
+  "activites": 96700.0
+ },
+ "dpa": {
+  "categories": [
+   {
+    "nom": "Cat. 1 — bâtiments : hôtel, restaurant, villas, chalets",
+    "taux": 0.04,
+    "base": 2058368.4173718442,
+    "dpa": [
+     41167.36834743688,
+     80688.04196097629,
+     77460.52028253724,
+     74362.09947123575,
+     71387.61549238632
+    ],
+    "fnacc": [
+     2017201.0490244073,
+     1936513.007063431,
+     1859052.4867808938,
+     1784690.387309658,
+     1713302.7718172718
+    ]
+   },
+   {
+    "nom": "Cat. 8 — équipements : mobilier",
+    "taux": 0.2,
+    "base": 0.0,
+    "dpa": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "fnacc": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   {
+    "nom": "Cat. 6 / à confirmer — unités d'hébergement préfabriquées sur structure d'acier (Coolbox)",
+    "taux": 0.1,
+    "base": 1154744.6821456046,
+    "dpa": [
+     57737.23410728024,
+     109700.74480383245,
+     98730.6703234492,
+     88857.60329110429,
+     79971.84296199385
+    ],
+    "fnacc": [
+     1097007.4480383245,
+     987306.703234492,
+     888576.0329110428,
+     799718.4296199385,
+     719746.5866579446
+    ]
+   },
+   {
+    "nom": "Cat. 17 — aménagements de surface : conversion de terrains saisonniers",
+    "taux": 0.08,
+    "base": 57176.90048255123,
+    "dpa": [
+     2287.076019302049,
+     4391.1859570599345,
+     4039.89108049514,
+     3716.6997940555293,
+     3419.3638105310865
+    ],
+    "fnacc": [
+     54889.824463249184,
+     50498.63850618925,
+     46458.74742569411,
+     42742.04763163858,
+     39322.683821107494
+    ]
+   },
+   {
+    "nom": "Frais de financement (déductibles sur 5 ans)",
+    "taux": 0.2,
+    "base": 125000.0,
+    "dpa": [
+     25000.0,
+     25000.0,
+     25000.0,
+     25000.0,
+     25000.0
+    ],
+    "fnacc": [
+     100000.0,
+     75000.0,
+     49999.999999999985,
+     24999.999999999993,
+     0.0
+    ]
+   }
+  ],
+  "total": [
+   126191.67847401917,
+   219779.9727218687,
+   205231.08168648157,
+   191936.40255639557,
+   179778.82226491126
+  ]
+ },
+ "bilan": [
+  {
+   "encaisse": 462046.35521226,
+   "immo_existantes_nettes": 8765000.0,
+   "immo_nouvelles_nettes": 3252101.501733019,
+   "frais_reportes": 342000.0,
+   "actif_total": 12821147.85694528,
+   "portion_courante": 101918.77533754971,
+   "dette_lt": 6983081.22466245,
+   "passif_total": 7085000,
+   "avoir_ouverture": 6011027,
+   "bnr_cumules": -274879.14305472083,
+   "avoir_total": 5736147.856945279,
+   "dette_sur_avoir": 1.2351494725543977,
+   "fonds_roulement": 4.533476326437267
+  },
+  {
+   "encaisse": 480830.40074622846,
+   "immo_existantes_nettes": 8615000.0,
+   "immo_nouvelles_nettes": 3185166.9018733986,
+   "frais_reportes": 256500.0,
+   "actif_total": 12537497.302619627,
+   "portion_courante": 213929.10913895542,
+   "dette_lt": 6769152.115523496,
+   "passif_total": 6983081.224662451,
+   "avoir_ouverture": 6011027,
+   "bnr_cumules": -456610.9220428234,
+   "avoir_total": 5554416.077957177,
+   "dette_sur_avoir": 1.257212482222022,
+   "fonds_roulement": 2.2476155894890866
+  },
+  {
+   "encaisse": 621803.9164201384,
+   "immo_existantes_nettes": 8465000.0,
+   "immo_nouvelles_nettes": 3130824.7985065775,
+   "frais_reportes": 171000.0,
+   "actif_total": 12388628.714926716,
+   "portion_courante": 303895.91119904397,
+   "dette_lt": 6465256.204324452,
+   "passif_total": 6769152.115523496,
+   "avoir_ouverture": 6011027,
+   "bnr_cumules": -391550.40059677884,
+   "avoir_total": 5619476.599403221,
+   "dette_sur_avoir": 1.2045876507862614,
+   "fonds_roulement": 2.0461082018733476
+  },
+  {
+   "encaisse": 817008.8487860011,
+   "immo_existantes_nettes": 8315000.0,
+   "immo_nouvelles_nettes": 3084515.965780684,
+   "frais_reportes": 85499.99999999999,
+   "actif_total": 12302024.814566683,
+   "portion_courante": 321480.1220475516,
+   "dette_lt": 6143776.082276899,
+   "passif_total": 6465256.204324451,
+   "avoir_ouverture": 6011027,
+   "bnr_cumules": -174258.3897577658,
+   "avoir_total": 5836768.610242235,
+   "dette_sur_avoir": 1.1076773187443751,
+   "fonds_roulement": 2.541397718721637
+  },
+  {
+   "encaisse": 1124718.3465125407,
+   "immo_existantes_nettes": 8165000.0,
+   "immo_nouvelles_nettes": 3044440.688349091,
+   "frais_reportes": 0.0,
+   "actif_total": 12334159.034861632,
+   "portion_courante": 340447.0533445109,
+   "dette_lt": 5803329.02893239,
+   "passif_total": 6143776.0822769,
+   "avoir_ouverture": 6011027,
+   "bnr_cumules": 179355.95258473232,
+   "avoir_total": 6190382.952584732,
+   "dette_sur_avoir": 0.9924710844765473,
+   "fonds_roulement": 3.3036512886906877
+  }
+ ],
+ "sensibilite": [
+  {
+   "scenario": "Scénario de base",
+   "dscr_an2": 1.166421401719355,
+   "dscr_banc_an2": 1.0329822595784088,
+   "dscr_an3": 1.3718613013423597,
+   "dscr_banc_an3": 1.2092860908116663,
+   "dscr_an5": 1.628059632427026,
+   "dscr_banc_an5": 1.409790814448033
+  },
+  {
+   "scenario": "Revenus −10 %",
+   "dscr_an2": 0.7620987456884744,
+   "dscr_banc_an2": 0.6420035177616227,
+   "dscr_an3": 0.9733589181910612,
+   "dscr_banc_an3": 0.8549938003968148,
+   "dscr_an5": 1.2100422676950624,
+   "dscr_banc_an5": 1.0564989370577569
+  },
+  {
+   "scenario": "Revenus −15 %",
+   "dscr_an2": 0.5599374176730336,
+   "dscr_banc_an2": 0.44651414685322927,
+   "dscr_an3": 0.7741077266154127,
+   "dscr_banc_an3": 0.6623184486986244,
+   "dscr_an5": 1.00103358532908,
+   "dscr_banc_an5": 0.8798381852233491
+  },
+  {
+   "scenario": "Revenus −20 %",
+   "dscr_an2": 0.3577760896575932,
+   "dscr_banc_an2": 0.2510247759448362,
+   "dscr_an3": 0.5748565350397641,
+   "dscr_banc_an3": 0.469643097000434,
+   "dscr_an5": 0.7920249029630987,
+   "dscr_banc_an5": 0.6824429624363019
+  },
+  {
+   "scenario": "Revenus d'hiver −50 %",
+   "dscr_an2": 0.9265218045472717,
+   "dscr_banc_an2": 0.8010001006129435,
+   "dscr_an3": 1.1224633789915723,
+   "dscr_banc_an3": 0.9985455355422755,
+   "dscr_an5": 1.3596209545859537,
+   "dscr_banc_an5": 1.1829275762196347
+  },
+  {
+   "scenario": "Restauration −50 % (permis d'alcool retardé, achalandage)",
+   "dscr_an2": 0.9364904818165531,
+   "dscr_banc_an2": 0.8106397803048565,
+   "dscr_an3": 1.0927675949395244,
+   "dscr_banc_an3": 0.9704616608717705,
+   "dscr_an5": 1.3091336782724614,
+   "dscr_banc_an5": 1.140254132749974
+  },
+  {
+   "scenario": "Taux senior 8 % (25 ans)",
+   "dscr_an2": 1.1498156049701844,
+   "dscr_banc_an2": 1.0182761735765804,
+   "dscr_an3": 1.2896770879055148,
+   "dscr_banc_an3": 1.1368412845501101,
+   "dscr_an5": 1.5400249775687596,
+   "dscr_banc_an5": 1.3335586879949803
+  },
+  {
+   "scenario": "Taux senior 9 % (25 ans)",
+   "dscr_an2": 1.0586787149872192,
+   "dscr_banc_an2": 0.9375653855142371,
+   "dscr_an3": 1.2143104374097151,
+   "dscr_banc_an3": 1.070406112082999,
+   "dscr_an5": 1.4583273104158285,
+   "dscr_banc_an5": 1.2628139693004106
+  },
+  {
+   "scenario": "Amortissement senior 20 ans (7 %)",
+   "dscr_an2": 1.2047644213753865,
+   "dscr_banc_an2": 1.0669388202390442,
+   "dscr_an3": 1.2855530216364224,
+   "dscr_banc_an3": 1.133205949132514,
+   "dscr_an5": 1.5355785334954883,
+   "dscr_banc_an5": 1.3297083646489556
+  }
+ ],
+ "part_variable": 0.49785294233069743,
+ "capacite": {
+  "methode_dscr_125": 7880694.16450424,
+  "methode_5x_baiia": 4620376.583966403,
+  "methode_ltv_65_revenu": 4573189.834248276,
+  "noi_an3": 835486.6043338197
+ },
+ "hypotheses": {
+  "terrains_uplift": {
+   "1": 1.0,
+   "2": 1.02,
+   "3": 1.03,
+   "4": 1.04,
+   "5": 1.04
+  },
+  "saisonniers_sites": {
+   "0": 12,
+   "1": 30,
+   "2": 45,
+   "3": 58,
+   "4": 66,
+   "5": 70
+  },
+  "saisonnier_tarif": 3650.0,
+  "chalets_n": 16,
+  "chalet_ete": 235.0,
+  "chalet_hiver": 210.0,
+  "chalets_occ_ete": {
+   "1": 0.58,
+   "2": 0.61,
+   "3": 0.63,
+   "4": 0.65,
+   "5": 0.66
+  },
+  "chalets_occ_hiver": {
+   "1": 0.12,
+   "2": 0.18,
+   "3": 0.22,
+   "4": 0.24,
+   "5": 0.25
+  },
+  "chalets_hiver_frac": {
+   "1": 0.3,
+   "2": 1,
+   "3": 1,
+   "4": 1,
+   "5": 1
+  },
+  "villas_n": 13,
+  "villa_ete": 275.0,
+  "villa_hiver": 245.0,
+  "villas_occ_ete": {
+   "1": 0.5,
+   "2": 0.55,
+   "3": 0.6,
+   "4": 0.63,
+   "5": 0.65
+  },
+  "villas_occ_hiver": {
+   "1": 0.1,
+   "2": 0.16,
+   "3": 0.2,
+   "4": 0.21,
+   "5": 0.22
+  },
+  "villas_ete_frac": {
+   "1": 0.5,
+   "2": 1,
+   "3": 1,
+   "4": 1,
+   "5": 1
+  },
+  "hotel_tarif": 190.0,
+  "hotel_rooms": {
+   "1": 11.5,
+   "2": 17,
+   "3": 17,
+   "4": 17,
+   "5": 17
+  },
+  "hotel_occ": {
+   "1": 0.35,
+   "2": 0.42,
+   "3": 0.48,
+   "4": 0.52,
+   "5": 0.55
+  },
+  "cabanas_uplift": {
+   "1": 1.0,
+   "2": 1.02,
+   "3": 1.04,
+   "4": 1.05,
+   "5": 1.05
+  },
+  "coolbox_n": 9,
+  "coolbox_ete": 225.0,
+  "coolbox_hiver": 199.0,
+  "coolbox_occ_ete": {
+   "1": 0.55,
+   "2": 0.6,
+   "3": 0.63,
+   "4": 0.65,
+   "5": 0.65
+  },
+  "coolbox_occ_hiver": {
+   "1": 0.2,
+   "2": 0.27,
+   "3": 0.32,
+   "4": 0.34,
+   "5": 0.35
+  },
+  "coolbox_ete_frac": {
+   "1": 0.8,
+   "2": 1,
+   "3": 1,
+   "4": 1,
+   "5": 1
+  },
+  "redevance_base": 90167.15,
+  "fb_ratio": {
+   "1": 0.08,
+   "2": 0.14,
+   "3": 0.18,
+   "4": 0.19,
+   "5": 0.2
+  },
+  "spa_visites": {
+   "1": 0,
+   "2": 0,
+   "3": 0,
+   "4": 5000,
+   "5": 7500
+  },
+  "spa_tarif": 55.0,
+  "spectacles": {
+   "1": 0,
+   "2": 60000,
+   "3": 120000,
+   "4": 150000,
+   "5": 160000
+  },
+  "activites": {
+   "1": 105000,
+   "2": 125000,
+   "3": 140000,
+   "4": 148000,
+   "5": 155000
+  }
+ },
+ "immo_existantes_cout": 11915000,
+ "amort_cumule_2026": 3000000
+}

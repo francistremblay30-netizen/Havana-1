@@ -222,9 +222,115 @@ def dette():
     return rows
 
 
+def dette_complete():
+    """Échéancier annuel COMPLET jusqu'au remboursement intégral : moratoire de
+    capital de 18 mois (An 1 intérêts seulement sur le solde moyen décaissé,
+    An 2 six mois d'intérêts seulement), puis 300 annuités mensuelles (25 ans).
+    Reprend exactement la logique de dette() pour les ans 1 à 5."""
+    rows = [dict(dette()[0])]
+    solde = PRET
+    an = 2
+    while solde > 0.005 and an <= 40:
+        interets = 0.0
+        capital = 0.0
+        for m in range(12):
+            if solde <= 0.005:
+                break
+            i = solde * r_m
+            interets += i
+            if an == 2 and m < 6:
+                continue
+            p = min(PAIEMENT_MENSUEL - i, solde)
+            capital += p
+            solde -= p
+        rows.append({"an": an, "interets": interets, "capital": capital,
+                     "service": interets + capital, "solde_fin": max(solde, 0.0)})
+        an += 1
+    assert abs(sum(r["capital"] for r in rows) - PRET) < 1, "capital cumulé ≠ montant du prêt"
+    return rows
+
+
 AMORT_EXISTANT = 150000  # amortissement comptable des actifs existants (hypothèse)
 TAUX_AMORT_NOUVEAU = 0.04
 TAUX_IMPOT = 0.20  # taux combiné moyen (petite entreprise et taux général)
+
+# ---------------------------------------------------------------------------
+# DPA fiscale — ventilation du capex par catégorie (HYPOTHÈSE de classement,
+# à valider avec le comptable). Contingence (275 k$) et honoraires (175 k$)
+# capitalisés au prorata des projets. Ajouts : phase 1 en An 1, phase 2 en An 2,
+# règle de demi-année l'année de la mise en service.
+# ---------------------------------------------------------------------------
+DPA_CATS = [
+    ("Cat. 1 — bâtiments : hôtel, restaurant, villas, chalets, amphithéâtre, bâtiment piscine-spa", 0.04, 1800000, 1700000),
+    ("Cat. 8 — équipements : piscine-spa (équipements), sentier lumineux", 0.20, 0, 1300000),
+    ("Cat. 17 — aménagements de surface : 35 terrains saisonniers", 0.08, 700000, 0),
+]
+FRAIS_FINANCEMENT = 75000  # déductibles linéairement sur 5 ans
+FACTEUR_CAPITALISATION = (5500000 + 275000 + 175000) / 5500000  # prorata contingence + honoraires
+
+
+def dpa():
+    cats = []
+    for nom, taux, add1, add2 in DPA_CATS:
+        a1, a2 = add1 * FACTEUR_CAPITALISATION, add2 * FACTEUR_CAPITALISATION
+        row = {"nom": nom, "taux": taux, "base": a1 + a2, "dpa": [], "fnacc": []}
+        fnacc = 0.0
+        for y in range(1, 6):
+            add = a1 if y == 1 else (a2 if y == 2 else 0.0)
+            d = (fnacc + add * 0.5) * taux  # demi-année sur les ajouts de l'année
+            fnacc = fnacc + add - d
+            row["dpa"].append(d)
+            row["fnacc"].append(fnacc)
+        cats.append(row)
+    cats.append({"nom": "Frais de financement (déductibles sur 5 ans)", "taux": 0.20,
+                 "base": float(FRAIS_FINANCEMENT),
+                 "dpa": [FRAIS_FINANCEMENT / 5.0] * 5,
+                 "fnacc": [FRAIS_FINANCEMENT * (1 - 0.2 * y) for y in range(1, 6)]})
+    total = [sum(c["dpa"][i] for c in cats) for i in range(5)]
+    return {"categories": cats, "total": total}
+
+
+def bilan(years, dc):
+    """Bilan prévisionnel PRO FORMA au 31 décembre, An 1 à An 5. Le site est
+    porté à sa valeur d'évaluation (28 M$, 2025) — pas à sa valeur aux livres,
+    indisponible — d'où : avoir pro forma à l'ouverture = valeur du site
+    − dette existante refinancée (5 M$) + mise de fonds (825 k$) = 23 825 000 $.
+    L'égalité actif = passif + avoir est vérifiée par assertion chaque année."""
+    rows = []
+    fdr = 100000  # fonds de roulement injecté à la clôture
+    capex_capitalise = 5500000 + 275000 + 175000
+    avoir_ouverture = VALEUR_SITE - 5000000 + MISE_DE_FONDS
+    amort_exist_cum = amort_nouv_cum = maintien_cum = bnr = 0.0
+    for i in range(1, 6):
+        y = years[i]
+        amort_exist_cum += AMORT_EXISTANT
+        amort_nouv_cum += y["amortissement"] - AMORT_EXISTANT
+        maintien_cum += y["capex_maintien"]
+        bnr += y["benefice_net"]
+        encaisse = fdr + y["tresorerie_cumulee"]
+        immo_exist = VALEUR_SITE - amort_exist_cum
+        immo_nouv = capex_capitalise + maintien_cum - amort_nouv_cum
+        actif = encaisse + immo_exist + immo_nouv + FRAIS_FINANCEMENT
+        solde = dc[i - 1]["solde_fin"]
+        portion_courante = dc[i]["capital"] if i < len(dc) else 0.0
+        avoir = avoir_ouverture + bnr
+        assert abs(actif - (solde + avoir)) < 1, f"bilan An {i} ne balance pas ({actif - solde - avoir:+.2f} $)"
+        rows.append({
+            "encaisse": encaisse,
+            "immo_existantes_nettes": immo_exist,
+            "immo_nouvelles_nettes": immo_nouv,
+            "frais_reportes": float(FRAIS_FINANCEMENT),
+            "actif_total": actif,
+            "portion_courante": portion_courante,
+            "dette_lt": solde - portion_courante,
+            "passif_total": solde,
+            "avoir_ouverture": float(avoir_ouverture),
+            "bnr_cumules": bnr,
+            "avoir_total": avoir,
+            "dette_sur_avoir": solde / avoir,
+            "encaisse_sur_portion_courante": (encaisse / portion_courante) if portion_courante else None,
+        })
+    return rows
 
 
 def modele():
@@ -427,9 +533,12 @@ def main():
         "reel_2025_total": REEL_2025_TOTAL,
         "reel_2026_total": REEL_2026_TOTAL,
         "dette": dette(),
+        "dette_complete": dette_complete(),
+        "dpa": dpa(),
+        "bilan": bilan(years, dette_complete()),
         "sensibilite": sensibilite(years),
     }
-    OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1))
+    OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
     charts(years)
     # Résumé console
     print(f"{'Année':<14}{'Revenus':>12}{'Charges':>12}{'BAIIA':>12}{'Marge':>7}{'Service':>12}{'DSCR':>6}{'Bén. net':>12}{'Flux':>12}")

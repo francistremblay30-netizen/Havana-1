@@ -1,146 +1,146 @@
 {
  "couverture": {
-  "file": "photos/prepare/piscine-vue-aerienne-cover.jpg",
-  "width": 1700,
-  "height": 2200,
+  "file": "photos\\prepare\\piscine-vue-aerienne-cover.jpg",
+  "width": 2550,
+  "height": 3300,
   "kind": "cover",
   "caption": ""
  },
  "dos": {
-  "file": "photos/prepare/navy-cover.jpg",
+  "file": "photos\\prepare\\navy-cover.jpg",
   "width": 1700,
   "height": 2200,
   "kind": "cover",
   "caption": ""
  },
  "ban_1": {
-  "file": "photos/prepare/piscine-plage-palapas-banner.jpg",
+  "file": "photos\\prepare\\piscine-plage-palapas-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_2": {
-  "file": "photos/prepare/pavillon-accueil-banner.jpg",
+  "file": "photos\\prepare\\pavillon-accueil-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_3": {
-  "file": "photos/prepare/piscine-fete-mousse-banner.jpg",
+  "file": "photos\\prepare\\piscine-fete-mousse-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_4": {
-  "file": "photos/prepare/lac-plage-banner.jpg",
+  "file": "photos\\prepare\\lac-plage-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_5": {
-  "file": "photos/prepare/spectacle-scene-banner.jpg",
+  "file": "photos\\prepare\\spectacle-scene-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_6": {
-  "file": "photos/prepare/kiosques-restauration-banner.jpg",
+  "file": "photos\\prepare\\kiosques-restauration-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_7": {
-  "file": "photos/prepare/equipe-banner.jpg",
+  "file": "photos\\prepare\\equipe-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_8": {
-  "file": "photos/prepare/terrains-vue-aerienne-banner.jpg",
+  "file": "photos\\prepare\\terrains-vue-aerienne-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_9": {
-  "file": "photos/prepare/train-coucher-de-soleil-banner.jpg",
+  "file": "photos\\prepare\\train-coucher-de-soleil-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_10": {
-  "file": "photos/prepare/piscine-vue-aerienne-banner.jpg",
+  "file": "photos\\prepare\\piscine-vue-aerienne-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "ban_annexes": {
-  "file": "photos/prepare/hotel-arriere-banner.jpg",
+  "file": "photos\\prepare\\hotel-arriere-banner.jpg",
   "width": 1700,
   "height": 840,
   "kind": "banner",
   "caption": ""
  },
  "actifs_terrains": {
-  "file": "photos/prepare/terrains-vue-aerienne-pair.jpg",
+  "file": "photos\\prepare\\terrains-vue-aerienne-pair.jpg",
   "width": 660,
   "height": 440,
   "kind": "pair",
   "caption": "265 terrains de camping : 52 % des revenus 2026, complets en haute saison"
  },
  "actifs_chalets": {
-  "file": "photos/prepare/chalets-pair.jpg",
+  "file": "photos\\prepare\\chalets-pair.jpg",
   "width": 660,
   "height": 440,
   "kind": "pair",
   "caption": "Chalets et chambres : 33 % des revenus 2026, en hausse de 24 % en un an"
  },
  "projet_hotel_entree": {
-  "file": "photos/prepare/hotel-entree-pair.jpg",
+  "file": "photos\\prepare\\hotel-entree-pair.jpg",
   "width": 660,
   "height": 440,
   "kind": "pair",
   "caption": "L'hôtel actuel : 6 chambres, à porter à 17"
  },
  "projet_hotel_arriere": {
-  "file": "photos/prepare/hotel-arriere-pair.jpg",
+  "file": "photos\\prepare\\hotel-arriere-pair.jpg",
   "width": 660,
   "height": 440,
   "kind": "pair",
   "caption": "L'aile arrière : les chambres à rénover pour une exploitation 12 mois"
  },
  "projet_resto": {
-  "file": "photos/prepare/aqua-bar-wide.jpg",
+  "file": "photos\\prepare\\aqua-bar-wide.jpg",
   "width": 1340,
   "height": 753,
   "kind": "wide",
   "caption": "L'Aqua Bar : la vente de boissons fonctionne déjà ; le restaurant Madera y ajoute les repas et l'hiver"
  },
  "plan_site": {
-  "file": "photos/prepare/plan-du-site-natural.jpg",
-  "width": 588,
-  "height": 381,
+  "file": "photos\\prepare\\plan-du-site-natural.jpg",
+  "width": 1800,
+  "height": 1165,
   "kind": "natural",
   "caption": "Plan d'aménagement actuel du site (source : Havana Resort)"
  },
  "promo_1": {
-  "file": "photos/prepare/visuel-reseaux-piscine-portrait.jpg",
+  "file": "photos\\prepare\\visuel-reseaux-piscine-portrait.jpg",
   "width": 334,
   "height": 598,
   "kind": "portrait",
   "caption": "Contenu vidéo des réseaux sociaux : animation aquatique"
  },
  "promo_2": {
-  "file": "photos/prepare/train-visuel-promo-portrait.jpg",
+  "file": "photos\\prepare\\train-visuel-promo-portrait.jpg",
   "width": 335,
   "height": 597,
   "kind": "portrait",
@@ -148,14 +148,14 @@
  },
  "galerie": [
   {
-   "file": "photos/prepare/coolbox-pair.jpg",
+   "file": "photos\\prepare\\coolbox-pair.jpg",
    "width": 660,
    "height": 440,
    "kind": "pair",
    "caption": "Les Coolbox, mini-maisons en conteneur"
   },
   {
-   "file": "photos/prepare/aqua-bar-pair.jpg",
+   "file": "photos\\prepare\\aqua-bar-pair.jpg",
    "width": 660,
    "height": 440,
    "kind": "pair",
@@ -163,7 +163,7 @@
   }
  ],
  "famille": {
-  "file": "photos/prepare/famille-chaise-geante-natural.jpg",
+  "file": "photos\\prepare\\famille-chaise-geante-natural.jpg",
   "width": 447,
   "height": 447,
   "kind": "natural",
