@@ -720,7 +720,7 @@ children.push(
       ["Salaires et charges sociales", "36 % An 1 → 32 % An 5 des revenus", "Hébergement de villégiature : 30 % à 38 %"],
       ["Énergie", "275 k$ An 1 → 450 k$ An 5", "Chauffage des bâtiments, piscine et spa"],
       ["Entretien et immobilisations de maintien", "4 % + 2 % des revenus", "Pratique bancaire"],
-      ["Amortissement comptable", "150 k$ existant + 4 % des nouveaux actifs", "Hypothèse ; à aligner sur les états financiers"],
+      ["Amortissement comptable", "150 k$ existant + 4 % des projets (5,5 M$)", "Hypothèse ; à aligner sur les états financiers"],
       ["Impôts", "20 % combiné", "Taux moyen petite entreprise et taux général ; la DPA fiscale (annexe K) réduirait l'impôt décaissé les premières années"],
       ["DPA fiscale", "Cat. 1 (4 %), cat. 8 (20 %), cat. 17 (8 %), demi-année", "Cédule complète à l'annexe K ; classement à valider avec le comptable"],
       ["Prêt à terme", money(M.pret) + " à " + pct(M.taux, 1) + ", 25 ans", "Moratoire de capital de 18 mois pendant la construction ; tableau complet à l'annexe J"],
@@ -815,7 +815,7 @@ children.push(
   ...chapter("10", "Conclusion et demande", "ban_10"),
   LEAD("Un actif de 28 M$, une demande démontrée et un plan phasé : le Complexe Havana demande un prêt de " + moneyM(M.pret, 1) + " pour devenir une destination quatre saisons."),
   P("Depuis 2015, le Complexe Havana a bâti un concept que personne d'autre n'offre au Québec et une clientèle qui remplit le site chaque été. Le projet présenté ici ne repose pas sur la conquête d'un marché incertain : il répond à une demande existante en ajoutant de la capacité et en ouvrant le site toute l'année."),
-  P("Les projections, construites à partir des revenus réels de 2026 et d'hypothèses d'occupation prudentes, font passer les revenus de " + moneyM(Y[0].total_revenus, 1) + " à " + moneyM(y5.total_revenus, 1) + " en cinq ans, avec une marge BAIIA de " + pct(y5.marge_baiia, 0) + " et un ratio de couverture du service de la dette de " + ratio(y5.dscr) + " en An 5. Le ratio prêt-valeur de " + pct(M.ltv, 0) + " procure au prêteur une sécurité exceptionnelle."),
+  P("Les projections, construites à partir des revenus réels de 2026 et d'hypothèses d'occupation prudentes, font passer les revenus totaux de " + moneyM(Y[0].total_revenus, 1) + " (soit " + money(M.reel_2026_total) + " d'hébergement enregistrés au système de réservation, plus la restauration et les activités) à " + moneyM(y5.total_revenus, 1) + " en cinq ans, avec une marge BAIIA de " + pct(y5.marge_baiia, 0) + " et un ratio de couverture du service de la dette de " + ratio(y5.dscr) + " en An 5. Le ratio prêt-valeur de " + pct(M.ltv, 0) + " procure au prêteur une sécurité exceptionnelle."),
   callout("Demande", [
     [run("Prêt à terme hypothécaire de premier rang de " + money(M.pret), { bold: true, size: 20 })],
     "Amortissement de 25 ans, moratoire de capital de 18 mois, décaissements par avancement des travaux.",

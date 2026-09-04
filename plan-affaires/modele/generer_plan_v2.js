@@ -236,8 +236,6 @@ children.push(
   P("Achèvement des 13 villas en construction, hivernisation des 16 chalets (isolation, chauffage, plomberie) et conversion de 40 terrains 3 services existants en contrats saisonniers. Le saisonnier est encaissé avant la saison, de janvier à mars : c'est le revenu qui sécurise le printemps."),
   H3("Développement futur"),
   P("L'achèvement de la piscine intérieure et un spa quatre saisons constituent la prochaine étape de développement du site, prévue en 2029 et financée séparément sur les résultats du présent projet. Ils ne sont pas comptés dans les projections."),
-  spacer(),
-  placeholder("Plan d'aménagement du site (2026)", 5600, CONTENT_W, "plan_site"),
   H2("3.4 Échéancier de réalisation"),
   ...figure("echeancier.png", 6.6, "Figure 1 – Échéancier de réalisation"),
   P("Les travaux se réalisent en basse saison, entre la clôture et juillet 2027, sans perturber l'exploitation estivale. Les unités Coolbox sont commandées à la clôture et livrées pour l'été. Les contrats saisonniers 2028 se vendent dès l'automne 2027."),
@@ -249,6 +247,19 @@ children.push(
   ]),
 
   P("Les autorisations, permis, documents et pièces complémentaires requis seront fournis et pris en considération aux étapes subséquentes du projet, au fur et à mesure de sa progression, en collaboration avec l'institution financière et les professionnels mandatés."),
+  H2("3.6 Plan d'aménagement du site"),
+  P("Le plan ci-dessous localise les installations existantes : l'hôtel et les condos (02) à l'entrée, la piscine centrale (06) avec la scène et le café cubain (08), la zone de restauration (09), les cabanas (14), les emplacements Coolbox et le terrain de volleyball (16), l'amphithéâtre (18), le chapiteau (19) et les secteurs de terrains desservis. Les travaux du projet portent sur l'hôtel, le restaurant, les villas, les chalets, les emplacements Coolbox et les terrains existants convertis en saisonniers."),
+  placeholder("Plan d'aménagement du site (2026)", 5600, CONTENT_W, "plan_site"),
+  spacer(80),
+  dataTable(["N°", "Installation", "N°", "Installation", "N°", "Installation"], [
+    ["01", "Accueil", "08", "Scène et café cubain", "15", "Toilettes et stationnement"],
+    ["02", "Hôtel, condos", "09", "Zone restauration", "16", "Coolbox et terrain de volleyball"],
+    ["03", "Parc, jeux pour enfants", "10", "Salle communautaire", "17", "Toilettes, douches, buanderie"],
+    ["04", "Kiosque de mangues", "11", "Dépanneur et cantine", "18", "Amphithéâtre"],
+    ["05", "Jeux d'eau", "12", "Soucoupe volante", "19", "Chapiteau"],
+    ["06", "Piscine", "13", "Location de triporteurs", "20", "Boutique Havana et informations"],
+    ["07", "Toilettes", "14", "Cabanas", "21", "Jeux gonflables"],
+  ], [500, 2716, 500, 2716, 500, 2716], { numericFrom: 99, fontSize: 16 }),
 );
 
 // --- 4. Marché ------------------------------------------------------------------------------------
@@ -292,12 +303,6 @@ children.push(
     ["Spas nordiques régionaux (Eastman, Bromont, Magog)", "Accès à la journée 65 $ à 80 $", "Repère tarifaire régional", "Spa intégré à un séjour, prix inférieur"],
     ["Hôtels et auberges de l'Estrie", "Chambres 3 étoiles", "Repère tarifaire de l'hôtel (190 $)", "Expérience immersive et activités sur place"],
   ], [2500, 2400, 2200, 2548], { numericFrom: 99, fontSize: 16 }),
-  H2("4.6 Positionnement"),
-  ...bullets([
-    [run("Un concept singulier depuis dix ans : ", { bold: true }), run("notoriété et clientèle qui revient (panier moyen +15 % en 2026).")],
-    [run("Un site de 274 acres : ", { bold: true }), run("la croissance se fait sur des emplacements déjà desservis, sans acquisition de terrain.")],
-    [run("Un produit hiver éprouvé (Coolbox) et un hôtel rouvert douze mois : ", { bold: true }), run("l'allongement de la saison ne repose pas sur un seul actif.")],
-  ]),
 );
 
 // --- 5. Commercialisation ----------------------------------------------------------------------------
@@ -403,8 +408,6 @@ children.push(
     ["Francis Tremblay – Coolbox HPA", "Partenaire industriel", "Unités quatre saisons, plateforme de vente, exploitation des 9 unités existantes"],
     ["Jean-Sébastien Tremblay – Construction Prospère", "Entrepreneur général", "Contrat à forfait, cautionnements, calendrier de chantier"],
   ], [2400, 2400, 4848], { numericFrom: 99, fontSize: 18 }),
-  spacer(),
-  placeholder("Photo de la famille fondatrice", 4200, CONTENT_W, "famille"),
   spacer(),
   H2("Conseillers externes"),
   ...bullets([

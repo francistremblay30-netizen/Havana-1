@@ -119,9 +119,5 @@
    "caption": "L'Aqua Bar, dans la piscine centrale"
   }
  ],
- "famille": {
-  "file": "famille-chaise-geante.jpg",
-  "kind": "natural",
-  "caption": "La famille fondatrice : Dominique, sa conjointe et leurs deux filles, sur la chaise géante « I ♥ Havana Resort »"
- }
+ "famille": null
 }
