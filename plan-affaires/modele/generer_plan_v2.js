@@ -551,7 +551,7 @@ children.push(
   dataTable(["Couche", "Montant", "Taux", "Amortissement", "Moratoire", "Paiement mensuel"], coucheRows, [3600, 1300, 900, 1200, 1100, 1548], { fontSize: 16 }),
   spacer(120),
   dataTable(["Service annuel par couche", ...heads5], serviceRows, W6, { totalRows: [serviceRows.length - 1], fontSize: 16 }),
-  spacer(120),
+  pageBreak(),
   dataTable(["Prêt senior", "Intérêts", "Capital", "Service", "Solde en fin d'année"], debtRows, [2000, 1900, 1900, 1900, 1948], { fontSize: 17 }),
   ...figure("dscr.png", 6.5, "Figure 5 – BAIIA, service de la dette et couverture"),
   pageBreak(),
