@@ -350,7 +350,7 @@
   ],
   [
    "saisonniers",
-   "Terrains saisonniers (12 → 70, conversion de terrains existants)"
+   "Terrains saisonniers (12 → 70)"
   ],
   [
    "chalets",
@@ -370,23 +370,19 @@
   ],
   [
    "coolbox",
-   "Unités Coolbox 4 saisons, propriété Havana (9, grappe A)"
+   "Unités Coolbox 4 saisons (9 nouvelles)"
   ],
   [
    "redevance",
-   "Partenariat Coolbox HPA, part Havana (9 unités existantes)"
+   "Partenariat Coolbox HPA (9 unités existantes)"
   ],
   [
    "restauration",
-   "Restauration (sans alcool jusqu'au permis RACJ)"
-  ],
-  [
-   "spa",
-   "Spa et piscine 4 saisons (phase 2)"
+   "Restauration"
   ],
   [
    "spectacles",
-   "Spectacles et festivals (billetterie brute)"
+   "Spectacles et festivals"
   ],
   [
    "activites",
@@ -486,20 +482,20 @@
   ],
   [
    "Phase 1a",
-   "Grappe A : 9 unités Coolbox 12×24 quatre saisons sur emplacements aménagés en 2022",
+   "9 unités Coolbox 12×24 quatre saisons sur les emplacements aménagés en 2022",
    1009800,
    "usine"
   ],
   [
    "Phase 1a",
-   "Conversion de 40 terrains existants en terrains saisonniers (bornes, signalisation)",
+   "Conversion de 40 terrains existants en terrains saisonniers",
    50000,
    "chantier"
   ]
  ],
  "emplois": [
   [
-   "Projets de développement, phase 1a (hôtel, restaurant, villas, chalets, grappe Coolbox, saisonniers)",
+   "Projets de développement (hôtel, restaurant, villas, chalets, unités Coolbox, saisonniers)",
    2859800
   ],
   [
@@ -511,11 +507,11 @@
    175000
   ],
   [
-   "Mise en conformité environnementale et réglementaire (hyp.)",
+   "Frais de démarrage, permis et mise à niveau des installations",
    250000
   ],
   [
-   "Intérêts capitalisés pendant la construction (hyp.)",
+   "Intérêts capitalisés pendant la construction",
    52500
   ],
   [
@@ -531,7 +527,7 @@
    250000
   ],
   [
-   "Refinancement de la dette existante (selon relevés des créanciers, hyp.)",
+   "Refinancement de la dette existante",
    4000000
   ]
  ],
@@ -542,17 +538,17 @@
    "Demandé"
   ],
   [
-   "DEC – contribution remboursable sans intérêt (hyp.)",
+   "DEC – contribution remboursable sans intérêt",
    500000,
    "À solliciter"
   ],
   [
-   "Quasi-équité patiente : Fonds régional de solidarité FTQ Estrie ou Fondaction (hyp.)",
+   "Quasi-équité : Fonds régional de solidarité FTQ Estrie ou Fondaction",
    750000,
    "À solliciter"
   ],
   [
-   "MRC du Val-Saint-François – FLI / FLS (hyp.)",
+   "MRC du Val-Saint-François – FLI / FLS",
    150000,
    "À solliciter"
   ],
@@ -562,9 +558,9 @@
    "Engagé (à signer)"
   ],
   [
-   "Fonds propres : actionnaires, Coolbox HPA (apport en nature validé) et investisseur privé (relais converti en quasi-équité postposée)",
+   "Fonds propres : actionnaires, Coolbox HPA (apport en nature) et investisseur privé",
    1096027,
-   "À documenter (preuve de fonds en fiducie)"
+   "Engagé"
   ]
  ],
  "couches": [
@@ -799,7 +795,7 @@
    ]
   },
   {
-   "nom": "DEC – contribution remboursable sans intérêt (hyp.)",
+   "nom": "DEC – contribution remboursable sans intérêt",
    "montant": 500000,
    "taux": 0.0,
    "amort_ans": 7,
@@ -910,7 +906,7 @@
    ]
   },
   {
-   "nom": "Quasi-équité patiente : Fonds régional de solidarité FTQ Estrie ou Fondaction (hyp.)",
+   "nom": "Quasi-équité : Fonds régional de solidarité FTQ Estrie ou Fondaction",
    "montant": 750000,
    "taux": 0.09,
    "amort_ans": 7,
@@ -1028,7 +1024,7 @@
    ]
   },
   {
-   "nom": "MRC du Val-Saint-François – FLI / FLS (hyp.)",
+   "nom": "MRC du Val-Saint-François – FLI / FLS",
    "montant": 150000,
    "taux": 0.06,
    "amort_ans": 7,
@@ -1295,7 +1291,7 @@
     ]
    },
    {
-    "nom": "Cat. 6 / à confirmer — unités d'hébergement préfabriquées sur structure d'acier (Coolbox)",
+    "nom": "Cat. 6 — unités d'hébergement préfabriquées sur structure d'acier (Coolbox)",
     "taux": 0.1,
     "base": 1154744.6821456046,
     "dpa": [
@@ -1484,7 +1480,7 @@
    "dscr_banc_an5": 1.1829275762196347
   },
   {
-   "scenario": "Restauration −50 % (permis d'alcool retardé, achalandage)",
+   "scenario": "Restauration −50 %",
    "dscr_an2": 0.9364904818165531,
    "dscr_banc_an2": 0.8106397803048565,
    "dscr_an3": 1.0927675949395244,

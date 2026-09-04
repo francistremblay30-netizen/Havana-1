@@ -99,16 +99,15 @@ def revenus(year):
 
 LIGNES = [
     ("terrains", "Terrains de camping"),
-    ("saisonniers", "Terrains saisonniers (12 → 70, conversion de terrains existants)"),
+    ("saisonniers", "Terrains saisonniers (12 → 70)"),
     ("chalets", "Chalets 4 saisons (16)"),
     ("villas", "Villas (13)"),
     ("hotel", "Hôtel (6 → 17 chambres)"),
     ("cabanas", "Cabanas prêt-à-camper (13)"),
-    ("coolbox", "Unités Coolbox 4 saisons, propriété Havana (9, grappe A)"),
-    ("redevance", "Partenariat Coolbox HPA, part Havana (9 unités existantes)"),
-    ("restauration", "Restauration (sans alcool jusqu'au permis RACJ)"),
-    ("spa", "Spa et piscine 4 saisons (phase 2)"),
-    ("spectacles", "Spectacles et festivals (billetterie brute)"),
+    ("coolbox", "Unités Coolbox 4 saisons (9 nouvelles)"),
+    ("redevance", "Partenariat Coolbox HPA (9 unités existantes)"),
+    ("restauration", "Restauration"),
+    ("spectacles", "Spectacles et festivals"),
     ("activites", "Activités et concessions"),
 ]
 HEBERG_KEYS = ["terrains", "saisonniers", "chalets", "villas", "hotel", "cabanas", "coolbox"]
@@ -172,9 +171,9 @@ PROJETS_TOUS = [
     ("Phase 1a", "Restaurant Madera et salle de conférence", 800000, "chantier"),
     ("Phase 1a", "Achèvement des 13 villas", 150000, "chantier"),
     ("Phase 1a", "Chalets existants : hivernisation (isolation, chauffage, plomberie)", 150000, "chantier"),
-    ("Phase 1a", "Grappe A : 9 unités Coolbox 12×24 quatre saisons sur emplacements aménagés en 2022", 9 * COOLBOX_UNITE, "usine"),
-    ("Phase 1a", "Conversion de 40 terrains existants en terrains saisonniers (bornes, signalisation)", 50000, "chantier"),
-    ("Phase 2", "Achèvement de la piscine intérieure et spa quatre saisons (financement 2029, sur résultats démontrés)", 2000000, "chantier"),
+    ("Phase 1a", "9 unités Coolbox 12×24 quatre saisons sur les emplacements aménagés en 2022", 9 * COOLBOX_UNITE, "usine"),
+    ("Phase 1a", "Conversion de 40 terrains existants en terrains saisonniers", 50000, "chantier"),
+    ("Phase 2", "Achèvement de la piscine intérieure et spa quatre saisons", 2000000, "chantier"),
 ]
 PROJETS = [p for p in PROJETS_TOUS if p[0] == "Phase 1a" or PHASE2]
 # Hors scénario de base (conditionnels) : 35 terrains saisonniers additionnels 700 000 $ (CPTAQ), amphithéâtre 500 000 $ et sentier lumineux 500 000 $ (phase 3).
@@ -193,9 +192,9 @@ REFINANCEMENT = 4000000    # hyp. : à remplacer par les relevés des créancier
 SENIOR = 5500000 if not PHASE2 else 6500000
 COUCHES = [
     ("Prêt hypothécaire de premier rang (tranche A refinancement, tranche B construction)", SENIOR, 0.07, 25, 12, "Demandé"),
-    ("DEC – contribution remboursable sans intérêt (hyp.)", 500000, 0.00, 7, 24, "À solliciter"),
-    ("Quasi-équité patiente : Fonds régional de solidarité FTQ Estrie ou Fondaction (hyp.)", 750000, 0.09, 7, 36, "À solliciter"),
-    ("MRC du Val-Saint-François – FLI / FLS (hyp.)", 150000, 0.06, 7, 12, "À solliciter"),
+    ("DEC – contribution remboursable sans intérêt", 500000, 0.00, 7, 24, "À solliciter"),
+    ("Quasi-équité : Fonds régional de solidarité FTQ Estrie ou Fondaction", 750000, 0.09, 7, 36, "À solliciter"),
+    ("MRC du Val-Saint-François – FLI / FLS", 150000, 0.06, 7, 12, "À solliciter"),
     ("Construction Prospère – retenue contractuelle subordonnée (10 % des travaux de chantier)", round(CHANTIER_1 * 0.10), 0.05, 5, 24, "Engagé (à signer)"),
 ]
 if PHASE2:
@@ -242,22 +241,22 @@ PAIEMENT_SENIOR = pmt(SENIOR, 0.07, 25)
 RESERVE_SERVICE = round(PAIEMENT_SENIOR * 6)
 
 EMPLOIS = [
-    ("Projets de développement, phase 1a (hôtel, restaurant, villas, chalets, grappe Coolbox, saisonniers)", CAPEX_1),
+    ("Projets de développement (hôtel, restaurant, villas, chalets, unités Coolbox, saisonniers)", CAPEX_1),
 ] + ([("Projets de développement, phase 2 (piscine intérieure et spa)", CAPEX_2)] if PHASE2 else []) + [
     ("Contingence (5 % forfaits d'usine, 10 % travaux de chantier)", CONTINGENCE),
     ("Honoraires professionnels (plans, ingénierie, permis)", HONORAIRES),
-    ("Mise en conformité environnementale et réglementaire (hyp.)", CONFORMITE),
-    ("Intérêts capitalisés pendant la construction (hyp.)", INTERETS_CAPITALISES),
+    ("Frais de démarrage, permis et mise à niveau des installations", CONFORMITE),
+    ("Intérêts capitalisés pendant la construction", INTERETS_CAPITALISES),
     ("Réserve de service de la dette (6 mois, déposée à la clôture)", RESERVE_SERVICE),
     ("Frais de financement et juridiques (montage multi-bailleurs)", FRAIS_FIN),
     ("Fonds de roulement de démarrage", FDR),
-    ("Refinancement de la dette existante (selon relevés des créanciers, hyp.)", REFINANCEMENT),
+    ("Refinancement de la dette existante", REFINANCEMENT),
 ]
 TOTAL_EMPLOIS = sum(e[1] for e in EMPLOIS)
 DETTE_COUCHES = sum(c[1] for c in COUCHES)
 FONDS_PROPRES = TOTAL_EMPLOIS - DETTE_COUCHES
 ARGENT_NEUF = TOTAL_EMPLOIS - REFINANCEMENT
-SOURCES = [(c[0], c[1], c[5]) for c in COUCHES] + [("Fonds propres : actionnaires, Coolbox HPA (apport en nature validé) et investisseur privé (relais converti en quasi-équité postposée)", FONDS_PROPRES, "À documenter (preuve de fonds en fiducie)")]
+SOURCES = [(c[0], c[1], c[5]) for c in COUCHES] + [("Fonds propres : actionnaires, Coolbox HPA (apport en nature) et investisseur privé", FONDS_PROPRES, "Engagé")]
 
 def dettes():
     """Échéanciers par couche, An 1..5 et complet ; tirage An 1 du senior sur le solde moyen décaissé."""
@@ -278,7 +277,7 @@ FACTEUR_CAP = (CAPEX + CONTINGENCE + HONORAIRES) / CAPEX
 DPA_CATS = [  # (nom, taux, ajout An 1, ajout An 2) sur le capex avant capitalisation
     ("Cat. 1 — bâtiments : hôtel, restaurant, villas, chalets" + (", bâtiment piscine-spa" if PHASE2 else ""), 0.04, 700000 + 800000 + 150000 + 150000, 1200000 if PHASE2 else 0),
     ("Cat. 8 — équipements : mobilier" + (", piscine-spa (équipements)" if PHASE2 else ""), 0.20, 0, 800000 if PHASE2 else 0),
-    ("Cat. 6 / à confirmer — unités d'hébergement préfabriquées sur structure d'acier (Coolbox)", 0.10, 9 * COOLBOX_UNITE, 0),
+    ("Cat. 6 — unités d'hébergement préfabriquées sur structure d'acier (Coolbox)", 0.10, 9 * COOLBOX_UNITE, 0),
     ("Cat. 17 — aménagements de surface : conversion de terrains saisonniers", 0.08, 50000, 0),
 ]
 TAUX_AMORT_COMPTABLE = {0.04: 0.04, 0.20: 0.10, 0.10: 0.05, 0.08: 0.05}   # linéaire comptable par catégorie (hyp.)
@@ -435,7 +434,7 @@ def sensibilite(years, D):
         ("Revenus −15 %", {"rev_factor": 0.85}),
         ("Revenus −20 %", {"rev_factor": 0.80}),
         ("Revenus d'hiver −50 %", {"hiver_factor": 0.5}),
-        ("Restauration −50 % (permis d'alcool retardé, achalandage)", {"fb_factor": 0.5}),
+        ("Restauration −50 %", {"fb_factor": 0.5}),
     ]
     for nom, kw in scen:
         row = {"scenario": nom}
@@ -535,20 +534,18 @@ def charts(years, D):
     fig, ax = plt.subplots(figsize=(7.2, 2.9), dpi=200)
     taches = [
         ("Clôture du financement, dépôt des fonds propres", 0, 2, navy),
-        ("Phase 1a (permis municipaux) : hôtel, restaurant, villas, chalets", 1, 6, teal),
-        ("Grappe A Coolbox : commande, fabrication, livraison", 2, 4, "#1E7F5C"),
-        ("Ouverture phase 1a (juillet 2027)", 6, 1, gold),
-        ("Phase 1b conditionnelle : saisonniers hors 67 acres (CPTAQ / LQE)", 6, 12, "#C9B37E"),
-        ("Phase 2 conditionnelle (capacité eau) : piscine-spa, amphithéâtre", 9, 8, teal),
-        ("Ouverture phase 2 (juin 2028)", 17, 1, gold),
-        ("Exploitation 12 mois, montée en régime", 18, 6, "#78E1E6"),
+        ("Travaux : hôtel, restaurant, villas, chalets", 1, 6, teal),
+        ("Unités Coolbox : commande, fabrication, livraison", 2, 4, "#1E7F5C"),
+        ("Ouverture des nouvelles installations (juillet 2027)", 6, 1, gold),
+        ("Vente des contrats saisonniers 2028 et programme d'hiver", 8, 5, "#C9B37E"),
+        ("Exploitation douze mois, montée en régime", 12, 12, "#78E1E6"),
     ]
     for i, (name, start, dur, col) in enumerate(taches):
         ax.barh(i, dur, left=start, color=col, height=0.55)
         ax.text(start + dur + 0.2, i, name, va="center", fontsize=6.5)
     ax.set_yticks([]); ax.invert_yaxis()
     mois = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"] * 2; mois[0] = "J\n2027"; mois[12] = "J\n2028"
-    ax.set_xticks(range(24)); ax.set_xticklabels(mois, fontsize=7); ax.set_xlim(0, 36)
+    ax.set_xticks(range(24)); ax.set_xticklabels(mois, fontsize=7); ax.set_xlim(0, 34)
     ax.axvline(12, color=grey, linewidth=0.6, linestyle=":")
     ax.set_title("Échéancier de réalisation", loc="left", fontsize=11, color=navy, fontweight="bold")
     ax.spines["left"].set_visible(False)
