@@ -107,21 +107,14 @@
   "kind": "portrait",
   "caption": "Contenu vidéo des réseaux sociaux : le train du resort"
  },
- "galerie": [
-  {
-   "file": "coolbox.jpg",
-   "kind": "pair",
-   "caption": "Les Coolbox, mini-maisons en conteneur"
-  },
-  {
-   "file": "aqua-bar.jpg",
-   "kind": "pair",
-   "caption": "L'Aqua Bar, dans la piscine centrale"
-  }
- ],
  "famille": {
   "file": "famille-chaise-geante.jpg",
   "kind": "natural",
   "caption": "La famille fondatrice : Dominique, sa conjointe et leurs deux filles, sur la chaise géante « I ♥ Havana Resort »"
+ },
+ "coolbox": {
+  "file": "coolbox.jpg",
+  "kind": "pair",
+  "caption": "Les Coolbox : l'hébergement insolite qui attire couples et jeunes adultes"
  }
 }

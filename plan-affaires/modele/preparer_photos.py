@@ -25,7 +25,7 @@ NAVY = (8, 52, 66)  # lagon profond
 DPI = 200
 SIZES = {
     "cover": (int(8.5 * DPI), int(11 * DPI)),
-    "banner": (int(8.5 * DPI), int(4.2 * DPI)),
+    "banner": (int(8.5 * DPI), int(3.7 * DPI)),
     "wide": (int(6.7 * DPI), int(6.7 * DPI * 9 / 16)),
     "pair": (int(3.3 * DPI), int(3.3 * DPI * 2 / 3)),
 }

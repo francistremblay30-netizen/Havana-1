@@ -42,9 +42,9 @@ const ratio = (x, dec = 2) => fmt(x, dec) + " x";
 const run = (text, opts = {}) => new TextRun({ text, font: FONT, size: 21, color: INK, ...opts });
 
 const P = (text, opts = {}) => {
-  const { bold, italics, color, size, align, before = 0, after = 120, keepNext, indent } = opts;
+  const { bold, italics, color, size, align, before = 0, after = 90, keepNext, indent } = opts;
   const runs = Array.isArray(text) ? text : [run(text, { bold, italics, color, size })];
-  return new Paragraph({ children: runs, alignment: align || AlignmentType.LEFT, spacing: { before, after, line: 276 }, keepNext, indent });
+  return new Paragraph({ children: runs, alignment: align || AlignmentType.LEFT, spacing: { before, after, line: 259 }, keepNext, indent });
 };
 
 const EMU = 914400;
@@ -64,15 +64,15 @@ const exactSpacer = (twips, extra = {}) => new Paragraph({ spacing: { before: 0,
 const chapter = (num, title, slot, lead) => {
   const meta = PHOTOS[slot];
   const out = [];
-  out.push(new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: meta ? [bleedImage(meta, 0.62, 8.5, 4.2)] : [] }));
-  out.push(exactSpacer(meta ? 3800 : 200));
+  out.push(new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: meta ? [bleedImage(meta, 0.62, 8.5, 3.7)] : [] }));
+  out.push(exactSpacer(meta ? 3150 : 200));
   out.push(new Paragraph({ children: [run(num, { bold: true, size: 26, color: meta ? GOLD : TEAL })], spacing: { before: 0, after: 60 } }));
   out.push(new Paragraph({
     heading: HeadingLevel.HEADING_1,
     children: [new TextRun({ text: title, font: FONT, size: 46, bold: true, color: meta ? WHITE : NAVY })],
     spacing: { before: 0, after: 0 },
   }));
-  out.push(exactSpacer(meta ? 1250 : 200));
+  out.push(exactSpacer(meta ? 1150 : 200));
   if (lead) out.push(LEAD(lead));
   return out;
 };
@@ -99,11 +99,11 @@ const LEAD = (text) => new Paragraph({
 
 const bullets = (items, ref = "puces") => items.map((t) => new Paragraph({
   children: Array.isArray(t) ? t : [run(t)],
-  numbering: { reference: ref, level: 0 }, spacing: { after: 80, line: 276 },
+  numbering: { reference: ref, level: 0 }, spacing: { after: 50, line: 259 },
 }));
 const numbered = (items) => items.map((t) => new Paragraph({
   children: Array.isArray(t) ? t : [run(t)],
-  numbering: { reference: "numeros", level: 0 }, spacing: { after: 80, line: 276 },
+  numbering: { reference: "numeros", level: 0 }, spacing: { after: 50, line: 259 },
 }));
 
 const border = (color = MID, size = 4) => ({ style: BorderStyle.SINGLE, size, color });
@@ -456,9 +456,9 @@ children.push(
   H3("Amphithéâtre et sentier lumineux"),
   P("L'amphithéâtre extérieur accueille spectacles, soirées cubaines et festivals ; le sentier lumineux, un parcours nocturne illuminé exploité d'octobre à avril, crée une raison de visiter le site en basse saison."),
   spacer(),
-  placeholder("Plan d'aménagement du site : localisation des phases 1 et 2 (hôtel, villas, terrains saisonniers, spa, amphithéâtre, sentier)", 5600, CONTENT_W, "plan_site"),
+  placeholder("Plan d'aménagement du site : localisation des phases 1 et 2 (hôtel, villas, terrains saisonniers, spa, amphithéâtre, sentier)", 4300, CONTENT_W, "plan_site"),
   H2("3.4 Échéancier de réalisation"),
-  ...figure("echeancier.png", 6.5, "Figure 1 – Échéancier des phases 1 et 2"),
+  ...figure("echeancier.png", 6.0, "Figure 1 – Échéancier des phases 1 et 2"),
   P("La phase 1 est réalisée en basse saison pour ne pas perturber l'exploitation estivale 2027. La phase 2 démarre à la fermeture de la saison 2027 et ouvre pour l'été 2028. La structure de financement proposée prévoit un moratoire de capital de 18 mois aligné sur cette séquence."),
   H2("3.5 Permis, réglementation et fournisseurs"),
   ...bullets([
@@ -482,7 +482,6 @@ children.push(
   P("[Insérer les statistiques les plus récentes de Camping Québec, de l'Institut de la statistique du Québec et de Tourisme Cantons-de-l'Est : nombre d'établissements, taux d'occupation moyen, dépenses touristiques régionales.]", { italics: true, color: GREY, size: 19 }),
   H2("4.2 La région des Cantons-de-l'Est"),
   P("Les Cantons-de-l'Est comptent parmi les régions touristiques les plus fréquentées du Québec, à moins de deux heures de Montréal et à proximité de Sherbrooke, de Granby et de la frontière américaine. La région est reconnue pour ses spas, ses vignobles, ses stations de ski et ses lacs, ce qui en fait une destination quatre saisons établie. Maricourt se situe au cœur de ce bassin, à distance de route d'environ 4,5 millions de personnes."),
-  placeholder("Carte de localisation : Maricourt, distances routières depuis Montréal, Sherbrooke, Drummondville, Granby et la frontière", 3000, CONTENT_W, "carte"),
   H2("4.3 Clientèle cible"),
   dataTable(
     ["Segment", "Profil", "Offre principale", "Saison"],
@@ -496,7 +495,6 @@ children.push(
     ],
     [2000, 2600, 3300, 1748], { numericFrom: 99 },
   ),
-
   H2("4.4 Concurrence"),
   P("Aucun établissement québécois n'offre une thématique cubaine intégrée. La concurrence est donc indirecte et se répartit en trois groupes."),
   dataTable(
@@ -550,7 +548,7 @@ children.push(
     [run("Partenariats : ", { bold: true }), run("Tourisme Cantons-de-l'Est, Camping Québec, associations de la communauté cubaine et latino-américaine, entreprises régionales pour les événements corporatifs.")],
     [run("Événements signature : ", { bold: true }), run("festival cubain estival, soirées à l'amphithéâtre, programmation hivernale du sentier lumineux.")],
   ]),
-  twoPlaceholders("Visuel de campagne", "Visuel de campagne", 3200, "promo_1", "promo_2"),
+  twoPlaceholders("Visuel de campagne", "Visuel de campagne", 2500, "promo_1", "promo_2"),
   P("Le budget de commercialisation est fixé à 3,5 % des revenus les deux premières années, puis à 3 %, conformément aux pratiques de l'industrie de l'hébergement."),
   H2("5.5 Objectifs commerciaux"),
   dataTable(
@@ -700,7 +698,7 @@ children.push(
   dataTable(["Emplois", "Montant", "Part"], emploisRows, [5600, 2200, 1848], { totalRows: [emploisRows.length - 1] }),
   spacer(120),
   dataTable(["Sources", "Montant", "Part"], sourcesRows, [5600, 2200, 1848], { totalRows: [sourcesRows.length - 1] }),
-  ...figure("sources_emplois.png", 6.2, "Figure 2 – Emplois et sources de financement"),
+  ...figure("sources_emplois.png", 5.8, "Figure 2 – Emplois et sources de financement"),
   H3("Structure de financement proposée"),
   dataTable(
     ["Modalité", "Proposition"],
@@ -718,30 +716,26 @@ children.push(
     [3000, 6648], { numericFrom: 99 },
   ),
   H2("8.3 État des résultats prévisionnels"),
-  ...figure("revenus.png", 6.5, "Figure 3 – Revenus par source, 2026 (réel) et An 1 à An 5"),
+  ...figure("revenus.png", 6.0, "Figure 3 – Revenus par source, 2026 (réel) et An 1 à An 5"),
   dataTable(["Revenus", ...yearHeads], revRows, W6, { totalRows: [revRows.length - 1], fontSize: 18 }),
   spacer(120),
   dataTable(["Charges d'exploitation", ...yearHeads], chRows, W6, { totalRows: [chRows.length - 1], fontSize: 18 }),
   spacer(120),
   dataTable(["Résultats", ...yearHeads], resRows, W6, { boldRows: [0, 6], fontSize: 18 }),
   spacer(),
-  ...figure("repartition.png", 6.2, "Figure 4 – Répartition des revenus : 2026 (réel) et An 5"),
+  ...figure("repartition.png", 5.8, "Figure 4 – Répartition des revenus : 2026 (réel) et An 5"),
   H2("8.4 Flux de trésorerie et service de la dette"),
   dataTable(["Flux de trésorerie", ...yearHeads], cfRows, W6, { boldRows: [5, 6], fontSize: 18 }),
   spacer(120),
   dataTable(["Échéancier du prêt", "Intérêts", "Capital", "Service total", "Solde en fin d'année"], debtRows, [2000, 1900, 1900, 1900, 1948]),
-  ...figure("dscr.png", 6.5, "Figure 5 – BAIIA, service de la dette et ratio de couverture"),
+  ...figure("dscr.png", 6.0, "Figure 5 – BAIIA, service de la dette et ratio de couverture"),
   H2("8.5 Ratios financiers"),
   dataTable(["Ratio", ...yearHeads], ratioRows, W6, { boldRows: [0] }),
-  spacer(),
-  callout("Lecture des ratios", [
-    "Le ratio de couverture du service de la dette atteint " + ratio(y1.dscr) + " en An 1 (intérêts seulement) et " + ratio(Y[2].dscr) + " en An 2, première année de remboursement de capital, puis dépasse 1,75 x à compter de l'An 3. Le ratio prêt-valeur de " + pct(M.ltv, 0) + " à la clôture et la dette à terme ramenée à " + ratio(y5.solde_dette / y5.baiia, 1) + " le BAIIA en An 5 situent le dossier dans les normes de prudence des institutions financières pour l'hébergement touristique.",
-  ]),
   H2("8.6 Analyse de sensibilité"),
   P("Le tableau suivant mesure le ratio de couverture si les revenus étaient inférieurs aux projections, en supposant que 60 % des charges sont variables et que les charges fixes demeurent inchangées."),
   dataTable(["Scénario", "DSCR An 2", "DSCR An 3", "DSCR An 5"], sensRows, [3600, 2000, 2000, 2048], { boldRows: [0] }),
   spacer(),
-  P("Même avec des revenus inférieurs de 15 % aux projections, le ratio de couverture demeure au-dessus de 1,25 x dès l'An 3 et au-dessus de 1,65 x en An 5. L'An 2 est l'année charnière : la trésorerie dégagée en An 1, la mise de fonds et la valeur du site couvrent ce risque de transition. La direction propose en outre de constituer une réserve de service de la dette équivalant à trois mois de paiements à même les flux de l'An 1."),
+  P("Même avec des revenus inférieurs de 15 % aux projections, le ratio de couverture demeure au-dessus de 1,25 x dès l'An 3. L'An 2 est l'année charnière : la trésorerie dégagée en An 1, la mise de fonds et la valeur du site couvrent ce risque, et la direction constituera une réserve de service de la dette de trois mois à même les flux de l'An 1."),
   H2("8.7 Seuil de rentabilité"),
   P("À maturité (An 3), les charges fixes (salaires de base, énergie, assurances, taxes, loyers, administration, soit environ 40 % des charges) et le service de la dette totalisent environ " + moneyM(Y[3].total_charges * 0.4 + Y[3].service_dette, 2) + ". Avec une marge sur charges variables d'environ 59 %, le seuil de rentabilité en trésorerie se situe autour de " + moneyM((Y[3].total_charges * 0.4 + Y[3].service_dette) / (1 - (Y[3].total_charges * 0.6 / Y[3].total_revenus)), 1) + " de revenus, soit " + pct(((Y[3].total_charges * 0.4 + Y[3].service_dette) / (1 - (Y[3].total_charges * 0.6 / Y[3].total_revenus))) / Y[3].total_revenus, 0) + " des revenus projetés de l'An 3."),
   H2("8.8 États financiers historiques"),
@@ -806,9 +800,7 @@ children.push(
     ],
     [1000, 6600, 2048], { numericFrom: 99 },
   ),
-  spacer(),
-  P("Annexe F – Autres photos du site", { bold: true, color: NAVY }),
-  ...gallery(PHOTOS.galerie, "Annexe F – Galerie photos : hébergements, piscine, animation, restauration, vues du site en quatre saisons"),
+
 );
 
 // --- Quatrième de couverture -----------------------------------------------------------------

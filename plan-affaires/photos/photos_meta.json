@@ -16,77 +16,77 @@
  "ban_1": {
   "file": "photos/prepare/piscine-plage-palapas-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_2": {
   "file": "photos/prepare/pavillon-accueil-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_3": {
   "file": "photos/prepare/piscine-fete-mousse-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_4": {
   "file": "photos/prepare/lac-plage-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_5": {
   "file": "photos/prepare/spectacle-scene-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_6": {
   "file": "photos/prepare/kiosques-restauration-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_7": {
   "file": "photos/prepare/equipe-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_8": {
   "file": "photos/prepare/terrains-vue-aerienne-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_9": {
   "file": "photos/prepare/train-coucher-de-soleil-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_10": {
   "file": "photos/prepare/piscine-vue-aerienne-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
  "ban_annexes": {
   "file": "photos/prepare/hotel-arriere-banner.jpg",
   "width": 1700,
-  "height": 840,
+  "height": 740,
   "kind": "banner",
   "caption": ""
  },
@@ -146,27 +146,18 @@
   "kind": "portrait",
   "caption": "Contenu vidéo des réseaux sociaux : le train du resort"
  },
- "galerie": [
-  {
-   "file": "photos/prepare/coolbox-pair.jpg",
-   "width": 660,
-   "height": 440,
-   "kind": "pair",
-   "caption": "Les Coolbox, mini-maisons en conteneur"
-  },
-  {
-   "file": "photos/prepare/aqua-bar-pair.jpg",
-   "width": 660,
-   "height": 440,
-   "kind": "pair",
-   "caption": "L'Aqua Bar, dans la piscine centrale"
-  }
- ],
  "famille": {
   "file": "photos/prepare/famille-chaise-geante-natural.jpg",
   "width": 447,
   "height": 447,
   "kind": "natural",
   "caption": "La famille fondatrice : Dominique, sa conjointe et leurs deux filles, sur la chaise géante « I ♥ Havana Resort »"
+ },
+ "coolbox": {
+  "file": "photos/prepare/coolbox-pair.jpg",
+  "width": 660,
+  "height": 440,
+  "kind": "pair",
+  "caption": "Les Coolbox : l'hébergement insolite qui attire couples et jeunes adultes"
  }
 }
