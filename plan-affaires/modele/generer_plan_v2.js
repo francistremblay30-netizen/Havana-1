@@ -33,7 +33,9 @@ const run = (text, opts = {}) => new TextRun({ text, font: FONT, size: 21, color
 const P = (text, opts = {}) => { const { bold, italics, color, size, align, before = 0, after = 120, keepNext, indent } = opts; const runs = Array.isArray(text) ? text : [run(text, { bold, italics, color, size })]; return new Paragraph({ children: runs, alignment: align || AlignmentType.LEFT, spacing: { before, after, line: 276 }, keepNext, indent }); };
 const NOTE = (text) => P(text, { italics: true, color: GREY, size: 18 });
 const EMU = 914400;
-const bleedImage = (meta, topIn, widthIn, heightIn) => new ImageRun({ type: "jpg", data: fs.readFileSync(path.join(HERE, "..", meta.file)), transformation: { width: Math.round(widthIn * 96), height: Math.round(heightIn * 96) }, floating: { horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: 0 }, verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: Math.round(topIn * EMU) }, behindDocument: true, allowOverlap: true, lockAnchor: true, layoutInCell: false, wrap: { type: TextWrappingType.NONE } } });
+// photos_meta.json est produit sous Windows : normaliser les séparateurs de chemin.
+const photoPath = (meta) => path.join(HERE, "..", ...meta.file.split(/[\\/]/));
+const bleedImage = (meta, topIn, widthIn, heightIn) => new ImageRun({ type: "jpg", data: fs.readFileSync(photoPath(meta)), transformation: { width: Math.round(widthIn * 96), height: Math.round(heightIn * 96) }, floating: { horizontalPosition: { relative: HorizontalPositionRelativeFrom.PAGE, offset: 0 }, verticalPosition: { relative: VerticalPositionRelativeFrom.PAGE, offset: Math.round(topIn * EMU) }, behindDocument: true, allowOverlap: true, lockAnchor: true, layoutInCell: false, wrap: { type: TextWrappingType.NONE } } });
 const exactSpacer = (twips, extra = {}) => new Paragraph({ spacing: { before: 0, after: 0, line: twips, lineRule: LineRuleType.EXACT }, children: [], ...extra });
 const LEAD = (text) => new Paragraph({ children: [new TextRun({ text, font: "Georgia", size: 25, italics: true, color: TEAL })], spacing: { before: 0, after: 240, line: 300 } });
 const chapter = (num, title, slot, lead) => { const meta = PHOTOS[slot]; const out = []; out.push(new Paragraph({ pageBreakBefore: true, spacing: { before: 0, after: 0, line: 20, lineRule: LineRuleType.EXACT }, children: meta ? [bleedImage(meta, 0.62, 8.5, 4.2)] : [] })); out.push(exactSpacer(meta ? 3800 : 200)); out.push(new Paragraph({ children: [run(num, { bold: true, size: 26, color: meta ? GOLD : TEAL })], spacing: { before: 0, after: 60 } })); out.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun({ text: title, font: FONT, size: 46, bold: true, color: meta ? WHITE : NAVY })], spacing: { before: 0, after: 0 } })); out.push(exactSpacer(meta ? 1250 : 200)); if (lead) out.push(LEAD(lead)); return out; };
@@ -48,12 +50,12 @@ const cell = (content, width, opts = {}) => { const { fill, align, bold, color, 
 const dataTable = (headers, rows, widths, opts = {}) => { const { numericFrom = 1, totalRows = [], boldRows = [], subheadRows = [], fontSize = 19 } = opts; const total = widths.reduce((a, b) => a + b, 0); const head = new TableRow({ tableHeader: true, children: headers.map((h, i) => cell(h, widths[i], { fill: NAVY, color: WHITE, bold: true, size: fontSize, align: i >= numericFrom ? AlignmentType.RIGHT : AlignmentType.LEFT })) }); const body = rows.map((r, ri) => { const isTotal = totalRows.includes(ri), isBold = boldRows.includes(ri), isSub = subheadRows.includes(ri); const fill = isTotal ? MID : isSub ? "E3F4F5" : ri % 2 === 1 ? LIGHT : WHITE; return new TableRow({ cantSplit: true, children: r.map((v, i) => cell(v, widths[i], { fill, bold: isTotal || isBold || isSub, size: fontSize, color: isSub ? NAVY : INK, align: i >= numericFrom ? AlignmentType.RIGHT : AlignmentType.LEFT })) }); }); return new Table({ rows: [head, ...body], width: { size: total, type: WidthType.DXA }, columnWidths: widths, borders: { top: noBorder, bottom: border(NAVY, 8), left: noBorder, right: noBorder, insideHorizontal: border(MID, 4), insideVertical: noBorder } }); };
 const kpiRow = (items) => { const w = Math.floor(CONTENT_W / items.length); return new Table({ rows: [new TableRow({ children: items.map(({ label, value }) => new TableCell({ width: { size: w, type: WidthType.DXA }, shading: { type: ShadingType.CLEAR, fill: LIGHT, color: "auto" }, borders: { top: border(TEAL, 18), bottom: noBorder, left: noBorder, right: { style: BorderStyle.SINGLE, size: 6, color: WHITE } }, margins: { top: 120, bottom: 120, left: 120, right: 120 }, children: [new Paragraph({ children: [run(value, { bold: true, size: 34, color: NAVY })], spacing: { after: 40 } }), new Paragraph({ children: [run(label, { size: 17, color: GREY })], spacing: { after: 0 } })] })) })], width: { size: w * items.length, type: WidthType.DXA }, columnWidths: items.map(() => w) }); };
 const callout = (title, lines, accent = TEAL) => new Table({ rows: [new TableRow({ children: [new TableCell({ width: { size: CONTENT_W, type: WidthType.DXA }, shading: { type: ShadingType.CLEAR, fill: LIGHT, color: "auto" }, borders: { left: border(accent, 24), top: noBorder, bottom: noBorder, right: noBorder }, margins: { top: 120, bottom: 120, left: 200, right: 160 }, children: [new Paragraph({ children: [run(title, { bold: true, color: NAVY, size: 21 })], spacing: { after: 80 } }), ...lines.map((l) => new Paragraph({ children: Array.isArray(l) ? l : [run(l, { size: 20 })], spacing: { after: 60, line: 264 } }))] })] })], width: { size: CONTENT_W, type: WidthType.DXA }, columnWidths: [CONTENT_W] });
-const photoRun = (meta, maxWDxa, maxHDxa) => { const data = fs.readFileSync(path.join(HERE, "..", meta.file)); const maxW = maxWDxa / 1440 * 96, maxH = maxHDxa / 1440 * 96; const scale = Math.min(maxW / meta.width, maxH / meta.height); return new ImageRun({ type: "jpg", data, transformation: { width: Math.round(meta.width * scale), height: Math.round(meta.height * scale) } }); };
+const photoRun = (meta, maxWDxa, maxHDxa) => { const data = fs.readFileSync(photoPath(meta)); const maxW = maxWDxa / 1440 * 96, maxH = maxHDxa / 1440 * 96; const scale = Math.min(maxW / meta.width, maxH / meta.height); return new ImageRun({ type: "jpg", data, transformation: { width: Math.round(meta.width * scale), height: Math.round(meta.height * scale) } }); };
 const photoCell = (meta, width, height, fallbackCaption) => { if (meta) { return new TableCell({ width: { size: width, type: WidthType.DXA }, borders: borders(noBorder), verticalAlign: VerticalAlign.CENTER, margins: { top: 0, bottom: 0, left: 0, right: 0 }, children: [new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 60 }, children: [photoRun(meta, width, height)] }), new Paragraph({ alignment: AlignmentType.LEFT, spacing: { after: 0, line: 240 }, border: { top: { color: TEAL, size: 6, style: BorderStyle.SINGLE, space: 3 } }, children: [run(meta.caption || "", { size: 16, color: GREY })] })] }); } return new TableCell({ width: { size: width, type: WidthType.DXA }, shading: { type: ShadingType.CLEAR, fill: "F7F8FA", color: "auto" }, borders: borders({ style: BorderStyle.DASHED, size: 8, color: GREY }), verticalAlign: VerticalAlign.CENTER, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [run("IMAGE À INSÉRER", { bold: true, color: GREY, size: 18 })], spacing: { after: 60 } }), new Paragraph({ alignment: AlignmentType.CENTER, children: [run(fallbackCaption, { italics: true, color: GREY, size: 19 })], spacing: { after: 0 } })] }); };
 const placeholder = (caption, height = 2400, width = CONTENT_W, slot = null) => { const meta = slot ? PHOTOS[slot] : null; return new Table({ rows: [new TableRow({ height: meta ? undefined : { value: height, rule: "atLeast" }, children: [photoCell(meta, width, height, caption)] })], width: { size: width, type: WidthType.DXA }, columnWidths: [width], borders: borders(noBorder) }); };
 const twoPlaceholders = (c1, c2, height = 2200, slot1 = null, slot2 = null) => { const w = Math.floor((CONTENT_W - 200) / 2); const gap = new TableCell({ width: { size: 200, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] }); const m1 = slot1 ? PHOTOS[slot1] : null, m2 = slot2 ? PHOTOS[slot2] : null; return new Table({ rows: [new TableRow({ height: (m1 && m2) ? undefined : { value: height, rule: "atLeast" }, children: [photoCell(m1, w, height, c1), gap, photoCell(m2, w, height, c2)] })], width: { size: w * 2 + 200, type: WidthType.DXA }, columnWidths: [w, 200, w], borders: borders(noBorder) }); };
 const gallery = (items, fallbackCaption, height = 3600) => { if (!items || !items.length) return [placeholder(fallbackCaption, height)]; const w = Math.floor((CONTENT_W - 200) / 2), rowH = 3600; const rows = []; for (let i = 0; i < items.length; i += 2) { const cells = [photoCell(items[i], w, rowH, "")]; cells.push(new TableCell({ width: { size: 200, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] })); cells.push(items[i + 1] ? photoCell(items[i + 1], w, rowH, "") : new TableCell({ width: { size: w, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] })); rows.push(new TableRow({ cantSplit: true, children: cells })); rows.push(new TableRow({ height: { value: 160, rule: "exact" }, children: [new TableCell({ columnSpan: 3, width: { size: w * 2 + 200, type: WidthType.DXA }, borders: borders(noBorder), children: [new Paragraph("")] })] })); } return [new Table({ rows, width: { size: w * 2 + 200, type: WidthType.DXA }, columnWidths: [w, 200, w], borders: borders(noBorder) })]; };
-const figure = (file, widthIn, caption) => { const data = fs.readFileSync(path.join(HERE, CH, file)); const dims = { "revenus.png": [7.2, 3.6], "dscr.png": [7.2, 3.4], "sources_emplois.png": [7.2, 3.8], "repartition.png": [7.2, 3.4], "echeancier.png": [7.2, 2.9] }[file]; const w = Math.round(widthIn * 96), h = Math.round(widthIn * dims[1] / dims[0] * 96); return [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 120, after: 40 }, children: [new ImageRun({ type: "png", data, transformation: { width: w, height: h } })] }), new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 }, children: [run(caption, { italics: true, size: 17, color: GREY })] })]; };
+const figure = (file, widthIn, caption) => { const data = fs.readFileSync(path.join(HERE, CH, file)); const dims = { "revenus.png": [7.2, 3.6], "dscr.png": [7.2, 3.4], "sources_emplois.png": [7.2, 3.8], "repartition.png": [7.2, 3.4], "echeancier.png": [7.2, 2.9], "saisons.png": [7.2, 3.2] }[file]; const w = Math.round(widthIn * 96), h = Math.round(widthIn * dims[1] / dims[0] * 96); return [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 120, after: 40 }, children: [new ImageRun({ type: "png", data, transformation: { width: w, height: h } })] }), new Paragraph({ alignment: AlignmentType.CENTER, spacing: { after: 200 }, children: [run(caption, { italics: true, size: 17, color: GREY })] })]; };
 const spacer = (after = 120) => new Paragraph({ spacing: { after } });
 const pageBreak = () => new Paragraph({ children: [new PageBreak()] });
 
@@ -397,6 +399,53 @@ children.push(
   P("Les 20 unités Coolbox appartiennent à Havana et entrent dans l'hypothèque mobilière. Elles sont vendues par la plateforme reservationcoolbox.ca et par les canaux du site ; le ménage, l'accueil et l'entretien courant sont assurés par les équipes de Havana, l'entretien du fabricant et la garantie par Coolbox HPA."),
 );
 
+// --- 6.6 Le compte de l'hiver ---
+const S = M.saisons, HSAI = M.hypotheses_saison;
+const s1 = S[1], s3 = S[3], s5 = S[5];
+const hiverRows = M.lignes
+  .filter(([k]) => s5.revenus_hiver_lignes[k] > 1000)
+  .sort((a, b) => s5.revenus_hiver_lignes[b[0]] - s5.revenus_hiver_lignes[a[0]])
+  .map(([k, nom]) => [
+    nom,
+    money(s3.revenus_hiver_lignes[k]),
+    money(s5.revenus_hiver_lignes[k]),
+    pct(s5.revenus_hiver_lignes[k] / Y[5].revenus[k], 0),
+  ]);
+hiverRows.push(["Total des revenus d'hiver", money(s3.revenus_hiver), money(s5.revenus_hiver), pct(s5.part_hiver, 0)]);
+children.push(
+  H2("6.6 L'hiver : ce qu'il rapporte et ce qu'il coûte"),
+  P("L'exploitation douze mois est le cœur du projet ; c'est aussi ce qu'un prêteur doit pouvoir vérifier ligne par ligne. Les revenus et les charges ont donc été découpés en deux périodes : l'été, du 15 mai au 15 octobre (184 jours), et l'hiver, du 16 octobre au 14 mai (181 jours) — les mêmes 184 et 181 jours que la projection de revenus par unité. La règle d'imputation retenue est celle du surcoût marginal : l'hiver ne porte que les charges qui n'existeraient pas si le site fermait en octobre. Les taxes, les assurances, les loyers et les honoraires comptables sont engagés dans les deux cas et ne lui sont pas imputés."),
+  ...figure("saisons.png", 6.5, "Figure 2 – Revenus par saison"),
+  H3("Le compte de l'hiver"),
+  dataTable(["", ...heads5], [
+    ["Revenus d'hiver", ...[1, 2, 3, 4, 5].map((i) => money(S[i].revenus_hiver))],
+    ["Part des revenus de l'année", ...[1, 2, 3, 4, 5].map((i) => pct(S[i].part_hiver, 0))],
+    ["Charges variables d'hiver", ...[1, 2, 3, 4, 5].map((i) => money(-S[i].charges_hiver_variables))],
+    ["Surcoûts fixes d'hiver", ...[1, 2, 3, 4, 5].map((i) => money(-S[i].charges_hiver_fixes))],
+    ["Contribution de l'hiver au BAIIA", ...[1, 2, 3, 4, 5].map((i) => money(S[i].contribution_hiver))],
+    ["Point mort : revenus d'hiver minimaux (% du projeté)", ...[1, 2, 3, 4, 5].map((i) => S[i].point_mort === null ? "—" : pct(S[i].point_mort, 0))],
+  ], W6, { totalRows: [4], fontSize: 17 }),
+  NOTE("La dernière ligne est le point mort : le pourcentage des revenus d'hiver projetés en deçà duquel l'hiver cesse de contribuer. À compter de l'An 3, les revenus d'hiver peuvent manquer leur cible de " + pct(1 - s3.point_mort, 0) + " et l'hiver reste positif."),
+  P("L'An 1 est le seul exercice où l'hiver est déficitaire, de " + money(-s1.contribution_hiver) + " : les chalets ne sont hivernisés qu'à l'automne 2027 et ne sont donc louables qu'en novembre et décembre, l'hôtel vient d'ouvrir et les surcoûts de chauffage et de déneigement sont engagés pour une saison complète. Dès l'An 2, l'hiver contribue " + money(S[2].contribution_hiver) + ", puis " + money(s5.contribution_hiver) + " en An 5, soit une marge de " + pct(s5.marge_contribution, 0) + " sur les revenus qu'il génère."),
+  H3("D'où viennent les revenus d'hiver"),
+  dataTable(["Source", "An 3 – 2029", "An 5 – 2031", "Part d'hiver de la ligne"], hiverRows, [3900, 1750, 1750, 2248], { totalRows: [hiverRows.length - 1], fontSize: 17 }),
+  NOTE("La dernière colonne indique quelle fraction de chaque ligne de revenus est réalisée en période hivernale. Les terrains de camping, les terrains saisonniers, les cabanas prêt-à-camper et les spectacles sont comptés à 100 % en été."),
+  H3("Base de calcul"),
+  ...bullets([
+    [run("Nuitées calculées directement : ", { bold: true }), run("chalets, villas et unités Coolbox sont projetés sur 181 nuits d'hiver aux taux d'occupation hivernaux de la section 5.6 et aux tarifs hors saison de la section 5.1.")],
+    [run("Hôtel : ", { bold: true }), run("hyp. " + pct(HSAI.part_hiver.hotel, 0) + " des nuitées en période hivernale, sous la part calendaire de 50 %, conformément au profil régional (occupation hôtelière des Cantons-de-l'Est d'environ 42 % l'hiver).")],
+    [run("Restauration et bars : ", { bold: true }), run("hyp. " + pct(HSAI.part_hiver.restauration, 0) + ", le restaurant Madera étant ouvert douze mois et servant aussi une clientèle régionale de jour.")],
+    [run("Énergie : ", { bold: true }), run("hyp. " + pct(HSAI.energie_ouvert, 0) + " de la facture annuelle consommée de novembre à avril, moins " + pct(HSAI.energie_ferme, 0) + " de hors-gel et de maintien des bâtiments qu'il faudrait payer même en fermant. Surcoût net imputé à l'hiver : " + money(s3.surcout_energie) + " en An 3.")],
+    [run("Salaires : ", { bold: true }), run("effectifs de la section 6.2 (" + HSAI.etp_hiver + " ETP l'hiver contre " + HSAI.etp_ete + " l'été), moins un noyau de " + HSAI.etp_noyau + " ETP (direction, finances, surveillance des infrastructures) payé à l'année que le site ouvre ou non. Masse salariale imputée à l'hiver : " + money(s3.salaires_hiver) + " en An 3.")],
+    [run("Déneigement et entretien d'hiver : ", { bold: true }), run(pct(HSAI.surcout_fixe.entretien, 0) + " de la part fixe de l'entretien (chemins, toitures) et " + pct(HSAI.surcout_fixe.vehicules, 0) + " de celle des véhicules (chargeur, souffleuse, carburant).")],
+  ]),
+  callout("Ce que l'hiver change pour le prêteur", [
+    "L'hiver n'est pas un pari sur un revenu additionnel : c'est ce qui transforme un actif saisonnier en actif exploité douze mois. Il porte " + pct(s5.part_hiver, 0) + " des revenus à maturité et " + money(s5.contribution_hiver) + " de BAIIA.",
+    "Le scénario de stress « revenus d'hiver −50 % » de la section 8.7 utilise exactement la définition ci-dessus. Le DSCR bancaire y tombe à " + ratio(M.sensibilite.find((x) => x.scenario === "Revenus d'hiver −50 %").dscr_banc_an3) + " en An 3 : la dette reste servie, mais sous le seuil de 1,25 x. C'est précisément le scénario que couvrent la réserve de service de " + money(M.reserve_service) + " (six paiements du prêt senior) et le report du développement de la phase 2.",
+    "Les surcoûts d'hiver sont déjà inscrits aux charges des projections (énergie, salaires, entretien, véhicules) ; la section 6.6 les isole, elle n'en ajoute pas.",
+  ], GOLD),
+);
+
 // --- 7. Équipe -------------------------------------------------------------------------------------------
 children.push(
   ...chapter("07", "Équipe de direction et partenaires", "ban_7", "Une direction renouvelée, la famille fondatrice, et deux partenaires industriels qui construisent et exploitent déjà sur le site."),
@@ -512,7 +561,7 @@ children.push(
   spacer(120),
   dataTable(["Sources", "Montant", "Part", "Statut"], sourcesRows, [4700, 1500, 900, 2548], { totalRows: [sourcesRows.length - 1], fontSize: 16 }),
   NOTE("Argent neuf (emplois hors refinancement) : " + money(M.argent_neuf) + " ; fonds propres : " + money(M.fonds_propres) + ", soit " + pct(M.pct_fonds_propres_argent_neuf, 0) + ". Les couches marquées « à solliciter » sont déposées en parallèle de la présente demande."),
-  ...figure("sources_emplois.png", 6.4, "Figure 2 – Emplois et sources de financement"),
+  ...figure("sources_emplois.png", 6.4, "Figure 3 – Emplois et sources de financement"),
   H3("Capacité d'endettement senior (An 3)"),
   dataTable(["Méthode", "Montant"], [
     ["Service de la dette couvert 1,25 fois par le BAIIA moins maintien (7 %, 25 ans)", money(cap.methode_dscr_125)],
@@ -533,14 +582,14 @@ children.push(
     ["Engagements financiers", "Aucun test avant l'exercice 2029 ; ensuite couverture bancaire ≥ 1,25 sur douze mois glissants ; dette / avoir ≤ 3,0 ; blocage des dividendes et des frais de gestion aux parties liées tant que la couverture est < 1,35 ; états financiers audités ; rapports trimestriels"],
   ], [2800, 6848], { numericFrom: 99, fontSize: 17 }),
   H2("8.3 État des résultats prévisionnels"),
-  ...figure("revenus.png", 6.5, "Figure 3 – Revenus par source, 2026 et An 1 à An 5"),
+  ...figure("revenus.png", 6.5, "Figure 4 – Revenus par source, 2026 et An 1 à An 5"),
   dataTable(["Revenus", ...heads6], revRows, W7, { totalRows: [revRows.length - 1], fontSize: 15 }),
   spacer(120),
   dataTable(["Charges d'exploitation", ...heads6], chRows, W7, { totalRows: [chRows.length - 1], fontSize: 15 }),
   spacer(120),
   dataTable(["Résultats", ...heads6], resRows, W7, { boldRows: [0, 6], fontSize: 16 }),
   NOTE("2026 : exercice de transition, charges du budget de la direction et dette existante en intérêts seulement."),
-  ...figure("repartition.png", 6.2, "Figure 4 – Répartition des revenus : 2026 et An 5"),
+  ...figure("repartition.png", 6.2, "Figure 5 – Répartition des revenus : 2026 et An 5"),
   H2("8.4 Flux de trésorerie et service de la dette"),
   dataTable(["Flux de trésorerie (méthode indirecte)", ...heads6], cfRows, W7, { boldRows: [2, 5, 6], fontSize: 15 }),
   spacer(120),
@@ -551,7 +600,7 @@ children.push(
   dataTable(["Service annuel par couche", ...heads5], serviceRows, W6, { totalRows: [serviceRows.length - 1], fontSize: 16 }),
   pageBreak(),
   dataTable(["Prêt senior", "Intérêts", "Capital", "Service", "Solde en fin d'année"], debtRows, [2000, 1900, 1900, 1900, 1948], { fontSize: 17 }),
-  ...figure("dscr.png", 6.5, "Figure 5 – BAIIA, service de la dette et couverture"),
+  ...figure("dscr.png", 6.5, "Figure 6 – BAIIA, service de la dette et couverture"),
   pageBreak(),
   H2("8.5 Bilan prévisionnel (pro forma)"),
   P("Le bilan est établi au coût : immobilisations existantes au coût des investissements réalisés (" + money(M.immo_existantes_cout) + ", annexe A) moins un amortissement cumulé de " + money(M.amort_cumule_2026) + ", dette existante refinancée, fonds propres injectés. Il balance chaque année."),

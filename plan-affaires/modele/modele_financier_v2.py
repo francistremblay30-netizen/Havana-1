@@ -115,6 +115,8 @@ HEBERG_KEYS = ["terrains", "saisonniers", "chalets", "villas", "hotel", "cabanas
 # ---------------------------------------------------------------------------
 # Charges
 # ---------------------------------------------------------------------------
+ENERGIE = {0: 242500, 1: 275000, 2: 400000, 3: 420000, 4: 435000, 5: 450000}
+
 def charges(year, r):
     tot = sum(r.values())
     c = {}
@@ -123,7 +125,7 @@ def charges(year, r):
     c["commissions"] = (r["hotel"] + r["villas"] + r["coolbox"]) * 0.40 * 0.15  # 40 % des nuitées via plateformes à 15 % (hyp.)
     sal_pct = {0: 0.39, 1: 0.36, 2: 0.34, 3: 0.32, 4: 0.31, 5: 0.30}[year]   # 30 % à maturité = normalisation Grenier 2021
     c["salaires"] = tot * sal_pct
-    c["energie"] = {0: 242500, 1: 275000, 2: 400000, 3: 420000, 4: 435000, 5: 450000}[year]
+    c["energie"] = ENERGIE[year]
     c["entretien"] = tot * 0.08                                              # norme Grenier 2021 (8 %)
     c["vehicules"] = 88500 * (1 + INFL) ** year                             # budget de la direction 2026
     c["marketing"] = tot * ({0: 0.03, 1: 0.035, 2: 0.035, 3: 0.03, 4: 0.03, 5: 0.03}[year])
@@ -411,12 +413,8 @@ def sensibilite(years, D):
     def recompute(y, rev_factor=1.0, hiver_factor=1.0, fb_factor=1.0, service_factor=1.0, service_add=0.0):
         yr = years[y]
         r = dict(yr["revenus"])
-        # hiver : part hivernale des chalets, villas, coolbox, hôtel (hyp. 30 % de l'hôtel), spa (50 %)
-        hiv = 0.0
-        hiv += H["chalets_n"] * 181 * H["chalets_hiver_frac"][y] * H["chalets_occ_hiver"][y] * idx(H["chalet_hiver"], y)
-        hiv += H["villas_n"] * 181 * H["villas_occ_hiver"][y] * idx(H["villa_hiver"], y)
-        hiv += H["coolbox_n"] * 181 * H["coolbox_occ_hiver"][y] * idx(H["coolbox_hiver"], y)
-        hiv += r["hotel"] * 0.30 + r["spa"] * 0.5
+        # hiver : même définition que la décomposition saisonnière (section 6.6 du plan)
+        hiv = sum(revenus_hiver(y, r).values())
         rev = yr["total_revenus"] * rev_factor - hiv * (1 - hiver_factor) - r["restauration"] * (1 - fb_factor)
         var = sum(yr["charges"][k] * PART_VARIABLE[k] for k in yr["charges"])
         fixe = yr["total_charges"] - var
@@ -459,6 +457,103 @@ def part_variable(years):
     y = years[3]
     var = sum(y["charges"][k] * PART_VARIABLE[k] for k in y["charges"])
     return var / y["total_charges"]
+
+# ---------------------------------------------------------------------------
+# Décomposition saisonnière : ce que l'hiver rapporte et ce qu'il coûte
+# ---------------------------------------------------------------------------
+# Été : du 15 mai au 15 octobre (184 jours). Hiver : du 16 octobre au 14 mai (181 jours).
+# Ce sont les mêmes 184 / 181 jours que la projection de revenus par unité.
+HS = {
+    # Part hivernale des lignes de revenus qui ne sont pas calculées nuitée par nuitée.
+    # Chalets, villas et unités Coolbox sont calculés directement (181 nuits d'hiver).
+    "part_hiver": {
+        "terrains": 0.0,        # camping non hivernal, fermé
+        "saisonniers": 0.0,     # contrat de saison (mai à octobre), encaissé de janvier à mars
+        "cabanas": 0.0,         # prêt-à-camper non chauffé
+        "redevance": 0.0,       # 2026 seulement, avant le transfert des unités Coolbox
+        "hotel": 0.30,          # hyp. : 30 % des nuitées d'hôtel hors saison estivale
+        "spa": 0.50,            # hyp. (phase 2 seulement)
+        "spectacles": 0.0,      # programmation estivale (scène, chapiteau)
+        "activites": 0.10,      # hyp. : location d'équipement, patin, glissades
+        "restauration": 0.35,   # hyp. : restaurant ouvert 12 mois, clientèle régionale de jour
+    },
+    "energie_ouvert": 0.60,     # hyp. : part de l'énergie annuelle consommée de novembre à avril
+    "energie_ferme": 0.15,      # hyp. : hors-gel et maintien des bâtiments si le site fermait l'hiver
+    "etp_ete": 34,              # tableau des effectifs, section 6.2
+    "etp_hiver": 15,
+    "etp_noyau": 3,             # direction, finances et surveillance des infrastructures : à l'année, que le site ouvre ou non
+    "surcout_fixe": {"entretien": 0.15, "vehicules": 0.35},   # déneigement, chemins, toitures ; chargeur, souffleuse, carburant
+}
+ETP_ETE, ETP_HIVER = HS["etp_ete"], HS["etp_hiver"]
+
+def revenus_hiver(year, r):
+    """Revenus attribuables à la période hivernale, ligne par ligne."""
+    if year == 0:
+        return {k: 0.0 for k in r}   # en 2026, le site ferme en octobre
+    h = {}
+    h["chalets"] = H["chalets_n"] * 181 * H["chalets_hiver_frac"][year] * H["chalets_occ_hiver"][year] * idx(H["chalet_hiver"], year)
+    h["villas"] = H["villas_n"] * 181 * H["villas_occ_hiver"][year] * idx(H["villa_hiver"], year)
+    h["coolbox"] = H["coolbox_n"] * 181 * H["coolbox_occ_hiver"][year] * idx(H["coolbox_hiver"], year)
+    for k, p in HS["part_hiver"].items():
+        h[k] = r[k] * p
+    return h
+
+def charges_hiver(year, c, part_rev):
+    """Charges attribuables à l'hiver, poste par poste, en (variable, fixe).
+
+    Variable = suit le volume d'hiver ; fixe = engagé dès que le site reste ouvert.
+    Les postes engagés que le site ouvre ou non l'hiver (taxes, assurances, loyers,
+    honoraires comptables) ne sont pas imputés à l'hiver : la question posée est celle
+    du surcoût marginal de l'exploitation hivernale, pas d'une répartition comptable.
+    """
+    var, fixe = {}, {}
+    if year == 0:
+        return {k: 0.0 for k in c}, {k: 0.0 for k in c}   # site fermé d'octobre à mai
+    etp_mois_total = (HS["etp_ete"] + HS["etp_hiver"]) * 6
+    etp_mois_hiver = max(HS["etp_hiver"] - HS["etp_noyau"], 0) * 6
+    for k in c:
+        if k == "energie":
+            # chauffer et éclairer le site l'hiver, moins le hors-gel qu'il faudrait payer de toute façon
+            total = c[k] * (HS["energie_ouvert"] - HS["energie_ferme"])
+        elif k == "salaires":
+            # effectifs d'hiver au-delà du noyau permanent (section 6.2)
+            total = c[k] * etp_mois_hiver / etp_mois_total
+        else:
+            total = c[k] * PART_VARIABLE[k] * part_rev + c[k] * (1 - PART_VARIABLE[k]) * HS["surcout_fixe"].get(k, 0.0)
+        var[k] = total * PART_VARIABLE[k]
+        fixe[k] = total - var[k]
+    return var, fixe
+
+def saisons(years):
+    """Revenus d'été et d'hiver, surcoûts d'hiver, contribution et point mort hivernal."""
+    out = []
+    for y, yr in enumerate(years):
+        r, c = yr["revenus"], yr["charges"]
+        h = revenus_hiver(y, r)
+        rev_h = sum(h.values())
+        rev_tot = yr["total_revenus"]
+        part = rev_h / rev_tot if rev_tot else 0.0
+        var, fixe = charges_hiver(y, c, part)
+        cv, cf = sum(var.values()), sum(fixe.values())
+        contrib = rev_h - cv - cf
+        # point mort : facteur f sur les revenus d'hiver pour lequel la contribution s'annule
+        marge_var = rev_h - cv
+        out.append({
+            "label": yr["label"],
+            "revenus_hiver_lignes": h,
+            "revenus_hiver": rev_h,
+            "revenus_ete": rev_tot - rev_h,
+            "part_hiver": part,
+            "charges_hiver_variables": cv,
+            "charges_hiver_fixes": cf,
+            "charges_hiver": cv + cf,
+            "surcout_energie": fixe["energie"] + var["energie"],
+            "salaires_hiver": fixe["salaires"] + var["salaires"],
+            "contribution_hiver": contrib,
+            "marge_contribution": contrib / rev_h if rev_h else None,
+            "point_mort": cf / marge_var if marge_var > 0 else None,
+        })
+    return out
 
 def capacite(years):
     """Capacité d'endettement senior selon trois méthodes (An 3)."""
@@ -533,6 +628,22 @@ def charts(years, D):
         ax.legend(wedges, [f"{n} {v/tot*100:.0f} %" for n, v, _ in items], fontsize=5.8, loc="upper center", bbox_to_anchor=(0.5, 0.02), frameon=False, ncol=2)
     fig.tight_layout(); fig.savefig(CHARTS / "repartition.png"); plt.close(fig)
 
+    S = saisons(years)
+    fig, ax = plt.subplots(figsize=(7.2, 3.2), dpi=200)
+    ete = [s["revenus_ete"] for s in S]
+    hiv = [s["revenus_hiver"] for s in S]
+    ax.bar(labels, ete, color=teal, width=0.6, label="Été (15 mai – 15 octobre, 184 jours)")
+    ax.bar(labels, hiv, bottom=ete, color=navy, width=0.6, label="Hiver (16 octobre – 14 mai, 181 jours)")
+    for i, s in enumerate(S):
+        if s["revenus_hiver"] > 0:
+            ax.text(i, ete[i] + hiv[i] / 2, f"{s['part_hiver']*100:.0f} %", ha="center", va="center",
+                    fontsize=8, color="white", fontweight="bold")
+        ax.text(i, ete[i] + hiv[i] + 50000, f"{(ete[i]+hiv[i])/1e6:.2f} M$", ha="center", fontsize=8, color=navy, fontweight="bold")
+    ax.yaxis.set_major_formatter(fmt_m); ax.set_ylim(0, max(e + h for e, h in zip(ete, hiv)) * 1.18)
+    ax.legend(fontsize=7, frameon=False, loc="upper left")
+    ax.set_title("Revenus par saison", loc="left", fontsize=11, color=navy, fontweight="bold")
+    fig.tight_layout(); fig.savefig(CHARTS / "saisons.png"); plt.close(fig)
+
     fig, ax = plt.subplots(figsize=(7.2, 2.9), dpi=200)
     taches = [
         ("Clôture du financement, dépôt des fonds propres", 0, 2, navy),
@@ -564,6 +675,7 @@ def main():
         "coolbox_unite": COOLBOX_UNITE, "coolbox_2026": COOLBOX_2026, "contingence": CONTINGENCE,
         "reel_2025_total": REEL_2025_TOTAL, "reel_2026_total": REEL_2026_TOTAL, "autres_2026": AUTRES_2026,
         "dpa": dpa(), "bilan": bilan(years, D), "sensibilite": sensibilite(years, D), "part_variable": part_variable(years),
+        "saisons": saisons(years), "hypotheses_saison": HS,
         "capacite": capacite(years), "hypotheses": {k: (v if not isinstance(v, dict) else {str(a): b for a, b in v.items()}) for k, v in H.items()},
         "immo_existantes_cout": IMMO_EXISTANTES_COUT, "amort_cumule_2026": AMORT_CUMULE_2026,
     }
@@ -576,6 +688,11 @@ def main():
     print("Capacité An 3", {k: round(v) for k, v in capacite(years).items()}, "part variable", f"{part_variable(years):.1%}")
     for s in sensibilite(years, D):
         print({k: (round(v, 2) if isinstance(v, float) else v) for k, v in s.items()})
+    print(f"\n{'Saison':<14}{'Rev. été':>12}{'Rev. hiver':>12}{'% hiver':>9}{'Ch. hiver':>12}{'Contrib.':>12}{'Marge':>8}{'Pt mort':>9}")
+    for s in saisons(years):
+        pm = f"{s['point_mort']*100:>8.0f}%" if s["point_mort"] is not None else "       —"
+        mg = f"{s['marge_contribution']*100:>7.0f}%" if s["marge_contribution"] is not None else "      —"
+        print(f"{s['label']:<14}{s['revenus_ete']:>12,.0f}{s['revenus_hiver']:>12,.0f}{s['part_hiver']*100:>8.1f}%{s['charges_hiver']:>12,.0f}{s['contribution_hiver']:>12,.0f}{mg}{pm}")
 
 if __name__ == "__main__":
     main()
