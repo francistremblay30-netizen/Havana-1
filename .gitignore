@@ -1,3 +1,6 @@
 node_modules/
 *.tmp
 
+
+# Audio regenerable : voir plan-affaires/modele/faire_audio.sh
+plan-affaires/Havana-plan-complet.mp3
