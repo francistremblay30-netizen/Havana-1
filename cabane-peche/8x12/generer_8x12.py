@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cabane à pêche 8 x 12 pi, toit monopente 3:12, tirée à la motoneige.
+"""Cabane à pêche 8 x 12 pi, toit monopente 1 1/2:12, tirée à la motoneige.
 
 6 feuilles SVG (lettre paysage) dans ce dossier, puis :
   node ../exporter.js . Plans_cabane_8x12_monopente.pdf
@@ -32,8 +32,8 @@ T = 3.0                   # mur : CP 1/4 + 2x3 + panneau 1/4
 UHMW, PAT, CAD, CP = 0.25, 5.5, 3.5, 0.5
 Z_P = UHMW + PAT
 Z_PL = Z_P + CAD + CP     # 9.75
-H_HAUT, H_BAS = 84, 60    # murs : côté haut (Y=0) et côté bas (Y=B)
-PENTE = (H_HAUT - H_BAS) / B          # 3:12
+H_HAUT, H_BAS = 84, 72    # murs : côté haut (Y=0) et côté bas (Y=B)
+PENTE = (H_HAUT - H_BAS) / B          # 1 1/2:12
 DEB_E, DEB_P = 6, 4       # débords : égouts (côtés) et bouts
 CHEV = 3.6                # chevron 2x4 mesuré à la verticale
 TOIT = 4.7                # chevron + fourrure + tôle
@@ -155,7 +155,7 @@ def f_plan():
         f.add(f'<polygon points="{a:.1f},{b-4:.1f} {a:.1f},{b+4:.1f} {a+9:.1f},{b:.1f}" fill="{ROUGE}"/>')
         f.text(a - 7, b + 3, "A", size=9, anchor="middle", weight="bold", fill=ROUGE)
     v.text(56, T + BANC + 2.6, "CÔTÉ HAUT (mur 7'-0\")", size=5.2, anchor="middle", fill="#555")
-    v.text(L / 2, B - T - BANC - 2, "CÔTÉ BAS (mur 5'-0\")", size=6.3, anchor="middle", fill="#555")
+    v.text(L / 2, B - T - BANC - 2, "CÔTÉ BAS (mur 6'-0\")", size=6.3, anchor="middle", fill="#555")
     v.text(-2, B + 9, "AVANT", size=6.5, weight="bold", fill="#555", anchor="end")
     v.text(L + 2, B + 9, "ARRIÈRE", size=6.5, weight="bold", fill="#555")
     # cotes
@@ -214,8 +214,8 @@ def f_cote():
     v.dim(u0, Z_PL + H_PORTE, u1, Z_PL + H_PORTE, -10, "28 po", size=6)
     v.dim(u1, Z_PL, u1, Z_PL + H_PORTE, 10, size=6)
     v.dim(b, Z_PL, b, Z_PL + 36, 10, size=6)
-    notes(f, 40, 488, "TOIT MONOPENTE 3:12", [
-        f"Le toit descend du côté haut ({fi(H_HAUT)}) vers le côté bas ({fi(H_BAS)}) : 3 po par pied sur 8 pi, soit 24 po d'écart. La neige et l'eau partent du côté bas, loin de la porte.",
+    notes(f, 40, 488, "TOIT MONOPENTE 1 1/2:12", [
+        f"Le toit descend du côté haut ({fi(H_HAUT)}) vers le côté bas ({fi(H_BAS)}) : 1 1/2 po par pied sur 8 pi, soit 12 po d'écart. La neige et l'eau partent du côté bas, loin de la porte. Pente faible : poser la tôle avec ruban scellant aux recouvrements et vérifier la pente minimale du fabricant.",
         "Chevrons 2×4 @ 24 po qui portent d'un mur à l'autre (pas de faîte), débord de 6 po aux deux égouts et de 4 po aux bouts.",
     ], larg=150, inter=9)
     return f
@@ -343,7 +343,7 @@ def f_coupe():
     leg = [
         "Tôle prépeinte cal. 29 (ou aluminium)",
         "Fourrures 1×3 @ 24 po",
-        "Chevrons 2×4 @ 24 po c/c, pente 3:12",
+        "Chevrons 2×4 @ 24 po c/c, pente 1 1/2:12",
         "Isolant XPS 1 1/2 po entre chevrons",
         "Revêtement CP 1/4 extérieur, peint",
         "Montants 2×3 @ 24 po + XPS + panneau 1/4",
@@ -465,14 +465,14 @@ MATERIAUX = [
     ("Plancher", "3 × CP 1/2 po 4×8 traité"),
     ("Timon en A", "16 pi tube acier 1 1/2 po + anneau + chaîne"),
     ("MURS", None),
-    ("Montants, lisses, sablières", "≈ 34 × 2×3 × 8 pi"),
+    ("Montants, lisses, sablières", "≈ 37 × 2×3 × 8 pi"),
     ("Linteaux (porte, fenêtres)", "3 × 2×4 × 8 pi"),
-    ("Revêtement extérieur", "8 × CP 1/4 po 4×8"),
+    ("Revêtement extérieur", "9 × CP 1/4 po 4×8"),
     ("Panneau intérieur (option)", "7 × CP 1/4 ou panneau 1/8"),
     ("TOIT", None),
     ("Chevrons @ 24 po", "7 × 2×4 × 10 pi"),
     ("Fourrures", "6 × 1×3 × 14 pi"),
-    ("Tôle", "5 × 3 pi × 9'-6\" + moulures"),
+    ("Tôle", "5 × 3 pi × 9'-6\" + moulures + ruban scellant"),
     ("ISOLATION, INTÉRIEUR", None),
     ("Isolant XPS 1 1/2 po", "≈ 22 panneaux 2×8 pi"),
     ("2 bancs + 6 couvercles", "2 × CP 1/2 4×8 + 6 × 2×2 × 8"),
@@ -492,9 +492,9 @@ POIDS = [
     ("3 patins + semelles", 84),
     ("Cadre de plancher 2×4 traité", 185),
     ("Plancher CP 1/2 traité", 145),
-    ("Ossature murs 2×3 + linteaux", 200),
-    ("Revêtement CP 1/4", 166),
-    ("Isolant XPS 1 1/2", 61),
+    ("Ossature murs 2×3 + linteaux", 225),
+    ("Revêtement CP 1/4", 196),
+    ("Isolant XPS 1 1/2", 68),
     ("Chevrons et fourrures", 102),
     ("Tôle et moulures", 90),
     ("Bancs et couvercles", 106),
@@ -535,7 +535,7 @@ def f_materiaux():
     f.text(x, y + 6, "TOTAL TEL QUE DESSINÉ", size=8, weight="bold")
     f.text(x + 310, y + 6, f"≈ {total} lb ({round(total * 0.4536 / 5) * 5} kg)", size=8, weight="bold", anchor="end")
     y += 26
-    y = notes(f, x, y, "POUR ALLÉGER (≈ 1 050 lb / 475 kg)", [
+    y = notes(f, x, y, "POUR ALLÉGER (≈ 1 100 lb / 500 kg)", [
         "Tôle d'aluminium au toit : environ 50 lb de moins.",
         "Cadre de plancher non traité, peint : environ 40 lb de moins.",
         "Pas de panneau intérieur ; bancs en CP 3/8 : environ 35 lb de moins.",

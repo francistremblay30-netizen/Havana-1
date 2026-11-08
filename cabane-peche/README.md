@@ -24,7 +24,7 @@ cd 5x10 && python3 generer_5x10.py && node ../exporter.js . Plans_cabane_5x10_mo
 
 ## Cabane 8 × 12 pi monopente — motoneige (`8x12/`)
 
-`8x12/Plans_cabane_8x12_monopente.pdf` : 6 feuilles. Toit monopente 3:12 (mur haut 7'-0", mur bas 5'-0"), 6 trappes, 2 bancs, 3 patins, timon en A. Poids estimé ≈ 1 240 lb (≈ 1 050 lb version allégée).
+`8x12/Plans_cabane_8x12_monopente.pdf` : 6 feuilles. Toit monopente 1 1/2:12 (mur haut 7'-0", mur bas 6'-0"), 6 trappes, 2 bancs, 3 patins, timon en A. Poids estimé ≈ 1 300 lb (≈ 1 100 lb version allégée).
 ```
 cd 8x12 && python3 generer_8x12.py && node ../exporter.js . Plans_cabane_8x12_monopente.pdf
 ```
