@@ -16,6 +16,7 @@ ICI = Path(__file__).parent
 W, H = 792, 612  # lettre paysage en points
 DATE = "2026-11-07"
 NB_FEUILLES = 4
+PROJET = "Cabane à pêche blanche 8 × 10 pi sur patins"
 
 # --- Paramètres de la cabane (pouces) --------------------------------------
 L = 120          # longueur hors-tout (10 pi)
@@ -77,7 +78,7 @@ class Feuille:
         for c in cols[1:-1]:
             cadre.append(f'<line x1="{c}" y1="{H-58}" x2="{c}" y2="{H-18}" stroke="#111" stroke-width="0.6"/>')
         champs = [
-            ("PROJET", "Cabane à pêche blanche 8 × 10 pi sur patins"),
+            ("PROJET", PROJET),
             ("FEUILLE", self.titre),
             ("DATE", DATE),
             ("STATUT", "Préliminaire"),

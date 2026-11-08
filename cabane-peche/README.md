@@ -13,3 +13,11 @@ python3 generer_plans.py   # -> feuille-1..4.svg
 node exporter.js           # -> PDF + PNG (Playwright)
 ```
 Statut : préliminaire, à valider avant de construire.
+
+## Cabane légère 5 × 10 pi — motoneige (`5x10/`)
+
+`5x10/Plans_cabane_5x10_motoneige.pdf` : 6 feuilles — plan, élévation latérale, pignons, coupe A-A (1:16), ossature, matériaux et poids estimé (≈ 740 lb tel que dessiné, ≈ 600 lb version allégée).
+Toit en pointe 8:12 à faîtière structurale 2×8, murs 2×2 @ 24 po, patins 2×6 à nez relevé + semelle UHMW, timon en A rigide.
+```
+cd 5x10 && python3 generer_5x10.py && node ../exporter.js . Plans_cabane_5x10_motoneige.pdf
+```

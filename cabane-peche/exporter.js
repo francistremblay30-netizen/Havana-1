@@ -5,8 +5,9 @@ const fs = require("fs");
 const path = require("path");
 
 (async () => {
-  const dir = __dirname;
-  const svgs = fs.readdirSync(dir).filter((f) => /^feuille-\d\.svg$/.test(f)).sort();
+  const dir = process.argv[2] ? path.resolve(process.argv[2]) : __dirname;
+  const nom = process.argv[3] || "Plans_cabane_peche_8x10.pdf";
+  const svgs = fs.readdirSync(dir).filter((f) => /^feuille-\d+\.svg$/.test(f)).sort((a, b) => parseInt(a.slice(8)) - parseInt(b.slice(8)));
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>
     @page { size: 11in 8.5in; margin: 0 }
     body { margin: 0 }
@@ -18,7 +19,7 @@ const path = require("path");
   const browser = await chromium.launch();
   const page = await browser.newPage({ deviceScaleFactor: 2, viewport: { width: 1056, height: 816 } });
   await page.setContent(html);
-  await page.pdf({ path: path.join(dir, "Plans_cabane_peche_8x10.pdf"), width: "11in", height: "8.5in", printBackground: true });
+  await page.pdf({ path: path.join(dir, nom), width: "11in", height: "8.5in", printBackground: true });
   const pages = await page.$$(".p");
   for (let i = 0; i < pages.length; i++) {
     await pages[i].screenshot({ path: path.join(dir, `feuille-${i + 1}.png`) });
