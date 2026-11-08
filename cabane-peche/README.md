@@ -28,3 +28,8 @@ cd 5x10 && python3 generer_5x10.py && node ../exporter.js . Plans_cabane_5x10_mo
 ```
 cd 8x12 && python3 generer_8x12.py && node ../exporter.js . Plans_cabane_8x12_monopente.pdf
 ```
+
+### Aménagement couchette 8 × 12 (`8x12/amenagement/`)
+
+`Amenagement_cabane_8x12.pdf` : 3 feuilles — plan d'aménagement, mode jour / mode nuit, cuisine et sécurité.
+Lit double 54 × 75 relevable (2 trappes dessous), banc-lit ado 30 × 75, kitchenette 42 × 20 avec réchaud 2 feux, glacière-siège, table amovible, 5 trappes, chauffage à ventouse. Porte déplacée au mur avant, timon amovible.
