@@ -33,3 +33,7 @@ cd 8x12 && python3 generer_8x12.py && node ../exporter.js . Plans_cabane_8x12_mo
 
 `Amenagement_cabane_8x12.pdf` : 3 feuilles — plan d'aménagement, mode jour / mode nuit, cuisine et sécurité.
 Lit double 54 × 75 relevable (2 trappes dessous), banc-lit ado 30 × 75, kitchenette 42 × 20 avec réchaud 2 feux, glacière-siège, table amovible, 5 trappes, chauffage à ventouse. Porte déplacée au mur avant, timon amovible.
+
+### Aménagement v2 « style chalet » (`8x12/amenagement-v2/`)
+
+D'après `photo-reference.jpg` : dînette 4 places au fond qui devient un lit double 54 × 90 (2 adultes), lit rabattable sur chaînes pour l'ado au-dessus du banc-coffre, comptoir cuisine avec réchaud, 5 trous ronds Ø 10 po (2 sous la table), finition lambris. `Amenagement_v2_cabane_8x12.pdf` : 3 feuilles.
